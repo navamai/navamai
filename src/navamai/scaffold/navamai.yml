@@ -1,0 +1,48 @@
+ask:
+  max-tokens: 300
+  model: mistral
+  provider: ollama
+  save: false
+  system: Be crisp in your response. Only respond to the prompt using valid markdown
+    syntax. Do not explain your response.
+  temperature: 0.3
+
+expand-intents:
+  folder: Intents
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  system: You will be given a document about exploring a topic, explaining the topic
+    in first paragraph. The document will have headings about user intents to explore
+    the topic. These intents will have related prompts to expand on the intent using
+    an LLM. Your job is to brainstorm the topic, research popular papers, articles,
+    books from experts on the topic. Then add more related intents and prompts to
+    the document. Depending on the expected response the prompt should ask for a table,
+    list, or narrative format. Respond with the expanded document. Do not explain
+    your response.
+  temperature: 0.3
+
+intents:
+  folder: Embeds
+  max-tokens: 1000
+  model: sonnet
+  provider: claude
+  save: true
+  system: Only respond to the prompt using valid markdown syntax. When responding
+    with markdown headings start at level 2. Do not explain your response.
+  temperature: 0.3
+
+model-mapping:
+  gemini-flash: gemini-1.5-flash
+  gemini-pro: gemini-1.5-pro
+  gemma: gemma2
+  gpt4mini: gpt-4o-mini
+  gpt4o: gpt-4o
+  groq-llama: llama2-70b-4096
+  groq-mixtral: mixtral-8x7b-32768
+  haiku: claude-3-haiku-20240307
+  llama: llama3.1
+  mistral: mistral-nemo
+  opus: claude-3-opus-20240229
+  sonnet: claude-3-5-sonnet-20240620
