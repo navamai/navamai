@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "navamai"
-version = "0.1.6"
-description = "NavamAI enhances your craft with AI"
+version = "0.1.8"
+description = "NavamAI enhances your craft with fast, personal, quality AI"
 authors = ["NavamAI <team@navamai.com>"]
 license = "Apache 2.0"
 readme = "README.md"

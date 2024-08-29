@@ -1,10 +1,5 @@
-import click
-import importlib.resources
-import shutil
-from pathlib import Path
 import yaml
 import os
-import re
 
 CONFIG_FILE = "navamai.yml"
 

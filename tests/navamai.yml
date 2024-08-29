@@ -8,11 +8,10 @@ ask:
   temperature: 0.3
 
 expand-intents:
-  lookup-folder: Intents
-  save-folder: Intents
+  folder: Intents
   max-tokens: 4000
-  model: mistral
-  provider: ollama
+  model: sonnet
+  provider: claude
   save: true
   system: You will be given a document about exploring a topic, explaining the topic
     in first paragraph. The document will have headings about user intents to explore
@@ -25,8 +24,7 @@ expand-intents:
   temperature: 0.3
 
 intents:
-  lookup-folder: Intents
-  save-folder: Embeds
+  folder: Embeds
   max-tokens: 1000
   model: sonnet
   provider: claude
@@ -34,16 +32,6 @@ intents:
   system: Only respond to the prompt using valid markdown syntax. When responding
     with markdown headings start at level 2. Do not explain your response.
   temperature: 0.3
-
-validate:
-  lookup-folder: Intents
-  save-folder: Embeds
-  max-tokens: 4000
-  model: gpt4o
-  provider: openai
-  save: true
-  system: Only respond to the prompt. Do not explain your response.
-  temperature: 0.0
 
 model-mapping:
   gemini-flash: gemini-1.5-flash

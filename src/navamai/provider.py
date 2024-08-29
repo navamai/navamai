@@ -26,7 +26,7 @@ class Provider(ABC):
         pass
         
     def ask(self, prompt: str, title: str = None) -> str:
-        with Live(console=self.console, refresh_per_second=4) as live:
+        with Live(console=self.console, refresh_per_second=8) as live:
             full_response = ""
             for chunk in self.stream_response(prompt):
                 full_response += chunk
@@ -39,7 +39,7 @@ class Provider(ABC):
         return response_file_path
 
     def save_response(self, prompt: str, response: str, title: str = None) -> str:
-        responses_folder = self.model_config.get('folder')
+        responses_folder = self.model_config.get('save-folder')
         os.makedirs(responses_folder, exist_ok=True)
         
         if title:
@@ -52,12 +52,9 @@ class Provider(ABC):
         
         filepath = os.path.join(responses_folder, filename)
         
-        # Strip leading "💬 " from the response
-        clean_response = response.lstrip("💬 ")
-        
         # Write the response, overwriting any existing file
         with open(filepath, "w", encoding="utf-8") as f:
-            f.write(clean_response)
+            f.write(response)
         
         self.console.print(f"Response saved to: {filepath}")
         return filepath

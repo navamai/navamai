@@ -10,6 +10,7 @@ from pathlib import Path
 import shutil
 import os
 import re
+from difflib import SequenceMatcher
 
 @click.group()
 def cli():
@@ -97,7 +98,7 @@ def ask(identify, prompt):
 def expand_intents(template):
     config = utils.load_config()
     model_config = config.get("expand-intents", {})
-    intents_template = f"{model_config['folder']}/{template}.md"
+    intents_template = f"{model_config['lookup-folder']}/{template}.md"
     provider = model_config.get("provider").lower()
     provider_instance = _get_provider_instance(provider)
     provider_instance.set_model_config("expand-intents")
@@ -110,16 +111,19 @@ def expand_intents(template):
 @cli.command()
 @click.argument('filename')
 def intents(filename):
-    md_filename = f"Intents/{filename}.md"
+    config = utils.load_config()
+    model_config = config.get("intents", {})
 
-    if not os.path.exists(md_filename):
-        click.echo(f"Error: Intents file {md_filename} not found.")
+    intents_template = f"{model_config.get("lookup-folder")}/{filename}.md"
+
+    if not os.path.exists(intents_template):
+        click.echo(f"Error: Intents file {intents_template} not found.")
         return
 
-    with open(md_filename, 'r') as file:
-        md_content = file.read()
+    with open(intents_template, 'r') as file:
+        intents_content = file.read()
 
-    sections = _parse_markdown_sections(md_content)
+    sections = _parse_markdown_sections(intents_content)
 
     for i, (title, _) in enumerate(sections, 1):
         click.echo(f"[{i}] {title}")
@@ -132,12 +136,9 @@ def intents(filename):
 
     selected_title, selected_prompt = sections[choice - 1]
 
-    config = utils.load_config()
-    model_config = config.get("intents", {})
-
     # Check if a response file already exists
     response_filename = f"{selected_title}.md"
-    response_file_path = os.path.join(model_config.get("folder"), response_filename)
+    response_file_path = os.path.join(model_config.get("save-folder"), response_filename)
 
     if os.path.exists(response_file_path):
         replace = click.confirm(f"A response file '{response_filename}' already exists. Do you want to replace it?", default=False)
@@ -157,9 +158,100 @@ def intents(filename):
 
     # Update the Markdown file if a response was saved
     if new_response_file_path:
-        _update_markdown_with_response(md_filename, selected_title, os.path.basename(new_response_file_path))
-        click.echo(f"Updated {md_filename} with response file path.")
+        _update_markdown_with_response(intents_template, selected_title, os.path.basename(new_response_file_path))
+        click.echo(f"Updated {intents_template} with response file path.")
 
+@cli.command()
+@click.argument('filename')
+def validate(filename):
+    config = utils.load_config()
+    intents_config = config.get("intents", {})
+    validate_config = config.get("validate", {})
+
+    intents_template = f"{intents_config.get('lookup-folder')}/{filename}.md"
+
+    if not os.path.exists(intents_template):
+        click.echo(f"Error: Intents file {intents_template} not found.")
+        return
+
+    with open(intents_template, 'r') as file:
+        intents_content = file.read()
+
+    sections = _parse_markdown_sections(intents_content)
+
+    for i, (title, _) in enumerate(sections, 1):
+        click.echo(f"[{i}] {title}")
+
+    while True:
+        choice = click.prompt("Select an option", type=int)
+        if 1 <= choice <= len(sections):
+            break
+        click.echo(f"Invalid choice. Please enter a number between 1 and {len(sections)}.")
+
+    selected_title, selected_prompt = sections[choice - 1]
+
+    # Check if a response file already exists
+    response_filename = f"{selected_title}.md"
+    response_file_path = os.path.join(intents_config.get("save-folder"), response_filename)
+
+    if not os.path.exists(response_file_path):
+        click.echo(f"Error: Response file '{response_filename}' not found.")
+        return
+
+    with open(response_file_path, 'r') as file:
+        existing_response = file.read()
+
+    validate_prompt = validate_config.get("validate-prompt")
+    # Create the validation prompt
+    validation_prompt = (
+        f"{validate_prompt}\n\n"
+        f"Prompt: {selected_prompt}\n\n"
+        f"Response: {existing_response}"
+    )
+
+    click.echo("Validating the response...")
+    
+    provider = validate_config.get("provider").lower()
+
+    provider_instance = _get_provider_instance(provider)
+    provider_instance.set_model_config("validate")
+
+    # Execute the ask method and capture the validated response
+    validated_response_file_path = provider_instance.ask(validation_prompt, title=f"{selected_title} validated")
+
+    if validated_response_file_path:
+        with open(validated_response_file_path, 'r') as file:
+            validated_response = file.read()
+
+        # Perform text diff
+        diff_percentage = _diff(existing_response, validated_response)
+        click.echo(f"{diff_percentage:.2f}% validated content is different from original.")
+    else:
+        click.echo("Validation failed. No changes made to the existing response.")
+
+def _diff(content1, content2):
+    def preprocess_content(content):
+        # Remove newlines and extra whitespace
+        content = re.sub(r'\s+', ' ', content)
+        # Remove all markdown formatting
+        content = re.sub(r'[#*_`~\[\]()>]+', '', content)
+        # Remove links
+        content = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', content)
+        # Remove HTML tags
+        content = re.sub(r'<[^>]+>', '', content)
+        return content.strip().lower()
+
+    # Preprocess both contents
+    processed_content1 = preprocess_content(content1)
+    processed_content2 = preprocess_content(content2)
+
+    # Calculate similarity ratio
+    similarity = SequenceMatcher(None, processed_content1, processed_content2).ratio()
+
+    # Calculate difference percentage
+    difference_percentage = (1 - similarity) * 100
+
+    return difference_percentage
 def _parse_markdown_sections(content):
     pattern = r'^#\s(.+)\n\nPrompt:\s(.+)$'
     return re.findall(pattern, content, re.MULTILINE)
