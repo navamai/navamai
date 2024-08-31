@@ -1,8 +1,9 @@
 # NavamAI enhances your craft with AI
+NavamAI enhances your craft with personal, fast, and quality AI. Turn your Terminal or Shell into a rich personal AI. Supports 10 GenAI models by 5 providers. Pairs with Markdown, VS Code, Obsidian.
 
-NavamAI works with markdown content (text files with simple formatting commands). So you can use it with many popular tools like VS Code and Obsidian to quickly and seamlessly design a custom workflow that enhances your craft. 
+You can switch private models or hosted frontier LLMs with ease. NavamAI comes with configurable support for more than 10 leading models (GPT 4o, Sonnet 3.5, Gemini 1.5 Pro, Mistral NeMo...) from five providers (Ollama, Anthropic, OpenAI, Groq, Google).
 
-With NavamAI - Command is all you need. Turn your command prompt into a rich personal AI chatbot experience. Switch private models or hosted frontier LLMs with ease. 
+NavamAI works with markdown content (text files with simple formatting commands). So you can use it with many popular tools like VS Code and Obsidian to quickly and seamlessly design a custom workflow that enhances your craft.
 
 ## Quick Start
 
@@ -56,7 +57,11 @@ This command is super useful when comparing model response time (latency), respo
 
 Here is an example of running `navamai test vision` command and resulting test summary. I this defailt prompt and image we are sharing image of around 150-160 people standing in close proximity in a circle and asking the model to count the number of people. The right number is between 150-160. This can be used to calculate the relative accuracy of each model based on the response. How closely the response follows the system prompt and the user prompts is  indicative of quality of response.
 
-You can similarly run `navamai test ask` command to test across all models and providers.
+You can also notice the response times seem proportional to model size. For Claude, Opus > Sonnet > Haiku. For Gemini, Pro > Flash. For OpenAI, GPT-4o > GPT-4-mini.
+
+You can similarly run `navamai test ask` command to test across all models and providers. In this run you may find groq is among the fastest providers when it comes to response time.
+
+Of course, you may need multiple test runs to get better intuition of response times as there are multiple factors which effect latency other than model size or architecture, like network latency, which may change across multiple test runs.
 
 ## Chatbot UI in command prompt
 

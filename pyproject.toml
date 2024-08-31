@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "navamai"
 version = "0.1.13"
-description = "NavamAI enhances your craft with fast, personal, quality AI"
+description = "NavamAI enhances your craft with personal, fast, and quality AI. Command  is all you need. Turn your command prompt (Terminal or Shell) into a rich personal AI."
 authors = ["NavamAI <team@navamai.com>"]
-license = "Apache 2.0"
+license = "Apache-2.0"
+homepage = "https://www.navamai.com"
 readme = "README.md"
 packages = [{ include = "navamai", from = "src" }]
 
