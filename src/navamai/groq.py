@@ -28,6 +28,9 @@ class Groq(Provider):
             ]
         }
 
+    def stream_vision_response(self, image_data: bytes, prompt: str) -> Generator[str, None, None]:
+        pass
+
     def stream_response(self, prompt: str) -> Generator[str, None, None]:
         request_data = self.create_request_data(prompt)
         for chunk in self.client.chat.completions.create(**request_data, stream=True):

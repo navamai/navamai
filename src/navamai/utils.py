@@ -6,13 +6,18 @@ CONFIG_FILE = "navamai.yml"
 def load_config(section=None):
     if not os.path.exists(CONFIG_FILE):
         return {} if section is None else {}
-    
+
     with open(CONFIG_FILE, "r") as f:
         config = yaml.safe_load(f)
-    
+
     if section:
         return config.get(section, {})
     return config
+
+def has_vision_capability(model):
+    config = load_config()
+    vision_models = config.get("vision-models", [])
+    return model in vision_models
 
 def save_config(config):
     with open(CONFIG_FILE, "w") as f:

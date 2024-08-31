@@ -7,11 +7,22 @@ ask:
     syntax. Do not explain your response.
   temperature: 0.3
 
-expand-intents:
-  folder: Intents
-  max-tokens: 4000
+vision:
+  max-tokens: 300
   model: sonnet
   provider: claude
+  save-folder: Vision
+  save: true
+  system: Analyze the image and respond to the prompt using valid markdown syntax. 
+    Do not explain your response.
+  temperature: 0.3
+
+expand-intents:
+  lookup-folder: Intents
+  save-folder: Intents
+  max-tokens: 4000
+  model: mistral
+  provider: ollama
   save: true
   system: You will be given a document about exploring a topic, explaining the topic
     in first paragraph. The document will have headings about user intents to explore
@@ -24,7 +35,8 @@ expand-intents:
   temperature: 0.3
 
 intents:
-  folder: Embeds
+  lookup-folder: Intents
+  save-folder: Embeds
   max-tokens: 1000
   model: sonnet
   provider: claude
@@ -32,6 +44,21 @@ intents:
   system: Only respond to the prompt using valid markdown syntax. When responding
     with markdown headings start at level 2. Do not explain your response.
   temperature: 0.3
+
+validate:
+  lookup-folder: Intents
+  save-folder: Embeds
+  max-tokens: 4000
+  model: gpt4o
+  provider: openai
+  save: true
+  validate-prompt: You are going to read a prompt and a response from an LLM.
+    Research the topic online using reputable sources, then validate
+    the response shared with you for accuracy and quality. If there
+    are material improvements then create a revised response otherwise
+    return the same response.
+  system: Only respond to the prompt. Do not explain your response.
+  temperature: 0.0
 
 model-mapping:
   gemini-flash: gemini-1.5-flash
@@ -46,3 +73,10 @@ model-mapping:
   mistral: mistral-nemo
   opus: claude-3-opus-20240229
   sonnet: claude-3-5-sonnet-20240620
+
+vision-models:
+  - sonnet
+  - gpt4o
+  - opus
+  - haiku
+  

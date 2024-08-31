@@ -24,6 +24,9 @@ class Ollama(Provider):
             }
         }
 
+    def stream_vision_response(self, image_data: bytes, prompt: str) -> Generator[str, None, None]:
+        pass
+
     def stream_response(self, prompt: str) -> Generator[str, None, None]:
         url = f"{self.base_url}/api/generate"
         headers = {"Content-Type": "application/json"}

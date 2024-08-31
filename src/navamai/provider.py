@@ -38,24 +38,34 @@ class Provider(ABC):
 
         return response_file_path
 
+    @abstractmethod
+    def stream_vision_response(self, image_data: bytes, prompt: str) -> Generator[str, None, None]:
+        pass
+
+    def vision(self, image_data: bytes, prompt: str, title: str = None) -> str:
+        full_response = ""
+        for chunk in self.stream_vision_response(image_data, prompt):
+            full_response += chunk
+            yield chunk  # This yields chunks of the AI's response, not image_data
+
     def save_response(self, prompt: str, response: str, title: str = None) -> str:
         responses_folder = self.model_config.get('save-folder')
         os.makedirs(responses_folder, exist_ok=True)
-        
+
         if title:
             # Use the title as the filename, ensuring it's safe for file systems
             filename = re.sub(r'[<>:"/\\|?*]', '', title) + ".md"
         else:
-            # Fallback to using the prompt if no title is provided (for backward compatibility)
-            words = re.findall(r'\w+', prompt.lower())
+            # Create filename based on first ten words, ignoring words less than five characters
+            words = [word.lower() for word in re.findall(r'\w+', response) if len(word) >= 5]
             filename = '-'.join(words[:10]) + ".md"
-        
+
         filepath = os.path.join(responses_folder, filename)
-        
+
         # Write the response, overwriting any existing file
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(response)
-        
+
         self.console.print(f"Response saved to: {filepath}")
         return filepath
 
