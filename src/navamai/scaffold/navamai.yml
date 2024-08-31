@@ -65,6 +65,9 @@ provider-model-mapping:
   openai:
   - gpt4o
   - gpt4mini
+test:
+  ask: How old is the oldest pyramid?
+  vision: How many people are in this image.
 validate:
   lookup-folder: Intents
   max-tokens: 4000
