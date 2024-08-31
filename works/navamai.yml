@@ -43,6 +43,7 @@ model-mapping:
   haiku: claude-3-haiku-20240307
   llama: llama3.1
   mistral: mistral-nemo
+  llava: llava
   opus: claude-3-opus-20240229
   sonnet: claude-3-5-sonnet-20240620
 validate:
@@ -74,3 +75,4 @@ vision-models:
 - haiku
 - gemini-pro
 - gemini-flash
+- llava

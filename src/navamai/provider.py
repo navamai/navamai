@@ -42,7 +42,7 @@ class Provider(ABC):
     def stream_vision_response(self, image_data: bytes, prompt: str) -> Generator[str, None, None]:
         pass
 
-    def vision(self, image_data: bytes, prompt: str, title: str = None) -> str:
+    def vision(self, image_data: bytes, prompt: str, title: str = None):
         full_response = ""
         for chunk in self.stream_vision_response(image_data, prompt):
             full_response += chunk
