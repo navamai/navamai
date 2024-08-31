@@ -2071,37 +2071,18 @@ files = [
 
 [[package]]
 name = "term-image"
-version = "0.6.2"
+version = "0.7.2"
 description = "Display images in the terminal"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "term_image-0.6.2-py3-none-any.whl", hash = "sha256:8846b0fe6e9dce87df844b4b9237fd895f802ce7625b5c40a290b7c2492504ea"},
-    {file = "term_image-0.6.2.tar.gz", hash = "sha256:55ebb51e6b0b31f6d5407bfa017f73d3a4795afc412c49c6c49b1ab6a3822224"},
+    {file = "term_image-0.7.2-py3-none-any.whl", hash = "sha256:97d9dba5afcf3989a23b1868adc5b2de3126d1ef915df2a7859f67fbdd613e15"},
+    {file = "term_image-0.7.2.tar.gz", hash = "sha256:07320573baa667dcde145d55e94769cbaafeea43b61245245153ff5075b55ffb"},
 ]
 
 [package.dependencies]
-pillow = ">=9.1,<11.0"
-requests = ">=2.23,<3.0"
-
-[[package]]
-name = "termvisage"
-version = "0.2.0"
-description = "Display and browse images in the terminal"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "termvisage-0.2.0-py3-none-any.whl", hash = "sha256:ec1a6d87d413c0234157ba2226bf15f012a6175ef9a640e9a395636d0fdc5248"},
-    {file = "termvisage-0.2.0.tar.gz", hash = "sha256:df3a7d0de7a6610c422c8209d227bd653f435a061576662d0ee43f365dc74c7f"},
-]
-
-[package.dependencies]
-Pillow = ">=10.1,<11"
-term-image = ">=0.6,<0.7"
-urwid = ">=2.1,<3"
-
-[package.extras]
-completions = ["argcomplete (>=2,<4)"]
+pillow = ">=9.1,<11"
+requests = ">=2.23,<3"
 
 [[package]]
 name = "tiktoken"
@@ -2354,42 +2335,6 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
-name = "urwid"
-version = "2.6.15"
-description = "A full-featured console (xterm et al.) user interface library"
-optional = false
-python-versions = ">3.7"
-files = [
-    {file = "urwid-2.6.15-py3-none-any.whl", hash = "sha256:71b3171cabaa0092902f556768756bd2f2ebb24c0da287ee08f081d235340cb7"},
-    {file = "urwid-2.6.15.tar.gz", hash = "sha256:9ecc57330d88c8d9663ffd7092a681674c03ff794b6330ccfef479af7aa9671b"},
-]
-
-[package.dependencies]
-typing-extensions = "*"
-wcwidth = "*"
-
-[package.extras]
-curses = ["windows-curses"]
-glib = ["PyGObject"]
-lcd = ["pyserial"]
-serial = ["pyserial"]
-tornado = ["tornado (>=5.0)"]
-trio = ["exceptiongroup", "trio (>=0.22.0)"]
-twisted = ["twisted"]
-zmq = ["zmq"]
-
-[[package]]
-name = "wcwidth"
-version = "0.2.13"
-description = "Measures the displayed width of unicode strings in a terminal"
-optional = false
-python-versions = "*"
-files = [
-    {file = "wcwidth-0.2.13-py2.py3-none-any.whl", hash = "sha256:3da69048e4540d84af32131829ff948f1e022c1c6bdb8d6102117aac784f6859"},
-    {file = "wcwidth-0.2.13.tar.gz", hash = "sha256:72ea0c06399eb286d978fdedb6923a9eb47e1c486ce63e9b4e64fc18303972b5"},
-]
-
-[[package]]
 name = "zipp"
 version = "3.20.1"
 description = "Backport of pathlib-compatible object wrapper for zip files"
@@ -2411,4 +2356,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "84b4ad9c2facbf3e2d89ce7e17c0aea7a0d01824e6c82856154a915f956a68bd"
+content-hash = "05b3fcdc2251d9abec3e16d01e0fa6c04ef271179eb7459e772675949d03dd10"

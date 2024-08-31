@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "navamai"
-version = "0.1.9"
+version = "0.1.11"
 description = "NavamAI enhances your craft with fast, personal, quality AI"
 authors = ["NavamAI <team@navamai.com>"]
 license = "Apache 2.0"
@@ -22,8 +22,8 @@ openai = "^1.42.0"
 google-generativeai = "^0.7.2"
 pyyaml = "^6.0.2"
 opencv-python = "^4.8.0"
-termvisage = "^0.2.0"
 pillow = "^10.4.0"
+term-image = "^0.7.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.2"
