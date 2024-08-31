@@ -18,6 +18,8 @@ from rich.panel import Panel
 from rich.markdown import Markdown
 from rich.live import Live
 from rich.table import Table
+from rich import box
+
 import tempfile
 import shutil
 import requests
@@ -27,6 +29,7 @@ from PIL import Image
 import cv2
 
 import term_image.image as TermImage
+import subprocess
 
 console = Console()
 
@@ -85,9 +88,130 @@ def resize_image(image_data, max_size=5*1024*1024):
     img_resized.save(buffer, format="JPEG", quality=85)
     return buffer.getvalue()
 
+def extract_error_info(error_message):
+    # Extract error code
+    error_code_match = re.search(r"Error code: (\d+)", error_message)
+    error_code = error_code_match.group(1) if error_code_match else "Unknown"
+
+    # Extract error content
+    error_content_match = re.search(r"\{.*\}", error_message)
+    if error_content_match:
+        error_content = error_content_match.group(0)
+    else:
+        # If no JSON-like content found, use the last line of the error message
+        error_content = error_message.strip().split('\n')[-1]
+
+    return error_code, error_content
+
+
 @click.group()
 def cli():
     pass
+
+@cli.command()
+@click.argument('model_config', type=click.Choice(['ask', 'validate', 'intents', 'expand-intents', 'vision']))
+def test(model_config):
+    """Test the specified model configuration across all compatible providers and models."""
+    config = utils.load_config()
+    provider_model_mapping = config.get('provider-model-mapping', {})
+    
+    summary = []
+
+    for provider, models in provider_model_mapping.items():
+        for model in models:
+            # Update the configuration
+            config[model_config]['provider'] = provider            
+            config[model_config]['model'] = model
+
+            # Save the updated configuration
+            utils.save_config(config)
+
+            # Prepare the command
+            if model_config == 'ask':
+                cmd = ['navamai', 'ask', 'How old is the oldest pyramid.']
+            elif model_config == 'intents':
+                cmd = ['navamai', 'intents', 'Financial Analysis']
+            elif model_config == 'expand-intents':
+                cmd = ['navamai', 'expand-intents', 'Financial Analysis']
+            elif model_config == 'validate':
+                cmd = ['navamai', 'validate', 'Financial Analysis']
+            elif model_config == 'vision':
+                if model in config.get('vision-models', []):
+                    cmd = ['navamai', 'vision', '-p', 'Images/hackathon.jpg', 'Describe this image.']
+                else:
+                    console.print(f"Skipping vision test for {provider} - {model} as it's not in the vision-models list.", style="yellow")
+                    summary.append({
+                        'Provider': provider,
+                        'Model': config[model_config]['model'],
+                        'Config': model_config,
+                        'Status': 'Skipped',
+                        'Details': 'Not in vision-models list'
+                    })
+                    continue
+
+            console.print(f"\nTesting [bold green]{model_config}[/bold green] with [bold blue]{provider}[/bold blue] - [bold magenta]{config[model_config]['model']}[/bold magenta]")
+            console.print("-" * 40)
+
+            # Run the command
+            try:
+                result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+                console.print(result.stdout)
+                summary.append({
+                    'Provider': provider,
+                    'Model': config[model_config]['model'],
+                    'Config': model_config,
+                    'Status': 'Success',
+                    'Details': 'Command executed successfully'
+                })
+            except subprocess.CalledProcessError as e:
+                error_code, error_content = extract_error_info(e.stderr)
+                console.print(f"Error occurred (Code {error_code}): {error_content}", style="bold red")
+                summary.append({
+                    'Provider': provider,
+                    'Model': config[model_config]['model'],
+                    'Config': model_config,
+                    'Status': 'Failed',
+                    'Details': f"Error {error_code}: {error_content}"
+                })
+            except Exception as e:
+                console.print(f"An unexpected error occurred: {str(e)}", style="bold red")
+                summary.append({
+                    'Provider': provider,
+                    'Model': config[model_config]['model'],
+                    'Config': model_config,
+                    'Status': 'Error',
+                    'Details': str(e)
+                })
+
+    console.print("\nTest Summary:", style="bold underline")
+    table = Table(title="Test Results", box=box.ROUNDED)
+    table.add_column("Provider", style="cyan")
+    table.add_column("Model", style="magenta")
+    table.add_column("Config", style="green")
+    table.add_column("Status", style="yellow")
+    table.add_column("Details", style="white")
+
+    for entry in summary:
+        status_style = "green" if entry['Status'] == 'Success' else "red"
+        table.add_row(
+            entry['Provider'],
+            entry['Model'],
+            entry['Config'],
+            f"[{status_style}]{entry['Status']}[/{status_style}]",
+            entry['Details']
+        )
+
+    console.print(table)
+
+    success_count = sum(1 for entry in summary if entry['Status'] == 'Success')
+    total_count = len(summary)
+    success_rate = (success_count / total_count) * 100 if total_count > 0 else 0
+
+    console.print(f"\nTotal tests: {total_count}")
+    console.print(f"Successful tests: {success_count}")
+    console.print(f"Success rate: {success_rate:.2f}%")
+
+    console.print("\nTest completed.", style="bold green")
 
 @cli.command()
 @click.option('--force', is_flag=True, help='Overwrite existing files without prompting')
@@ -307,9 +431,10 @@ def validate(filename):
 @click.option('-p', '--path', type=click.Path(exists=True), help='Path to the local image file')
 @click.option('-u', '--url', type=str, help='URL of the online image')
 @click.option('-c', '--camera', is_flag=True, help='Capture image from camera')
+@click.option('-d', '--display', is_flag=True, help='Display image')
 @click.option('-i', '--identify', is_flag=True, help='Identify the provider and model without running a query')
 @click.argument('prompt', required=False)
-def vision(path, url, camera, identify, prompt):
+def vision(path, url, camera, identify, display, prompt):
     config = utils.load_config()
     vision_config = config.get("vision", {})
 
@@ -359,8 +484,8 @@ def vision(path, url, camera, identify, prompt):
         temp_file.write(image_data)
         temp_file_path = temp_file.name
 
-    # Display the image
-    display_image(temp_file_path)
+    if display:
+        display_image(temp_file_path)
 
     if prompt:
         console.print("[bold green]Processing image and generating response...[/bold green]")
@@ -410,6 +535,7 @@ def vision(path, url, camera, identify, prompt):
     # Clean up temporary file
     if os.path.exists(temp_file_path):
         os.unlink(temp_file_path)
+
 
 def _diff(content1, content2):
     def preprocess_content(content):
