@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "navamai"
-version = "0.1.13"
-description = "NavamAI enhances your craft with personal, fast, and quality AI. Command  is all you need. Turn your command prompt (Terminal or Shell) into a rich personal AI."
+version = "0.1.14"
+description = "NavamAI enhances your craft with personal, fast, and quality AI. Turn your Terminal or Shell into a rich personal AI. Supports 10 GenAI models by 5 providers. Pairs with Markdown, VS Code, Obsidian."
 authors = ["NavamAI <team@navamai.com>"]
 license = "Apache-2.0"
 homepage = "https://www.navamai.com"
