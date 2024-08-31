@@ -60,9 +60,9 @@ validate:
     revised response otherwise return the same response.
 vision:
   max-tokens: 300
-  model: gpt4o
-  provider: openai
-  save: true
+  model: opus
+  provider: claude
+  save: false
   save-folder: Vision
   system: Analyze the image and respond to the prompt using valid markdown syntax.
     Do not explain your response.
@@ -72,3 +72,5 @@ vision-models:
 - gpt4o
 - opus
 - haiku
+- gemini-pro
+- gemini-flash
