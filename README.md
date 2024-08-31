@@ -52,9 +52,9 @@ NavamAI comes with configurable support for more than 10 leading models from fiv
 
 This command is super useful when comparing model response time (latency), response quality (does it follow the system and prompt instructions), response accuracy, and token length (cost) for the same prompt. You can configure the test prompts within `navamai.yml` in the `test` section.
 
-Here is an example of running `navamai test vision` command and resulting test summary.
-
 ![](https://raw.githubusercontent.com/navamai/navamai/main/images/test-summary.webp)
+
+Here is an example of running `navamai test vision` command and resulting test summary. I this defailt prompt and image we are sharing image of around 150-160 people standing in close proximity in a circle and asking the model to count the number of people. The right number is between 150-160. This can be used to calculate the relative accuracy of each model based on the response. How closely the response follows the system prompt and the user prompts is  indicative of quality of response.
 
 You can similarly run `navamai test ask` command to test across all models and providers.
 
