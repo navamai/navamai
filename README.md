@@ -50,7 +50,7 @@ Another magical thing happens when the interface to your generative AI is a humb
 
 NavamAI comes with configurable support for more than 10 leading models from five providers (Ollama, Anthropic, OpenAI, Groq, Google). The `navamai test` command can be used to run each of the navamai commands over all the provider and model combinations and respond with a summary of model test and evaluation results. Use this to quickly compare models and providers as well as when you add or remove a new model or provider in the config.
 
-This command is super useful when comparing model response time (latency) and token length (cost) for the same prompt. You can configure the test prompts within `navamai.yml` in the `test` section.
+This command is super useful when comparing model response time (latency), response quality (does it follow the system and prompt instructions), response accuracy, and token length (cost) for the same prompt. You can configure the test prompts within `navamai.yml` in the `test` section.
 
 Here is an example of running `navamai test vision` command and resulting test summary.
 
