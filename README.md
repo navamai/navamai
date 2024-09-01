@@ -102,7 +102,7 @@ Now run `navamai intents "Financial Analysis"` and choose among a list of intent
 
 This workflow can get really useful very fast. As each template has linked embeds, Obsidian Graph view can be used to visualize the links. You can get creative and link related templates or even enhance generated embeds with more intents. Of course this also means you can use all the great Obsidian plugins to generate websites, PDFs, and more.  Your creativity + Obsidian + NavamAI = Magic!
 
-![](https://raw.githubusercontent.com/navamai/assets/main/images/navamai-intents-workflow.png)
+![](https://raw.githubusercontent.com/navamai/navamai/main/images/navamai-intents-workflow.webp)
 
 ## Why NavamAI
 
