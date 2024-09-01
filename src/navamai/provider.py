@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Generator
-import navamai.utils as utils
+import navamai.configure as configure
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.live import Live
@@ -9,7 +9,7 @@ import re
 
 class Provider(ABC):
     def __init__(self):
-        self.full_config = utils.load_config()
+        self.full_config = configure.load_config()
         self.model_config = self.full_config.get("ask-model-config", {})
         self.console = Console()
 

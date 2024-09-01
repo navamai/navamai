@@ -1,7 +1,7 @@
 import google.generativeai as genai
 from typing import Generator
 from navamai.provider import Provider
-import navamai.utils as utils
+import navamai.configure as configure
 import os
 import io
 from PIL import Image
@@ -13,7 +13,7 @@ class Gemini(Provider):
         if not api_key:
             raise ValueError("GEMINI_API_KEY environment variable is not set")
         genai.configure(api_key=api_key)
-        self.full_config = utils.load_config()
+        self.full_config = configure.load_config()
     
     def create_request_data(self, prompt: str, image_data: bytes = None) -> dict:
         config = self.model_config

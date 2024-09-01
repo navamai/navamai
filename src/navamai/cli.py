@@ -1,275 +1,34 @@
 import click
-import navamai.utils as utils
-from navamai.claude import Claude
-from navamai.ollama import Ollama
-from navamai.groq import Groq
-from navamai.openai import Openai
-from navamai.gemini import Gemini
+import navamai.configure as configure
 import importlib.resources
 from pathlib import Path
 import shutil
 import os
-import re
-import io
-from difflib import SequenceMatcher
 
-from datetime import timedelta
-from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
-from rich.layout import Layout
 from rich.live import Live
-from rich.text import Text
 from rich.table import Table
 from rich import box
-from rich.columns import Columns
 
 import tempfile
 import shutil
 import requests
 import mimetypes
 
-from PIL import Image
-import cv2
-
-import term_image.image as TermImage
 import time
-import tiktoken
-
-console = Console()
 
 import os
 import tempfile
 
-import yaml
-from datetime import datetime
-import os
+import navamai.metrics as metrics
+import navamai.vision as vision
+import navamai.markdown as markdown
+import navamai.utils as utils
 
-def generate_yaml_data(provider, model, config, prompt, status, details, response_time, token_count):
-    timestamp = datetime.now().isoformat()
-    return {
-        timestamp: {
-            provider: {
-                model: {
-                    config: {
-                        'prompt': prompt,
-                        'status': status,
-                        'details': details,
-                        'response_time': response_time,
-                        'token_count': token_count
-                    }
-                }
-            }
-        }
-    }
+from rich.console import Console
+console = Console()
 
-def save_to_yaml(data):
-    filename = f"Metrics/test_summary_{datetime.now().strftime('%Y%m%d')}.yml"
-    
-    if os.path.exists(filename):
-        with open(filename, 'r') as file:
-            existing_data = yaml.safe_load(file) or {}
-    else:
-        existing_data = {}
-
-    existing_data.update(data)
-
-    with open(filename, 'w') as file:
-        yaml.dump(existing_data, file, default_flow_style=False)
-
-def save_test_summary(provider, model, model_config, prompt, status, details, response_time, token_count):
-    yaml_data = generate_yaml_data(provider, model, model_config, prompt, status, details, response_time, token_count)
-    save_to_yaml(yaml_data)
-
-
-def display_image(image_path):
-    if 'TERM_PROGRAM' in os.environ and os.environ['TERM_PROGRAM'] == 'vscode':
-        img = TermImage.from_file(image_path)
-        img.draw()
-    else:
-        console.print(f"Browse processed image at: {image_path}")
-
-def capture_image():
-    cap = cv2.VideoCapture(0)
-    if not cap.isOpened():
-        raise IOError("Cannot access the camera")
-    
-    # Wait for the camera to initialize and adjust light levels
-    for i in range(30):
-        cap.read()
-    
-    ret, frame = cap.read()
-    cap.release()
-    
-    if not ret or frame is None:
-        raise IOError("Failed to capture an image")
-    
-    _, buffer = cv2.imencode('.jpg', frame)
-    
-    return buffer.tobytes()
-
-def resize_image(image_data, max_size=5*1024*1024):
-    """Resize the image to ensure it's under 5MB."""
-    img = Image.open(io.BytesIO(image_data))
-    
-    # Calculate current size
-    current_size = len(image_data)
-    
-    if current_size <= max_size:
-        return image_data  # No need to resize
-    
-    # Calculate the scale factor
-    scale_factor = (max_size / current_size) ** 0.5
-    
-    # Calculate new dimensions
-    new_width = int(img.width * scale_factor)
-    new_height = int(img.height * scale_factor)
-    
-    # Resize the image
-    img_resized = img.resize((new_width, new_height), Image.LANCZOS)
-    
-    # Convert back to bytes
-    buffer = io.BytesIO()
-    img_resized.save(buffer, format="JPEG", quality=85)
-    return buffer.getvalue()
-
-def extract_error_info(error_message):
-    # Extract error code
-    error_code_match = re.search(r"Error code: (\d+)", error_message)
-    error_code = error_code_match.group(1) if error_code_match else "Unknown"
-
-    # Extract error content
-    error_content_match = re.search(r"\{.*\}", error_message)
-    if error_content_match:
-        error_content = error_content_match.group(0)
-    else:
-        # If no JSON-like content found, use the last line of the error message
-        error_content = error_message.strip().split('\n')[-1]
-
-    return error_code, error_content
-
-
-def _count_tokens(text):
-    """Count the number of tokens in the given text."""
-    try:
-        encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
-        return len(encoding.encode(text))
-    except Exception:
-        # Fallback to a simple word count if tiktoken fails
-        return len(text.split())
-
-
-def read_yaml_files(directory='Metrics'):
-    data = {}
-    for filename in os.listdir(directory):
-        if filename.startswith('test_summary_') and filename.endswith('.yml'):
-            date = filename[13:21]  # Extract date from filename
-            with open(os.path.join(directory, filename), 'r') as file:
-                data[date] = yaml.safe_load(file)
-    console.print(f"Found {len(data)} YAML files")
-    return data
-
-def process_data(data, days=7):
-    processed_data = {}
-    end_date = datetime.now().date()
-    start_date = end_date - timedelta(days=days-1)
-
-    for date, daily_data in data.items():
-        file_date = datetime.strptime(date, '%Y%m%d').date()
-        if start_date <= file_date <= end_date:
-            for timestamp, provider_data in daily_data.items():
-                for provider, model_data in provider_data.items():
-                    for model, config_data in model_data.items():
-                        for config, test_data in config_data.items():
-                            key = (provider, model, config)
-                            if key not in processed_data:
-                                processed_data[key] = {'dates': [], 'response_times': [], 'token_counts': []}
-                            processed_data[key]['dates'].append(file_date)
-                            processed_data[key]['response_times'].append(test_data['response_time'])
-                            processed_data[key]['token_counts'].append(test_data['token_count'])
-
-    console.print(f"Processed data for {len(processed_data)} provider-model combinations")
-    return processed_data
-
-def create_sparkline(data, max_value, width=10):
-    if not data:
-        return ' ' * width
-    
-    bins = [0] * width
-    for value in data:
-        if isinstance(value, (int, float)) and value != float('inf'):
-            bin = min(int((value / max_value) * (width - 1)), width - 1)
-            bins[bin] += 1
-
-    sparkline = ''
-    for count in bins:
-        if count == 0:
-            sparkline += '▁'
-        elif count <= 1:
-            sparkline += '▂'
-        elif count <= 2:
-            sparkline += '▃'
-        elif count <= 3:
-            sparkline += '▄'
-        elif count <= 4:
-            sparkline += '▅'
-        else:
-            sparkline += '▇'
-
-    return sparkline
-
-def display_trends(processed_data):
-    if not processed_data:
-        console.print("No data to display", style="bold red")
-        return
-
-    console.print(Panel("Trend Visualization", style="bold magenta"))
-
-    tables = []
-    for (provider, model, config), data in processed_data.items():
-        table = Table(title=f"{provider} - {model} ({config})", box=box.ROUNDED, width=60)
-        table.add_column("Metric", style="cyan", width=15)
-        table.add_column("Trend", style="magenta", width=12)
-        table.add_column("Min", style="green", width=8)
-        table.add_column("Max", style="red", width=8)
-        table.add_column("Avg", style="yellow", width=8)
-
-        # Response Time
-        rt_data = [rt for rt in data['response_times'] if isinstance(rt, (int, float)) and rt != float('inf')]
-        if rt_data:
-            rt_max = max(rt_data)
-            rt_sparkline = create_sparkline(rt_data, rt_max)
-            table.add_row(
-                "Response Time",
-                rt_sparkline,
-                f"{min(rt_data):.2f}s",
-                f"{rt_max:.2f}s",
-                f"{sum(rt_data)/len(rt_data):.2f}s"
-            )
-
-        # Token Count
-        tc_data = [tc for tc in data['token_counts'] if isinstance(tc, (int, float)) and tc != 'N/A']
-        if tc_data:
-            tc_max = max(tc_data)
-            tc_sparkline = create_sparkline(tc_data, tc_max)
-            table.add_row(
-                "Token Count",
-                tc_sparkline,
-                str(min(tc_data)),
-                str(max(tc_data)),
-                f"{sum(tc_data)/len(tc_data):.2f}"
-            )
-
-        tables.append(table)
-
-    # Display tables with pagination
-    items_per_page = 4
-    for i in range(0, len(tables), items_per_page):
-        page_tables = tables[i:i+items_per_page]
-        console.print(Columns(page_tables))
-        if i + items_per_page < len(tables):
-            input("Press Enter to see more...")
-            console.clear()
 
 @click.group()
 def cli():
@@ -277,18 +36,18 @@ def cli():
 
 
 @cli.command()
-@click.option('--days', default=7, help='Number of days to analyze')
+@click.option('-d', '--days', default=7, help='Number of days to analyze')
 def trends(days):
     """Visualize trends for provider-model combinations."""
-    data = read_yaml_files()
-    processed_data = process_data(data, days)
-    display_trends(processed_data)
+    data = metrics.read_yaml_files()
+    processed_data = metrics.process_data(data, days)
+    metrics.display_trends(processed_data)
 
 @cli.command()
 @click.argument('model_config', type=click.Choice(['ask', 'vision']))
 def test(model_config):
     """Test the specified model configuration across all compatible providers and models."""
-    config = utils.load_config()
+    config = configure.load_config()
     provider_model_mapping = config.get('provider-model-mapping', {})
     test_config = config.get('test', {})
     
@@ -301,7 +60,7 @@ def test(model_config):
             config[model_config]['model'] = model
 
             # Save the updated configuration
-            utils.save_config(config)
+            configure.save_config(config)
 
             # Get the prompt from the config file
             if model_config == 'ask':
@@ -331,7 +90,7 @@ def test(model_config):
 
             # Run the command
             try:
-                provider_instance = _get_provider_instance(provider)
+                provider_instance = utils.get_provider_instance(provider)
                 provider_instance.set_model_config(model_config)
 
                 start_time = time.time()
@@ -350,7 +109,7 @@ def test(model_config):
                 end_time = time.time()
 
                 response_time = end_time - start_time
-                token_count = _count_tokens(full_response)
+                token_count = metrics.count_tokens(full_response)
 
                 summary.append({
                     'Provider': provider,
@@ -363,7 +122,7 @@ def test(model_config):
                 })
 
                 # NEW: Save test summary to YAML
-                save_test_summary(provider, config[model_config]['model'], model_config, prompt, 
+                metrics.save_test_summary(provider, config[model_config]['model'], model_config, prompt, 
                                   'Success', 'Command executed successfully', response_time, token_count)
                 
             except Exception as e:
@@ -380,7 +139,7 @@ def test(model_config):
                 })
     
                 # NEW: Save error summary to YAML
-                save_test_summary(provider, config[model_config]['model'], model_config, prompt, 
+                metrics.save_test_summary(provider, config[model_config]['model'], model_config, prompt, 
                                   'Error', error_message, float('inf'), 'N/A')
 
     # Sort summary by response time
@@ -423,7 +182,7 @@ def test(model_config):
 
 
 @cli.command()
-@click.option('--force', is_flag=True, help='Overwrite existing files without prompting')
+@click.option('-f', '--force', is_flag=True, help='Overwrite existing files without prompting')
 def init(force):
     click.echo("Initializing navamai in the current directory...")
 
@@ -476,7 +235,7 @@ def init(force):
 @click.argument('value')
 def config(config_path, value):
     keys = list(config_path)
-    utils.edit_config(keys, value)
+    configure.edit_config(keys, value)
     click.echo(f"Updated config: {' > '.join(keys)} = {value}")
 
 
@@ -484,11 +243,11 @@ def config(config_path, value):
 @click.option('-i', '--identify', is_flag=True, help='Identify the provider and model without running a query')
 @click.argument('prompt', required=False)
 def ask(identify, prompt):
-    config = utils.load_config()
+    config = configure.load_config()
     ask_config = config.get("ask", {})
     
     provider = ask_config.get("provider").lower()
-    provider_instance = _get_provider_instance(provider)
+    provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config("ask")
     if identify:
         model_info = provider_instance.get_model_info()
@@ -503,11 +262,11 @@ def ask(identify, prompt):
 @click.argument('section', required=True)
 @click.argument('document', required=True)
 def expand(section, document):
-    config = utils.load_config()
+    config = configure.load_config()
     model_config = config.get(f"expand-{section}", {})
     source_document = f"{model_config['lookup-folder']}/{document}.md"
     provider = model_config.get("provider").lower()
-    provider_instance = _get_provider_instance(provider)
+    provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config(f"expand-{section}")
     
     with open(source_document, 'r') as file:
@@ -518,7 +277,7 @@ def expand(section, document):
 @cli.command()
 @click.argument('filename')
 def intents(filename):
-    config = utils.load_config()
+    config = configure.load_config()
     model_config = config.get("intents", {})
 
     intents_template = f"{model_config.get("lookup-folder")}/{filename}.md"
@@ -530,7 +289,7 @@ def intents(filename):
     with open(intents_template, 'r') as file:
         intents_content = file.read()
 
-    sections = _parse_markdown_sections(intents_content)
+    sections = markdown.parse_markdown_sections(intents_content)
 
     for i, (title, _) in enumerate(sections, 1):
         click.echo(f"[{i}] {title}")
@@ -557,7 +316,7 @@ def intents(filename):
     
     provider = model_config.get("provider").lower()
 
-    provider_instance = _get_provider_instance(provider)
+    provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config("intents")
 
     # Execute the ask method and capture the response file path
@@ -565,13 +324,13 @@ def intents(filename):
 
     # Update the Markdown file if a response was saved
     if new_response_file_path:
-        _update_markdown_with_response(intents_template, selected_title, os.path.basename(new_response_file_path))
+        markdown.update_markdown_with_response(intents_template, selected_title, os.path.basename(new_response_file_path))
         click.echo(f"Updated {intents_template} with response file path.")
 
 @cli.command()
 @click.argument('filename')
 def validate(filename):
-    config = utils.load_config()
+    config = configure.load_config()
     intents_config = config.get("intents", {})
     validate_config = config.get("validate", {})
 
@@ -584,7 +343,7 @@ def validate(filename):
     with open(intents_template, 'r') as file:
         intents_content = file.read()
 
-    sections = _parse_markdown_sections(intents_content)
+    sections = markdown.parse_markdown_sections(intents_content)
 
     for i, (title, _) in enumerate(sections, 1):
         click.echo(f"[{i}] {title}")
@@ -620,7 +379,7 @@ def validate(filename):
     
     provider = validate_config.get("provider").lower()
 
-    provider_instance = _get_provider_instance(provider)
+    provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config("validate")
 
     # Execute the ask method and capture the validated response
@@ -631,7 +390,7 @@ def validate(filename):
             validated_response = file.read()
 
         # Perform text diff
-        diff_percentage = _diff(existing_response, validated_response)
+        diff_percentage = markdown.diff(existing_response, validated_response)
         click.echo(f"{diff_percentage:.2f}% validated content is different from original.")
     else:
         click.echo("Validation failed. No changes made to the existing response.")
@@ -645,13 +404,13 @@ def validate(filename):
 @click.option('-i', '--identify', is_flag=True, help='Identify the provider and model without running a query')
 @click.argument('prompt', required=False)
 def vision(path, url, camera, identify, display, prompt):
-    config = utils.load_config()
+    config = configure.load_config()
     vision_config = config.get("vision", {})
 
     provider = vision_config.get("provider").lower()
     model = vision_config.get("model")
 
-    provider_instance = _get_provider_instance(provider)
+    provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config("vision")
 
     if identify:
@@ -663,7 +422,7 @@ def vision(path, url, camera, identify, display, prompt):
         console.print("[bold red]Error:[/bold red] Please provide exactly one of: local image file path (-p), image URL (-u), or camera capture (-c)")
         return
 
-    if not utils.has_vision_capability(model):
+    if not configure.has_vision_capability(model):
         console.print(f"[bold red]Error:[/bold red] The selected model '{model}' does not have vision capabilities.")
         vision_models = config.get("vision-models", [])
         console.print(Panel(f"Please choose one of the following vision-capable models:\n{', '.join(vision_models)}", title="Available Vision Models", border_style="yellow"))
@@ -680,14 +439,14 @@ def vision(path, url, camera, identify, display, prompt):
             image_data = response.content
             image_source = "URL"
         elif camera:
-            image_data = capture_image()
+            image_data = vision.capture_image()
             image_source = "Camera"
         else:
             image_source = path
             with open(image_source, 'rb') as img_file:
                 image_data = img_file.read()
 
-    image_data = resize_image(image_data)
+    image_data = vision.resize_image(image_data)
 
     # Create a temporary file to display the image
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
@@ -695,7 +454,7 @@ def vision(path, url, camera, identify, display, prompt):
         temp_file_path = temp_file.name
 
     if display:
-        display_image(temp_file_path)
+        vision.display_image(temp_file_path)
 
     if prompt:
         console.print("[bold green]Processing image and generating response...[/bold green]")
@@ -746,74 +505,6 @@ def vision(path, url, camera, identify, display, prompt):
     if os.path.exists(temp_file_path):
         os.unlink(temp_file_path)
 
-
-def _diff(content1, content2):
-    def preprocess_content(content):
-        # Remove newlines and extra whitespace
-        content = re.sub(r'\s+', ' ', content)
-        # Remove all markdown formatting
-        content = re.sub(r'[#*_`~\[\]()>]+', '', content)
-        # Remove links
-        content = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', content)
-        # Remove HTML tags
-        content = re.sub(r'<[^>]+>', '', content)
-        return content.strip().lower()
-
-    # Preprocess both contents
-    processed_content1 = preprocess_content(content1)
-    processed_content2 = preprocess_content(content2)
-
-    # Calculate similarity ratio
-    similarity = SequenceMatcher(None, processed_content1, processed_content2).ratio()
-
-    # Calculate difference percentage
-    difference_percentage = (1 - similarity) * 100
-
-    return difference_percentage
-def _parse_markdown_sections(content):
-    pattern = r'^#\s(.+)\n\nPrompt:\s(.+)$'
-    return re.findall(pattern, content, re.MULTILINE)
-
-def _get_provider_instance(provider):
-    if provider == "claude":
-        return Claude()
-    elif provider == "ollama":
-        return Ollama()
-    elif provider == "groq":
-        return Groq()
-    elif provider == "openai":
-        return Openai()
-    elif provider == "gemini":
-        return Gemini()
-    else:
-        raise ValueError(f"Unsupported provider: {provider}")
-
-def _update_markdown_with_response(filename, title, response_filename):
-    with open(filename, 'r') as file:
-        content = file.read()
-
-    # Create the Obsidian-flavored markdown embed
-    embed = f"![[{response_filename}]]"
-
-    # Find the section and check if the embed already exists
-    pattern = f"(#\\s{re.escape(title)}.*?^Prompt:.*?$)(.*?)(?=^#|\\Z)"
-    match = re.search(pattern, content, flags=re.MULTILINE | re.DOTALL)
-    
-    if match:
-        section_content = match.group(2)
-        if embed in section_content:
-            # Embed already exists, do nothing
-            return
-        
-        # Embed doesn't exist, add it
-        replacement = f"{match.group(1)}\n\n{embed}"
-        updated_content = content[:match.start()] + replacement + '\n\n' + content[match.end():]
-    else:
-        # Section not found, don't modify the file
-        return
-
-    with open(filename, 'w') as file:
-        file.write(updated_content)
 
 if __name__ == "__main__":
     cli()

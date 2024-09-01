@@ -1,14 +1,14 @@
 from openai import OpenAI
 from typing import Generator
 from navamai.provider import Provider
-import navamai.utils as utils
+import navamai.configure as configure
 import base64
 
 class Openai(Provider):
     def __init__(self):
         super().__init__()
         self.client = OpenAI()
-        self.full_config = utils.load_config()
+        self.full_config = configure.load_config()
     
     def create_request_data(self, prompt: str) -> dict:
         config = self.model_config
