@@ -6,24 +6,6 @@ ask:
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
   temperature: 0.3
-expand-post:
-  lookup-folder: Posts
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
-  save: true
-  save-folder: Posts
-  system: You will be given a partially written blog post on a topic.
-    Your job as an expert blog writer is to expand the post by adding more content.
-    Your response will include the existing post content as is and the new content.
-    Perform these actions step by step.
-    1) Study given post content.
-    2) Research related popular papers, articles, books from experts on the topic.
-    3) Add more related sections and content to the post following the existing structure. 
-    4) Cite relevant research where applicable as you add new content to the post.
-    5) Create a section in the end of the document for citations with links.
-    6) Do not explain your response.
-  temperature: 0.5
 expand-intents:
   lookup-folder: Intents
   max-tokens: 4000
@@ -40,6 +22,22 @@ expand-intents:
     list, or narrative format. Respond with the expanded document following the same
     structure as the given document. Do not explain your response.
   temperature: 0.3
+expand-post:
+  lookup-folder: Posts
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: You will be given a partially written blog post on a topic. Your job as
+    an expert blog writer is to expand the post by adding more content. Your response
+    will include the existing post content as is and the new content. Perform these
+    actions step by step. 1) Study given post content. 2) Research related popular
+    papers, articles, books from experts on the topic. 3) Add more related sections
+    and content to the post following the existing structure. 4) Cite relevant research
+    where applicable as you add new content to the post. 5) Create a section in the
+    end of the document for citations with links. 6) Do not explain your response.
+  temperature: 0.5
 intents:
   lookup-folder: Intents
   max-tokens: 1000
@@ -101,8 +99,8 @@ validate:
     revised response otherwise return the same response.
 vision:
   max-tokens: 300
-  model: sonnet
-  provider: claude
+  model: gpt4mini
+  provider: openai
   save: false
   save-folder: Vision
   system: Analyze the image and respond to the prompt using valid markdown syntax.
