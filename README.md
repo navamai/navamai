@@ -14,9 +14,57 @@ Go to a folder where you want to initialize NavamAI. This could be your Obsidian
 ```bash
 pip install -U navamai
 navamai init # copies config file, quick start samples
+navamai ask "How old is the oldest pyramid?"
+```
+
+You will need to setup model-provider keys. Edit your environment config `~/.zshrc` like so.
+
+```bash
+export ANTHROPIC_API_KEY= # https://docs.anthropic.com/en/api/getting-started
+export OPENAI_API_KEY= # https://openai.com/index/openai-api/
+export GROQ_API_KEY= # https://console.groq.com/keys
+export GEMINI_API_KEY= # https://ai.google.dev/gemini-api
+```
+
+For local models [install Ollama](https://ollama.com/) and download the latest [models](https://ollama.com/library) you want to run.
+
+Now you are ready to test all models and providers.
+
+```bash
 navamai test ask
 navamai test vision
 ```
+
+# Setting up Python Environment (optional)
+
+Skip this section if you have your Python environment already working.
+
+First, you should be running the latest Python on your system with Python package manager upgraded to the latest.
+
+```bash
+python --version
+# should return Python 3.12.x or higher as on Sep'24
+```
+
+1. Optionally install latest [Python on Mac](https://docs.python-guide.org/starting/install3/osx/). 
+2. Safely install NavamAI. Follow [this thread](https://apple.stackexchange.com/questions/237430/how-to-install-specific-version-of-python-on-os-x) to setup `pyenv` version manager.
+
+First change to the directory to your VS Code workspace, Obsidian vault, or folder where you want to install NavamAI. Next create the virtual environment.
+
+```bash
+python -m venv env
+```
+
+Now you can activate your virtual environment like so. You will notice that directory prefixed with `(env)` to indicate you are now running in the virtual environment.
+
+```bash
+. env/bin/activate
+```
+
+To leave the virtual environment using `deactivate` command. Re-enter using same command as earlier.
+
+Now you are ready to install NavamAI.
+
 
 ## NavamAI Expands Your Content
 
