@@ -4,25 +4,20 @@ These intents related to research and insights which help making well-informed s
 
 Prompt: Create a table of top 10 macro factors which impact the stock markets. Add columns for nature of impact, scale of impact, and recent example.
 
-![[Macro Factors Impact Stocks.md]]
-
 # Top Companies by ROCE
 
 Prompt: Create a table of top 10 companies by ROCE. Add columns for 5 year growth rate for stock value, revenue, free cash flow.
 
-![[Top Companies by ROCE.md]]
 
 # Economic Indicators Analysis
 
 Prompt: Analyze the current state of key economic indicators (GDP growth, inflation rate, unemployment rate) and their potential impact on the stock market over the next 6 months.
 
-![[Economic Indicators Analysis.md]]
 
 # Sector Performance Comparison
 
 Prompt: Compare the performance of major market sectors (Technology, Healthcare, Finance, Energy, Consumer Discretionary) over the past year. Include average returns and volatility metrics.
 
-![[Sector Performance Comparison.md]]
 
 # Global Market Trends
 

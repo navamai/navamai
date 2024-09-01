@@ -225,7 +225,7 @@ def test(model_config):
     table.add_column("Config", style="green")
     table.add_column("Status", style="yellow")
     table.add_column("Details", style="white")
-    table.add_column("Response Time", style="blue")
+    table.add_column("Response Time", style="cyan")
     table.add_column("Token Count", style="orange3")
 
     for entry in summary:
@@ -332,19 +332,20 @@ def ask(identify, prompt):
 
 
 @cli.command()
-@click.argument('template', required=True)
-def expand_intents(template):
+@click.argument('section', required=True)
+@click.argument('document', required=True)
+def expand(section, document):
     config = utils.load_config()
-    model_config = config.get("expand-intents", {})
-    intents_template = f"{model_config['lookup-folder']}/{template}.md"
+    model_config = config.get(f"expand-{section}", {})
+    source_document = f"{model_config['lookup-folder']}/{document}.md"
     provider = model_config.get("provider").lower()
     provider_instance = _get_provider_instance(provider)
-    provider_instance.set_model_config("expand-intents")
+    provider_instance.set_model_config(f"expand-{section}")
     
-    with open(intents_template, 'r') as file:
-        template_contents = file.read()
+    with open(source_document, 'r') as file:
+        source_contents = file.read()
     
-    provider_instance.ask(prompt=template_contents, title=template)
+    provider_instance.ask(prompt=source_contents, title=f"{document} expanded")
 
 @cli.command()
 @click.argument('filename')

@@ -6,11 +6,29 @@ ask:
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
   temperature: 0.3
+expand-post:
+  lookup-folder: Posts
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: You will be given a partially written blog post on a topic.
+    Your job as an expert blog writer is to expand the post by adding more content.
+    Your response will include the existing post content as is and the new content.
+    Perform these actions step by step.
+    1) Study given post content.
+    2) Research related popular papers, articles, books from experts on the topic.
+    3) Add more related sections and content to the post following the existing structure. 
+    4) Cite relevant research where applicable as you add new content to the post.
+    5) Create a section in the end of the document for citations with links.
+    6) Do not explain your response.
+  temperature: 0.5
 expand-intents:
   lookup-folder: Intents
   max-tokens: 4000
-  model: mistral
-  provider: ollama
+  model: sonnet
+  provider: claude
   save: true
   save-folder: Intents
   system: You will be given a document about exploring a topic, explaining the topic
@@ -19,8 +37,8 @@ expand-intents:
     an LLM. Your job is to brainstorm the topic, research popular papers, articles,
     books from experts on the topic. Then add more related intents and prompts to
     the document. Depending on the expected response the prompt should ask for a table,
-    list, or narrative format. Respond with the expanded document. Do not explain
-    your response.
+    list, or narrative format. Respond with the expanded document following the same
+    structure as the given document. Do not explain your response.
   temperature: 0.3
 intents:
   lookup-folder: Intents
@@ -38,13 +56,13 @@ model-mapping:
   gemma: gemma2
   gpt4mini: gpt-4o-mini
   gpt4o: gpt-4o
-  groq-llama: llama2-70b-4096
-  groq-mixtral: mixtral-8x7b-32768
   haiku: claude-3-haiku-20240307
   llama: llama3.1
   llava: llava
   mistral: mistral-nemo
+  mixtral: mixtral-8x7b-32768
   opus: claude-3-opus-20240229
+  qwen: qwen2
   sonnet: claude-3-5-sonnet-20240620
 provider-model-mapping:
   claude:
@@ -55,13 +73,13 @@ provider-model-mapping:
   - gemini-pro
   - gemini-flash
   groq:
-  - groq-llama
-  - groq-mixtral
+  - mixtral
   ollama:
   - llama
   - llava
   - mistral
   - gemma
+  - qwen
   openai:
   - gpt4o
   - gpt4mini
@@ -83,13 +101,13 @@ validate:
     revised response otherwise return the same response.
 vision:
   max-tokens: 300
-  model: gpt4mini
-  provider: openai
+  model: sonnet
+  provider: claude
   save: false
   save-folder: Vision
   system: Analyze the image and respond to the prompt using valid markdown syntax.
     Do not explain your response.
-  temperature: 0.3
+  temperature: 0.5
 vision-models:
 - sonnet
 - gpt4o
