@@ -17,6 +17,7 @@ navamai init # copies config file, quick start samples
 navamai ask "How old is the oldest pyramid?"
 ```
 
+### Models Setup
 You will need to setup model-provider keys. Edit your environment config `~/.zshrc` like so.
 
 ```bash
@@ -35,7 +36,7 @@ navamai test ask
 navamai test vision
 ```
 
-# Setting up Python Environment (optional)
+### Python Environment Setup (optional)
 
 Skip this section if you have your Python environment already working.
 
