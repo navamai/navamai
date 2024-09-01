@@ -1,4 +1,4 @@
-# Intruduction
+# Introduction
 These are top startup growth hacking tips from successful solo entrepreneurs, influencers, and investors. The tips are particularly useful for software product or digital content startups. The tips particularly focus on how to bootstrap without any funding and start making meaningful returns quickly from the time invested. The tips include leveraging social media, generative AI, productivity tooling, launch platforms, partnering strategies, bootstrapping techniques, and more.
 
 # Pieter Levels on Hacking Startups Quickly
