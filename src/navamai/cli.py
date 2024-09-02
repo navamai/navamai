@@ -22,7 +22,7 @@ import os
 import tempfile
 
 import navamai.metrics as metrics
-import navamai.vision as vision
+import navamai.images as images
 import navamai.markdown as markdown
 import navamai.utils as utils
 
@@ -329,6 +329,13 @@ def intents(filename):
 
 @cli.command()
 @click.argument('filename')
+def merge(filename):
+    config = configure.load_config()
+    merge_config = config.get("merge", {})
+    markdown.merge_docs(f"{merge_config.get('lookup-folder')}/{filename}")
+
+@cli.command()
+@click.argument('filename')
 def validate(filename):
     config = configure.load_config()
     intents_config = config.get("intents", {})
@@ -439,14 +446,14 @@ def vision(path, url, camera, identify, display, prompt):
             image_data = response.content
             image_source = "URL"
         elif camera:
-            image_data = vision.capture_image()
+            image_data = images.capture_image()
             image_source = "Camera"
         else:
             image_source = path
             with open(image_source, 'rb') as img_file:
                 image_data = img_file.read()
 
-    image_data = vision.resize_image(image_data)
+    image_data = images.resize_image(image_data)
 
     # Create a temporary file to display the image
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
@@ -454,7 +461,7 @@ def vision(path, url, camera, identify, display, prompt):
         temp_file_path = temp_file.name
 
     if display:
-        vision.display_image(temp_file_path)
+        images.display_image(temp_file_path)
 
     if prompt:
         console.print("[bold green]Processing image and generating response...[/bold green]")
