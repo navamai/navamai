@@ -1,13 +1,15 @@
-from navamai.claude import Claude
-from navamai.ollama import Ollama
-from navamai.groq import Groq
-from navamai.openai import Openai
-from navamai.gemini import Gemini
-
 import functools
-import yaml
-from datetime import datetime
 import os
+from datetime import datetime
+
+import yaml
+
+from navamai.claude import Claude
+from navamai.gemini import Gemini
+from navamai.groq import Groq
+from navamai.ollama import Ollama
+from navamai.openai import Openai
+
 
 def trail(f):
     @functools.wraps(f)
@@ -26,10 +28,10 @@ def trail(f):
 
         # Prepare the log entry
         log_entry = {
-            'timestamp': datetime.now().isoformat(),
-            'command': full_command,
-            'source_file': None,
-            'destination_file': None
+            "timestamp": datetime.now().isoformat(),
+            "command": full_command,
+            "source_file": None,
+            "destination_file": None,
         }
 
         # Execute the wrapped function
@@ -37,15 +39,15 @@ def trail(f):
 
         # Handle the result
         if isinstance(result, dict):
-            if 'source_file' in result:
-                log_entry['source_file'] = result['source_file']
-            if 'destination_file' in result:
-                log_entry['destination_file'] = result['destination_file']
+            if "source_file" in result:
+                log_entry["source_file"] = result["source_file"]
+            if "destination_file" in result:
+                log_entry["destination_file"] = result["destination_file"]
         elif isinstance(result, str) and os.path.exists(result):
-            log_entry['destination_file'] = result
+            log_entry["destination_file"] = result
 
         # Append to the YAML file
-        with open('trail.yml', 'a') as log_file:
+        with open("trail.yml", "a") as log_file:
             yaml.dump([log_entry], log_file, default_flow_style=False)
 
         return result
@@ -66,4 +68,3 @@ def get_provider_instance(provider):
         return Gemini()
     else:
         raise ValueError(f"Unsupported provider: {provider}")
-

@@ -1,14 +1,17 @@
-import groq
 from typing import Generator
-from navamai.provider import Provider
+
+import groq
+
 import navamai.configure as configure
+from navamai.provider import Provider
+
 
 class Groq(Provider):
     def __init__(self):
         super().__init__()
         self.client = groq.Groq()
         self.full_config = configure.load_config()
-    
+
     def create_request_data(self, prompt: str) -> dict:
         config = self.model_config
         model = self.resolve_model(config["model"])
@@ -17,18 +20,14 @@ class Groq(Provider):
             "max_tokens": config["max-tokens"],
             "temperature": config["temperature"],
             "messages": [
-                {
-                    "role": "system",
-                    "content": config["system"]
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
+                {"role": "system", "content": config["system"]},
+                {"role": "user", "content": prompt},
+            ],
         }
 
-    def stream_vision_response(self, image_data: bytes, prompt: str) -> Generator[str, None, None]:
+    def stream_vision_response(
+        self, image_data: bytes, prompt: str
+    ) -> Generator[str, None, None]:
         pass
 
     def stream_response(self, prompt: str) -> Generator[str, None, None]:

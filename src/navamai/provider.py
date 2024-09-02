@@ -1,11 +1,14 @@
-from abc import ABC, abstractmethod
-from typing import Generator
-import navamai.configure as configure
-from rich.console import Console
-from rich.markdown import Markdown
-from rich.live import Live
 import os
 import re
+from abc import ABC, abstractmethod
+from typing import Generator
+
+from rich.console import Console
+from rich.live import Live
+from rich.markdown import Markdown
+
+import navamai.configure as configure
+
 
 class Provider(ABC):
     def __init__(self):
@@ -24,20 +27,20 @@ class Provider(ABC):
     def set_model_config(self, model_config: str):
         self.model_config = self.full_config.get(model_config, {})
         pass
-        
+
     def ask(self, prompt: str, title: str = None) -> str:
         full_response = ""
         buffer = ""
-        
+
         for chunk in self.stream_response(prompt):
             full_response += chunk
             buffer += chunk
-            
+
             # Print the buffer when it contains a full word or punctuation
-            if buffer.endswith((' ', '\n', '.', '!', '?', ',', ';', ':', '-')):
+            if buffer.endswith((" ", "\n", ".", "!", "?", ",", ";", ":", "-")):
                 self.console.print(Markdown(buffer), end="")
                 buffer = ""
-        
+
         # Print any remaining content in the buffer
         if buffer:
             self.console.print(Markdown(buffer), end="")
@@ -51,7 +54,9 @@ class Provider(ABC):
         return response_file_path
 
     @abstractmethod
-    def stream_vision_response(self, image_data: bytes, prompt: str) -> Generator[str, None, None]:
+    def stream_vision_response(
+        self, image_data: bytes, prompt: str
+    ) -> Generator[str, None, None]:
         pass
 
     def vision(self, image_data: bytes, prompt: str, title: str = None):
@@ -61,16 +66,18 @@ class Provider(ABC):
             yield chunk  # This yields chunks of the AI's response, not image_data
 
     def save_response(self, prompt: str, response: str, title: str = None) -> str:
-        responses_folder = self.model_config.get('save-folder')
+        responses_folder = self.model_config.get("save-folder")
         os.makedirs(responses_folder, exist_ok=True)
 
         if title:
             # Use the title as the filename, ensuring it's safe for file systems
-            filename = re.sub(r'[<>:"/\\|?*]', '', title) + ".md"
+            filename = re.sub(r'[<>:"/\\|?*]', "", title) + ".md"
         else:
             # Create filename based on first ten words, ignoring words less than five characters
-            words = [word.lower() for word in re.findall(r'\w+', response) if len(word) >= 5]
-            filename = '-'.join(words[:10]) + ".md"
+            words = [
+                word.lower() for word in re.findall(r"\w+", response) if len(word) >= 5
+            ]
+            filename = "-".join(words[:10]) + ".md"
 
         filepath = os.path.join(responses_folder, filename)
 
