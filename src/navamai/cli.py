@@ -25,6 +25,10 @@ import navamai.metrics as metrics
 import navamai.images as images
 import navamai.markdown as markdown
 import navamai.utils as utils
+from navamai.utils import trail
+
+from typing import Optional
+
 
 from rich.console import Console
 console = Console()
@@ -242,6 +246,7 @@ def config(config_path, value):
 @cli.command()
 @click.option('-i', '--identify', is_flag=True, help='Identify the provider and model without running a query')
 @click.argument('prompt', required=False)
+@trail
 def ask(identify, prompt):
     config = configure.load_config()
     ask_config = config.get("ask", {})
@@ -249,38 +254,85 @@ def ask(identify, prompt):
     provider = ask_config.get("provider").lower()
     provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config("ask")
+    destination_file = None
     if identify:
         model_info = provider_instance.get_model_info()
         console.print(f"Model Information: [bold magenta]{model_info}[/bold magenta]")
     elif prompt:
-        provider_instance.ask(prompt)
+        destination_file = provider_instance.ask(prompt)
     else:
         click.echo("Error: Please provide a prompt or use the --identify flag.")
+    return {"source_file": None, "destination_file": destination_file}
 
 
 @cli.command()
 @click.argument('section', required=True)
-@click.argument('document', required=True)
-def expand(section, document):
+@click.option('-d', '--document', help="The document to expand")
+@click.option('-p', '--prompt', help="Additional prompt to use when expanding the document")
+@trail
+def expand(section: str, document: Optional[str] = None, prompt: Optional[str] = None):
+    """
+    Expand a document from the specified section.
+
+    SECTION: The section to expand from (required).
+
+    If no document is specified, available documents will be listed for selection.
+    """
     config = configure.load_config()
     model_config = config.get(f"expand-{section}", {})
-    source_document = f"{model_config['lookup-folder']}/{document}.md"
+    lookup_folder = model_config['lookup-folder']
+    
+    if not document:
+        documents = [f.replace('.md', '') for f in os.listdir(lookup_folder) if f.endswith('.md')]
+        click.echo("Available documents:")
+        for i, doc in enumerate(documents, 1):
+            click.echo(f"{i}. {doc}")
+        
+        document = click.prompt("Select a document number", type=click.IntRange(1, len(documents)))
+        document = documents[document - 1]
+
+    source_document = f"{lookup_folder}/{document}.md"
+    
+    if not os.path.exists(source_document):
+        raise click.ClickException(f"Document '{document}' not found in {lookup_folder}")
+    
     provider = model_config.get("provider").lower()
     provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config(f"expand-{section}")
     
     with open(source_document, 'r') as file:
         source_contents = file.read()
-    
-    provider_instance.ask(prompt=source_contents, title=f"{document} expanded")
+
+    if prompt:
+        destination_file = provider_instance.ask(prompt=f"{prompt}\n\n{source_contents}", title=f"{document} expanded")
+    else:
+        destination_file = provider_instance.ask(prompt=source_contents, title=f"{document} expanded")
+
+    return {"source_file": source_document, "destination_file": destination_file}
 
 @cli.command()
-@click.argument('filename')
-def intents(filename):
+@click.option('-d', '--document', help='Filename of the document to process')
+@trail
+def intents(document):
     config = configure.load_config()
     model_config = config.get("intents", {})
+    lookup_folder = model_config.get("lookup-folder")
 
-    intents_template = f"{model_config.get("lookup-folder")}/{filename}.md"
+    if not document:
+        console.print("Select from available documents...", style="green")
+        # List documents in lookup-folder
+        documents = [f.replace('.md', '') for f in os.listdir(lookup_folder) if f.endswith('.md')]
+        for i, doc in enumerate(documents, 1):
+            click.echo(f"[{i}] {doc}")
+
+        while True:
+            choice = click.prompt("Select a document", type=int)
+            if 1 <= choice <= len(documents):
+                document = documents[choice - 1]
+                break
+            click.echo(f"Invalid choice. Please enter a number between 1 and {len(documents)}.")
+
+    intents_template = os.path.join(lookup_folder, f"{document}.md")
 
     if not os.path.exists(intents_template):
         click.echo(f"Error: Intents file {intents_template} not found.")
@@ -290,6 +342,7 @@ def intents(filename):
         intents_content = file.read()
 
     sections = markdown.parse_markdown_sections(intents_content)
+    console.print("Select from available intents to generate embed...", style="green")
 
     for i, (title, _) in enumerate(sections, 1):
         click.echo(f"[{i}] {title}")
@@ -326,6 +379,7 @@ def intents(filename):
     if new_response_file_path:
         markdown.update_markdown_with_response(intents_template, selected_title, os.path.basename(new_response_file_path))
         click.echo(f"Updated {intents_template} with response file path.")
+    return {"source_file": intents_template, "destination_file": new_response_file_path}
 
 @cli.command()
 @click.argument('filename')
@@ -340,13 +394,28 @@ def merge(filename):
         prompt_prefix=merge_config.get('prompt-prefix'))
 
 @cli.command()
-@click.argument('filename')
-def validate(filename):
+@click.option('-d', '--document', help='Filename of the document to process')
+@trail
+def validate(document):
     config = configure.load_config()
-    intents_config = config.get("intents", {})
     validate_config = config.get("validate", {})
+    lookup_folder = validate_config.get("lookup-folder")
 
-    intents_template = f"{intents_config.get('lookup-folder')}/{filename}.md"
+    if not document:
+        console.print("Select from available documents...", style="green")
+        # List documents in lookup-folder
+        documents = [f.replace('.md', '') for f in os.listdir(lookup_folder) if f.endswith('.md')]
+        for i, doc in enumerate(documents, 1):
+            click.echo(f"[{i}] {doc}")
+
+        while True:
+            choice = click.prompt("Select a document", type=int)
+            if 1 <= choice <= len(documents):
+                document = documents[choice - 1]
+                break
+            click.echo(f"Invalid choice. Please enter a number between 1 and {len(documents)}.")
+
+    intents_template = os.path.join(lookup_folder, f"{document}.md")
 
     if not os.path.exists(intents_template):
         click.echo(f"Error: Intents file {intents_template} not found.")
@@ -370,7 +439,7 @@ def validate(filename):
 
     # Check if a response file already exists
     response_filename = f"{selected_title}.md"
-    response_file_path = os.path.join(intents_config.get("save-folder"), response_filename)
+    response_file_path = os.path.join(validate_config.get("save-folder"), response_filename)
 
     if not os.path.exists(response_file_path):
         click.echo(f"Error: Response file '{response_filename}' not found.")
@@ -407,6 +476,8 @@ def validate(filename):
     else:
         click.echo("Validation failed. No changes made to the existing response.")
 
+    return {"source_file": intents_template, "destination_file": validated_response_file_path}
+
 
 @cli.command()
 @click.option('-p', '--path', type=click.Path(exists=True), help='Path to the local image file')
@@ -415,6 +486,7 @@ def validate(filename):
 @click.option('-d', '--display', is_flag=True, help='Display image')
 @click.option('-i', '--identify', is_flag=True, help='Identify the provider and model without running a query')
 @click.argument('prompt', required=False)
+@trail
 def vision(path, url, camera, identify, display, prompt):
     config = configure.load_config()
     vision_config = config.get("vision", {})
@@ -459,6 +531,7 @@ def vision(path, url, camera, identify, display, prompt):
                 image_data = img_file.read()
 
     image_data = images.resize_image(image_data)
+    dest_path = None
 
     # Create a temporary file to display the image
     with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
@@ -516,6 +589,8 @@ def vision(path, url, camera, identify, display, prompt):
     # Clean up temporary file
     if os.path.exists(temp_file_path):
         os.unlink(temp_file_path)
+
+    return {"source_file": image_source, "destination_file": dest_path}
 
 
 if __name__ == "__main__":

@@ -1,0 +1,1 @@
+Vision command processed images and output response will be saved here.

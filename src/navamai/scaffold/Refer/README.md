@@ -1,0 +1,1 @@
+Draft and gathered content that models refer to generate content will be saved here.
