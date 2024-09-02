@@ -30,20 +30,11 @@ class Provider(ABC):
 
     def ask(self, prompt: str, title: str = None) -> str:
         full_response = ""
-        buffer = ""
 
-        for chunk in self.stream_response(prompt):
-            full_response += chunk
-            buffer += chunk
-
-            # Print the buffer when it contains a full word or punctuation
-            if buffer.endswith((" ", "\n", ".", "!", "?", ",", ";", ":", "-")):
-                self.console.print(Markdown(buffer), end="")
-                buffer = ""
-
-        # Print any remaining content in the buffer
-        if buffer:
-            self.console.print(Markdown(buffer), end="")
+        with Live(console=self.console, refresh_per_second=8) as live:
+            for chunk in self.stream_response(prompt):
+                full_response += chunk
+                live.update(Markdown(full_response))
 
         self.console.print()  # Print a newline at the end
 
