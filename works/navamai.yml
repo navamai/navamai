@@ -100,6 +100,10 @@ test:
   vision: How many people are in this image.
 merge:
   lookup-folder: Posts
+  placeholder: '[merge here]'
+  dest-suffix: expanded
+  merge-suffix: merged
+  prompt-prefix: '> Prompt:'
 validate:
   lookup-folder: Intents
   max-tokens: 4000

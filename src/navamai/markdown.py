@@ -2,23 +2,27 @@ import re
 from difflib import SequenceMatcher
 from pathlib import Path
 
-def merge_docs(file_path):
+def merge_docs(source_path, dest_suffix="expanded", 
+               merge_suffix="merged", placeholder="[merge here]",
+               prompt_prefix="> Prompt:"):
 
     # Step 1: Read source content
-    source_file = file_path + ".md"
+    source_file = source_path + ".md"
     with open(source_file, 'r') as f:
         source_content = f.read()
 
     # Step 2: Read expanded content
-    expanded_file = file_path + " expanded.md"
+    expanded_file = source_path + f" {dest_suffix}.md"
     with open(expanded_file, 'r') as f:
         expanded_content = f.read()
 
     # Step 3: Define merged doc path
-    merged_file = file_path + " merged.md"
+    merged_file = source_path + f" {merge_suffix}.md"
 
-    # Step 4: Remove sentences starting with "> Prompt:" from source_content
-    source_content = re.sub(r'(?m)^> Prompt:.*$\n?', '', source_content)
+    # Step 4: Remove sentences starting with prompt prefix from source_content
+
+    escaped_prefix = re.escape(prompt_prefix)
+    source_content = re.sub(rf'(?m)^{escaped_prefix}.*$\n?', '', source_content)
 
     # Step 5 & 6: Find placeholders, match headings, and replace content
     # Split expanded content into lines
@@ -34,7 +38,7 @@ def merge_docs(file_path):
         if not section_buffer:
             return
         
-        merge_index = next((i for i, line in enumerate(section_buffer) if "[merge here]" in line), -1)
+        merge_index = next((i for i, line in enumerate(section_buffer) if f"{placeholder}" in line), -1)
         
         if merge_index != -1:
             # Add content before [merge here]

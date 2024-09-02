@@ -332,7 +332,12 @@ def intents(filename):
 def merge(filename):
     config = configure.load_config()
     merge_config = config.get("merge", {})
-    markdown.merge_docs(f"{merge_config.get('lookup-folder')}/{filename}")
+    markdown.merge_docs(
+        source_path=f"{merge_config.get('lookup-folder')}/{filename}",
+        dest_suffix=merge_config.get('dest-suffix'),
+        merge_suffix=merge_config.get('merge-suffix'),
+        placeholder=merge_config.get('placeholder'),
+        prompt_prefix=merge_config.get('prompt-prefix'))
 
 @cli.command()
 @click.argument('filename')

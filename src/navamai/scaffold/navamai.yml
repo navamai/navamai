@@ -22,6 +22,20 @@ expand-intents:
     list, or narrative format. Respond with the expanded document following the same
     structure as the given document. Do not explain your response.
   temperature: 0.3
+expand-sections:
+  lookup-folder: Posts
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: You will be given a post with inline prompts in a markdown blockqoute with "Prompt:" as the prefix. 
+    Your job is to execute the prompt and replace the blockquote and prompt by adding new content and sections. 
+    If the prompt asks for content to be added in another section of the post, then add the content 
+    in the correct section and remove the prompt. Your response will include the existing post headings 
+    with placeholder [merge here] replacing existing content and new generated content in new sections. 
+    Do not explain your response.
+  temperature: 0.3
 expand-post:
   lookup-folder: Posts
   max-tokens: 4000
@@ -84,6 +98,12 @@ provider-model-mapping:
 test:
   ask: How old is the oldest pyramid?
   vision: How many people are in this image.
+merge:
+  lookup-folder: Posts
+  placeholder: '[merge here]'
+  dest-suffix: expanded
+  merge-suffix: merged
+  prompt-prefix: '> Prompt:'
 validate:
   lookup-folder: Intents
   max-tokens: 4000
