@@ -1,0 +1,198 @@
+{
+  "main": {
+    "id": "ec108110e83d1a04",
+    "type": "split",
+    "children": [
+      {
+        "id": "2064c386e88333fc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "57d32466285c9183",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Posts/Startup Growth Hacks merged.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "80c85e9a31ff1e35",
+    "type": "split",
+    "children": [
+      {
+        "id": "9bad1e172951700e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "272c49843858c425",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "370b6997007808d9",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "ff270f9f72ba4b8a",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "4a4c438825e32623",
+    "type": "split",
+    "children": [
+      {
+        "id": "3353bd530b4eec2a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "27ed18b93dcf56d7",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Posts/Startup Growth Hacks merged.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "e27812a80a3a3e86",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Posts/Startup Growth Hacks merged.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "4b3ee78ec559d870",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "5f60d4b65072c27d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Posts/Startup Growth Hacks merged.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "57d32466285c9183",
+  "lastOpenFiles": [
+    "Posts/Anthropic CEO upstream interview researched merged.md",
+    "Posts/Startup Growth Hacks merged.md",
+    "Posts/Startup Growth Hacks expanded.md",
+    "Posts/Startup Growth Hacks.md",
+    "Posts/Pieter Levels Startup Hacks expanded.md",
+    "Raw/Anthropic CEO upstream interview.md",
+    "Posts/Anthropic CEO upstream interview researched expanded.md",
+    "Posts/Anthropic CEO upstream interview researched.md",
+    "Posts/Anthropic CEO upstream interview expanded expanded.md",
+    "Posts/Anthropic CEO upstream interview expanded.md",
+    "NavamAI/Progress.md",
+    "Vision/buildings-image-include-shard-gherkin-walkie-talkie-fenchurch-street-cheesegrater.webp",
+    "Vision/buildings-image-include-shard-gherkin-walkie-talkie-fenchurch-street-cheesegrater.md",
+    "Raw/Automating video creation.md",
+    "Raw/macro-factor-nature-impact-scale-impact-recent-example-interest-rates.md",
+    "Raw/quantum-entanglement-quantum-entanglement-phenomenon-quantum-physics-where-particles-become.md",
+    "Raw/README.md",
+    "Raw/Pieter Levels Startup Hacks.md",
+    "Raw/Elon Musk Design Process.md",
+    "Raw",
+    "Embeds/README.md",
+    "Embeds",
+    "Intents/README.md",
+    "Intents/Product Management.md",
+    "Intents/Financial Analysis.md",
+    "Intents/Event Planning.md",
+    "Intents",
+    "Vision/README.md",
+    "Vision",
+    "Images/london-skyline.webp",
+    "Images/hackathon.jpg",
+    "Images/README.md",
+    "Images",
+    "Posts/README.md",
+    "Posts",
+    "navamai.yml",
+    "trail.yml",
+    "navamai-chain.sh",
+    "Vision/gesture-shown-image-commonly-recognized-devil-horns-often-associated-music.jpg",
+    "Vision/gesture-shown-image-where-thumb-pinky-extended-while-other-fingers.jpg",
+    "Vision/image-shows-three-fingers-extended.jpg",
+    "Vision/image-shows-three-fingers-raised.jpg",
+    "Vision/image-shows-close-fingers-extended-positioned-front-person-background-neutral.jpg",
+    "Vision/buildings-visible-image-shard-fenchurch-street-known-walkie-talkie-cheesegrater.webp",
+    "Metrics/test_summary_20240902.yml",
+    "Vision/image-shows-person-sitting-couch-facing-camera-short-wearing-black.jpg"
+  ]
+}

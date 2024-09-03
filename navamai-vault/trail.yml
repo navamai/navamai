@@ -1,0 +1,213 @@
+- command: ask  --identify --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T12:55:36.619528'
+- command: ask  --identify --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T12:56:08.956855'
+- command: ask  --prompt=what is the meaning of quantum entanglement?
+  destination_file: Raw/quantum-entanglement-quantum-entanglement-phenomenon-quantum-physics-where-particles-become.md
+  source_file: null
+  timestamp: '2024-09-02T12:56:29.721911'
+- command: ask  --prompt=Create a table of top 10 macro factors which impact the stock
+    markets. Add columns for nature of impact, scale of impact, and recent example.
+  destination_file: Raw/macro-factor-nature-impact-scale-impact-recent-example-interest-rates.md
+  source_file: null
+  timestamp: '2024-09-02T12:57:46.687063'
+- command: ask  --prompt=Create a table of top 10 macro factors which impact the stock
+    markets. Add columns for nature of impact, scale of impact, and recent example.
+  destination_file: Raw/macro-factor-nature-impact-scale-impact-recent-example-interest-rates.md
+  source_file: null
+  timestamp: '2024-09-02T12:59:32.093227'
+- command: ask  --prompt=Create a table of top 10 macro factors which impact the stock
+    markets. Add columns for nature of impact, scale of impact, and recent example.
+  destination_file: Raw/macro-factor-nature-impact-scale-impact-recent-example-interest-rates.md
+  source_file: null
+  timestamp: '2024-09-02T13:03:57.935359'
+- command: ask  --prompt=Create a table of top 10 macro factors which impact the stock
+    markets. Add columns for nature of impact, scale of impact, and recent example.
+  destination_file: Raw/macro-factor-nature-impact-scale-impact-recent-example-interest-rates.md
+  source_file: null
+  timestamp: '2024-09-02T13:04:34.576559'
+- command: ask  --prompt=Create a table of top 10 macro factors which impact the stock
+    markets. Add columns for nature of impact, scale of impact, and recent example.
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:09:25.638996'
+- command: ask  --prompt=Describe quantum computing in 10 paragraphs
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:10:02.634462'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:12:30.834925'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:12:54.226397'
+- command: ask  --prompt=Describe quantum computing in 10 paragraphs
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:13:04.245409'
+- command: ask  --prompt=Create a table of top 10 macro factors which impact the stock
+    markets. Add columns for nature of impact, scale of impact, and recent example.
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:13:15.129434'
+- command: ask  --prompt=Create a table of top 10 macro factors which impact the stock
+    markets. Add columns for nature of impact, scale of impact, and recent example.
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:13:26.759337'
+- command: ask  --prompt=Create a table of top 10 macro factors which impact the stock
+    markets. Add columns for nature of impact, scale of impact, and recent example.
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:13:39.312212'
+- command: ask  --prompt=Describe quantum computing in 10 paragraphs
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:13:45.886424'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T13:14:06.339919'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:13:36.238651'
+- command: ask  --identify --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:13:47.705110'
+- command: ask  --identify --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:14:05.881516'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:14:09.212130'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:15:22.173986'
+- command: ask  --prompt=write a python function for fibonacci
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:15:37.371834'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:17:14.478803'
+- command: ask  --prompt=write a python function for fibonacci
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:17:22.623358'
+- command: ask  --prompt=write a python function for fibonacci
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:18:20.988403'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:18:27.580355'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth, and ROCE
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:24:25.941193'
+- command: ask  --prompt=write a python function for fibonacci
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:24:42.723073'
+- command: ask  --prompt=write a python function for fibonacci
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:25:40.201872'
+- command: ask  --prompt=create a table of top 5 companies by ROCE with columns for
+    stock symbol, stock 5-year growth, and ROCE
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T14:25:48.614813'
+- command: vision  --path=Images/london-skyline.webp --display --prompt=Name the tall
+    buildings --url=None
+  destination_file: Vision/buildings-image-include-shard-gherkin-walkie-talkie-fenchurch-street-cheesegrater.webp
+  source_file: Images/london-skyline.webp
+  timestamp: '2024-09-02T14:26:09.054924'
+- command: expand  --prompt=List trends and insights related to LLMs --section=transcript
+    --document=None
+  destination_file: Posts/Anthropic CEO upstream interview expanded.md
+  source_file: Raw/Anthropic CEO upstream interview.md
+  timestamp: '2024-09-02T16:45:33.017264'
+- command: expand  --prompt=List trends and insights related to LLMs --section=transcript
+    --document=None
+  destination_file: Posts/Anthropic CEO upstream interview expanded.md
+  source_file: Raw/Anthropic CEO upstream interview.md
+  timestamp: '2024-09-02T16:48:09.906912'
+- command: expand  --prompt=List trends and insights related to LLMs --section=transcript
+    --document=None
+  destination_file: Posts/Anthropic CEO upstream interview expanded.md
+  source_file: Raw/Anthropic CEO upstream interview.md
+  timestamp: '2024-09-02T16:49:54.330747'
+- command: ask  --prompt=create a table of planets in the solar system with size,
+    distance from sun, day length, moons, etc.
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-02T19:47:19.818748'
+- command: expand  --prompt=List trends and insights related to LLMs --section=transcript
+    --document=None
+  destination_file: Posts/Anthropic CEO upstream interview expanded.md
+  source_file: Raw/Anthropic CEO upstream interview.md
+  timestamp: '2024-09-02T19:56:47.493088'
+- command: expand  --section=post --document=None --prompt=None
+  destination_file: Posts/Anthropic CEO upstream interview expanded expanded.md
+  source_file: Posts/Anthropic CEO upstream interview expanded.md
+  timestamp: '2024-09-02T20:02:56.050812'
+- command: expand  --section=sections --document=None --prompt=None
+  destination_file: Posts/Anthropic CEO upstream interview researched expanded.md
+  source_file: Posts/Anthropic CEO upstream interview researched.md
+  timestamp: '2024-09-02T20:26:52.314449'
+- command: expand  --section=sections --document=None --prompt=None
+  destination_file: Posts/Anthropic CEO upstream interview researched expanded.md
+  source_file: Posts/Anthropic CEO upstream interview researched.md
+  timestamp: '2024-09-02T20:30:07.571241'
+- command: expand  --prompt=Create a numbered list of single sentence startup growth
+    hack tips --section=transcript --document=None
+  destination_file: Posts/Pieter Levels Startup Hacks expanded.md
+  source_file: Raw/Pieter Levels Startup Hacks.md
+  timestamp: '2024-09-03T07:16:53.433972'
+- command: expand  --section=sections --document=None --prompt=None
+  destination_file: Posts/Startup Growth Hacks expanded.md
+  source_file: Posts/Startup Growth Hacks.md
+  timestamp: '2024-09-03T07:21:45.241204'
+- command: expand  --section=sections --document=None --prompt=None
+  destination_file: Posts/Startup Growth Hacks expanded.md
+  source_file: Posts/Startup Growth Hacks.md
+  timestamp: '2024-09-03T07:25:00.007524'
+- command: expand  --section=sections --document=None --prompt=None
+  destination_file: Posts/Startup Growth Hacks expanded.md
+  source_file: Posts/Startup Growth Hacks.md
+  timestamp: '2024-09-03T07:28:07.311923'
+- command: expand  --section=sections --document=None --prompt=None
+  destination_file: Posts/Startup Growth Hacks expanded.md
+  source_file: Posts/Startup Growth Hacks.md
+  timestamp: '2024-09-03T07:32:13.138952'
+- command: expand  --section=sections --document=None --prompt=None
+  destination_file: Posts/Startup Growth Hacks expanded.md
+  source_file: Posts/Startup Growth Hacks.md
+  timestamp: '2024-09-03T07:34:09.849828'
+- command: expand  --section=sections --document=None --prompt=None
+  destination_file: Posts/Startup Growth Hacks expanded.md
+  source_file: Posts/Startup Growth Hacks.md
+  timestamp: '2024-09-03T07:35:16.562295'
