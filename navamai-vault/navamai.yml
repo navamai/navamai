@@ -1,7 +1,7 @@
 ask:
   max-tokens: 300
-  model: sonnet
-  provider: claude
+  model: gpt4mini
+  provider: openai
   save: false
   save-folder: Raw
   system: Be crisp in your response. Only respond to the prompt using valid markdown
