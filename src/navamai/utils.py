@@ -30,6 +30,7 @@ def trail(f):
         log_entry = {
             "timestamp": datetime.now().isoformat(),
             "command": full_command,
+            "prompt_file": None,
             "source_file": None,
             "destination_file": None,
         }
@@ -39,6 +40,8 @@ def trail(f):
 
         # Handle the result
         if isinstance(result, dict):
+            if "prompt_file" in result:
+                log_entry["prompt_file"] = result["prompt_file"]
             if "source_file" in result:
                 log_entry["source_file"] = result["source_file"]
             if "destination_file" in result:

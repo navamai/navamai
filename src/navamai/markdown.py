@@ -1,6 +1,63 @@
 import re
 from difflib import SequenceMatcher
 from pathlib import Path
+from rich.table import Table
+from rich.prompt import Prompt
+from rich.syntax import Syntax
+import os
+from rich.console import Console
+from math import ceil
+
+console = Console()
+
+def extract_variables(template):
+    # Regular expression pattern to match variables enclosed in double curly braces
+    pattern = r'\{\{(\w+)\}\}'
+    
+    # Find all matches in the template
+    matches = re.findall(pattern, template)
+    
+    # Return the list of unique variable names
+    return list(set(matches))
+
+def list_files(directory, page=1, files_per_page=10):
+    all_files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+    total_pages = ceil(len(all_files) / files_per_page)
+    start = (page - 1) * files_per_page
+    end = start + files_per_page
+    return all_files[start:end], total_pages
+
+def file_select_paginate(directory):
+    page = 1
+    files_per_page = 10
+    while True:
+        files, total_pages = list_files(directory, page, files_per_page)
+        
+        table = Table(title=f"Prompt Files (Page {page} of {total_pages})")
+        table.add_column("Number", no_wrap=True)
+        table.add_column("Filename", style="cyan")
+        
+        for i, file in enumerate(files, 1):
+            table.add_row(str(i), file)
+        
+        console.print(table)
+        if total_pages > 1:
+            msg = "Enter file number, '[blue]n[/blue]' for next page, '[blue]p[/blue]' for previous page, or '[blue]q[/blue]' to quit"
+        else:
+            msg = "Enter file number or '[blue]q[/blue]' to quit"
+
+        choice = Prompt.ask(msg, default="")
+        
+        if choice.lower() == 'q':
+            return None
+        elif choice.lower() == 'n' and page < total_pages:
+            page += 1
+        elif choice.lower() == 'p' and page > 1:
+            page -= 1
+        elif choice.isdigit() and 1 <= int(choice) <= len(files):
+            return os.path.join(directory, files[int(choice) - 1])
+        else:
+            console.print("[bold red]Invalid choice. Please try again.[/bold red]")
 
 
 def merge_docs(

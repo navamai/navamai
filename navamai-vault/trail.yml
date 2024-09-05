@@ -211,3 +211,120 @@
   destination_file: Posts/Startup Growth Hacks expanded.md
   source_file: Posts/Startup Growth Hacks.md
   timestamp: '2024-09-03T07:35:16.562295'
+- command: ask  --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T04:08:57.627949'
+- command: ask  --prompt=what is the distance to moon
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T08:31:03.309503'
+- command: ask  --file --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T08:33:27.791000'
+- command: ask  --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T08:33:43.896687'
+- command: ask  --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T08:34:33.758439'
+- command: ask  --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T17:19:15.493769'
+- command: ask  --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T17:19:59.490036'
+- command: ask  --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T17:22:40.859161'
+- command: ask  --file --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T17:22:59.963284'
+- command: ask  --file --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T17:25:27.269980'
+- command: ask  --file --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T17:26:39.598465'
+- command: ask  --prompt=what is the distance to moon
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T18:00:28.846648'
+- command: ask  --file --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T18:11:10.975042'
+- command: ask  --file --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T18:13:25.322981'
+- command: ask  --prompt=None
+  destination_file: null
+  source_file: null
+  timestamp: '2024-09-04T18:15:20.501739'
+- command: ask  --file --prompt=None
+  destination_file: null
+  prompt: Create a table of stocks with largest market cap in NASDAQ. Add columns
+    for company, stock symbol, current stock price, P/E Ratio, Market Cap.
+  source_file: null
+  timestamp: '2024-09-04T18:19:16.017213'
+- command: ask  --file --prompt=None
+  destination_file: null
+  prompt_file: Prompts/Table of Top Stocks.md
+  source_file: null
+  timestamp: '2024-09-04T18:21:03.137176'
+- command: ask  --prompt=what is the distance to moon
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-04T18:21:33.767438'
+- command: ask  --file --prompt=None
+  destination_file: null
+  prompt_file: Prompts/Table of Top Stocks.md
+  source_file: null
+  timestamp: '2024-09-04T18:29:53.774482'
+- command: ask  --file --prompt=None
+  destination_file: null
+  prompt_file: Prompts/Stock Analysis.md
+  source_file: null
+  timestamp: '2024-09-04T19:06:03.331513'
+- command: ask  --file --prompt=None
+  destination_file: null
+  prompt_file: Prompts/Stock Analysis.md
+  source_file: null
+  timestamp: '2024-09-04T19:08:15.896007'
+- command: ask  --file --prompt=None
+  destination_file: Raw/analysis-overview-company-nvidia-corporation-leading-technology-company-primarily-known.md
+  prompt_file: Prompts/Stock Analysis.md
+  source_file: null
+  timestamp: '2024-09-04T19:09:27.695829'
+- command: ask  --file --prompt=None
+  destination_file: Raw/analysis-overview-company-apple-multinational-technology-company-designs-manufactures-markets.md
+  prompt_file: Prompts/Stock Analysis.md
+  source_file: null
+  timestamp: '2024-09-04T19:13:49.533602'
+- command: ask  --prompt=what is the currency of USA
+  destination_file: Raw/currency-united-states-dollar.md
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-04T19:59:49.410230'
+- command: ask  --prompt=what is the currency of USA
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-04T20:00:45.370889'
+- command: ask  --prompt=How many INR is The currency of the USA is the United States
+    Dollar (USD).
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-04T20:00:46.424562'

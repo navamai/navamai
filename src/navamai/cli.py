@@ -1,6 +1,7 @@
 import importlib.resources
 import mimetypes
 import os
+import sys
 import shutil
 import tempfile
 import time
@@ -290,8 +291,9 @@ def config(config_path, value):
     help="Identify the provider and model without running a query",
 )
 @click.argument("prompt", required=False)
+@click.option('-f', '--file', is_flag=True, help='Interactively select a prompt file')
 @trail
-def ask(identify, prompt):
+def ask(identify, prompt, file):
     config = configure.load_config()
     ask_config = config.get("ask", {})
 
@@ -299,14 +301,48 @@ def ask(identify, prompt):
     provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config("ask")
     destination_file = None
+    selected_file = None
+    
     if identify:
         model_info = provider_instance.get_model_info()
         console.print(f"Model Information: [bold magenta]{model_info}[/bold magenta]")
+        sys.exit(0)
     elif prompt:
         destination_file = provider_instance.ask(prompt)
-    else:
-        click.echo("Error: Please provide a prompt or use the --identify flag.")
-    return {"source_file": None, "destination_file": destination_file}
+    elif file:
+        prompts_dir = ask_config.get("prompts-folder")
+        if not os.path.exists(prompts_dir):
+            console.print(f"[bold red]Error:[/bold red] Prompts directory not found at {prompts_dir}")
+            sys.exit(1)
+        
+        selected_file = markdown.file_select_paginate(prompts_dir)
+        if selected_file:
+            with open(selected_file, 'r') as f:
+                prompt = f.read().strip()
+            
+            prompt_variables = markdown.extract_variables(prompt)
+            
+            # check if the prompt has variables. If so, ask for values
+            if prompt_variables:
+                console.print("The Prompt Template has variables. Enter values for the following variables:", style="yellow")
+                for variable in prompt_variables:
+                    value = click.prompt(variable)
+                    prompt = prompt.replace(variable, value)
+            
+            destination_file = provider_instance.ask(prompt)
+        else:
+            console.print("[yellow]No file selected. Exiting.[/yellow]")
+            sys.exit(0)
+    elif not prompt:
+        console.print("Create your prompt here. Press Enter, then CTRL+D to submit.", style="green")
+        # If no prompt is provided, read from stdin
+        prompt = sys.stdin.read().strip()
+        destination_file = provider_instance.ask(prompt)
+    if not prompt:
+        console.print("[bold red]Error:[/bold red] No prompt provided")
+        sys.exit(1)
+
+    return {"prompt_file": selected_file, "source_file": None, "destination_file": destination_file}
 
 
 @cli.command()
@@ -317,29 +353,16 @@ def ask(identify, prompt):
 )
 @trail
 def expand(section: str, document: Optional[str] = None, prompt: Optional[str] = None):
-    """
-    Expand a document from the specified section.
-
-    SECTION: The section to expand from (required).
-
-    If no document is specified, available documents will be listed for selection.
-    """
     config = configure.load_config()
     model_config = config.get(f"expand-{section}", {})
     lookup_folder = model_config["lookup-folder"]
 
     if not document:
-        documents = [
-            f.replace(".md", "") for f in os.listdir(lookup_folder) if f.endswith(".md")
-        ]
-        click.echo("Available documents:")
-        for i, doc in enumerate(documents, 1):
-            click.echo(f"{i}. {doc}")
+        document = markdown.file_select_paginate(lookup_folder)
 
-        document = click.prompt(
-            "Select a document number", type=click.IntRange(1, len(documents))
-        )
-        document = documents[document - 1]
+    if not document:
+        console.print("[yellow]No file selected. Exiting.[/yellow]")
+        sys.exit(0)
 
     source_document = f"{lookup_folder}/{document}.md"
 

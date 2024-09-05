@@ -5,7 +5,7 @@ You can switch private models or hosted frontier LLMs with ease. NavamAI comes w
 
 NavamAI works with markdown content (text files with simple formatting commands). So you can use it with many popular tools like VS Code and Obsidian to quickly and seamlessly design a custom workflow that enhances your craft.
 
-NavamAI is very simple to use out of the box as you learn its handful of powerful commands. As you get comfortable you can customize NavamAI commands simply by changing one configuration file `navamai.yml` and align NavamAI to suit your workflow. Everything in NavamAI has sensible defaults to get started quickly. When you are ready, everything is configurable and extensible including commands, models, providers, prompts, model parameters, folders, and document types.
+NavamAI is very simple to use out of the box as you learn its handful of powerful commands. As you get comfortable you can customize NavamAI commands simply by changing one configuration file and align NavamAI to suit your workflow. Everything in NavamAI has sensible defaults to get started quickly. When you are ready, everything is configurable and extensible including commands, models, providers, prompts, model parameters, folders, and document types.
 
 ## Quick Start
 
@@ -14,7 +14,7 @@ Go to a folder where you want to initialize NavamAI. This could be your Obsidian
 ```bash
 pip install -U navamai
 navamai init # copies config file, quick start samples
-navamai ask "How old is the oldest pyramid?"
+ask "How old is the oldest pyramid?"
 ```
 
 ### Models Setup
@@ -71,7 +71,7 @@ Now you are ready to install NavamAI.
 
 Using NavamAI with few simple commands in your Terminal you can create a simple yet powerful personal AI content manager with your Markdown tool of choice like Obsidian or VS Code. For example, you can write partial blogs posts, write your seed ideas, start with a list of intents and prompts, or capture partial notes from a lecture where you were slightly distracted. 
 
-Then you can use `navamai expand` command in conjunction with custom `expand-section` configs within `navamai.yml` to expand this partial, incomplete, or seed content into complete posts, notes, articles, prompt templates, and even well-researched papers. You can experiment with choice of models and providers, tune model settings in the config by document type, define custom folders for your content, and specify document specific system prompts to get exactly the outcome you desire based on the type of the document. You just have to remember one simple command `navamai expand` and you are all set.
+Then you can use `expand` command in conjunction with custom `expand-section` configs within `navamai.yml` to expand this partial, incomplete, or seed content into complete posts, notes, articles, prompt templates, and even well-researched papers. You can experiment with choice of models and providers, tune model settings in the config by document type, define custom folders for your content, and specify document specific system prompts to get exactly the outcome you desire based on the type of the document. You just have to remember one simple command `expand` and you are all set.
 
 As a quick example, check out the `Posts` folder with sample partially written post on startup growth strategies. Now view the related config section within `navamai.yml` for expanding posts.
 
@@ -88,13 +88,13 @@ expand-post:
   temperature: 0.5
 ```
 
-Please note that for brevity we are not listing the complete system prompt here. You can obviously change it to suit your workflow. For now, just run `navamai expand post "startup-growth-hacking"` command within the working folder where you initialized NavamAI. Soon the model response starts streaming into your terminal. The expanded post is saved in the `Posts` folder with `expanded` prefix so you can compare with the original.
+Please note that for brevity we are not listing the complete system prompt here. You can obviously change it to suit your workflow. For now, just run `expand post "startup-growth-hacking"` command within the working folder where you initialized NavamAI. Soon the model response starts streaming into your terminal. The expanded post is saved in the `Posts` folder with `expanded` prefix so you can compare with the original.
 
-To create a new document type like research papers, class notes, cooking recipes, or whatever, all you need to do is copy and customize one of the `expand-post` or `expand-intents` sections into something like your custom `expnand-notes` section. Then you can run a custom command on your new document type like `navamai expand notes "your-notes-file"` and achieve the same results.
+To create a new document type like research papers, class notes, cooking recipes, or whatever, all you need to do is copy and customize one of the `expand-post` or `expand-intents` sections into something like your custom `expnand-notes` section. Then you can run a custom command on your new document type like `expand notes "your-notes-file"` and achieve the same results.
 
 ## Combining NavamAI Commands
 
-When combined with other NavamAI commands this workflow can get even more powerful. As an example, start by defining your document template for a set of intents and prompts as a simple markdown. For example `Financial Analysis` or `Product Management` are shown here. Next add a few intents as headings like, `Macro Factors Impact Stocks` or `Top Companies by ROCE` and so on. Then add simple prompts under these intents to generate content. You can now use NavamAI to expand on the set of intents and prompts in your document template with the command `navamai expand intents "Financial Analysis"` and the model will brainstorm more related intents and prompts for you to use.
+When combined with other NavamAI commands this workflow can get even more powerful. As an example, start by defining your document template for a set of intents and prompts as a simple markdown. For example `Financial Analysis` or `Product Management` are shown here. Next add a few intents as headings like, `Macro Factors Impact Stocks` or `Top Companies by ROCE` and so on. Then add simple prompts under these intents to generate content. You can now use NavamAI to expand on the set of intents and prompts in your document template with the command `expand intents "Financial Analysis"` and the model will brainstorm more related intents and prompts for you to use.
 
 ![](https://raw.githubusercontent.com/navamai/assets/main/images/obsidian-navamai.png)
 
@@ -106,24 +106,25 @@ This workflow can get really useful very fast. As each template has linked embed
 
 ## Why NavamAI
 
-So, the LLM science fans will get the pun in our tagline - Command is all you need. It is a play on the famous paper that introduced the world to Transformer model architecture - Attention is all you need. With NavamAI a simple command via your favorite terminal or shell is all you need to bend an large or small language model to your wishes. NavamAI provides a rich UI right there within your command prompt. No browser tabs to open, no apps to install, no context switching... just pure, simple, fast workflow. Try it with a simple command like `navamai ask "create a table of planets"` and see your Terminal come to life just like a chat UI with fast streaming responses, markdown formatted tables, and even code blocks with color highlights if your prompt requires code in response! 
+So, the LLM science fans will get the pun in our tagline - Command is all you need. It is a play on the famous paper that introduced the world to Transformer model architecture - Attention is all you need. With NavamAI a simple command via your favorite terminal or shell is all you need to bend an large or small language model to your wishes. NavamAI provides a rich UI right there within your command prompt. No browser tabs to open, no apps to install, no context switching... just pure, simple, fast workflow. Try it with a simple command like `ask "create a table of planets"` and see your Terminal come to life just like a chat UI with fast streaming responses, markdown formatted tables, and even code blocks with color highlights if your prompt requires code in response! 
 
 Another magical thing happens when the interface to your generative AI is a humble command prompt. You will experience a sense of being in control. In control of your workflow, your privacy, your intents, and your artifacts.
 
 ## Command Reference
 
+Note that `navamai`, `ask` and `expand` are top level commands available to you when you install NavamAI. You can also use `navamai ask` and `navamai expand` if you prefer.
 
-| Command      | Example and Description                                                                                                                                                                                                           |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **ask**      | `navamai ask "your prompt"`<br>Prompt the LLM for a fast, crisp (default up to 300 words), single turn response                                                                                                                   |
-| **config**   | `navamai config ask save true`<br>Edit `navamai.yml` file config from command line                                                                                                                                                |
-| **expand**   | `navamai expand intents "Financial Analysis"`<br>Expand a set of intents and prompts within an intents template                                                                                                                   |
-| **init**     | `navamai init`<br>Initialize navamai in any folder. Copies `navamai.yml` default config and quick start Intents and Embeds folders and files. Checks before overwriting. Use --force option to force overwrite files and folders. |
-| **intents**  | `navamai intents "Financial Analysis"`<br>Interactively choose from a list of intents within a template to expand into content embeds                                                                                             |
-| **test**     | `navamai test ask`<br>Tests navamai command using all providers and models defined in `navamai.yml` config and provides a test summary.                                                                                           |
-| **trends**   | `navamai trends --days 7`<br>Visualize latency and token length trends based on `navamai test` runs for `ask` and `vision` commands across models and providers.                                                                  |
-| **validate** | `navamai validate "Financial Analysis"`<br>Validates prior generated embeds running another model and reports the percentage difference between validated and original content.                                                   |
-| **vision**   | `navamai vision -p path/to/image.png "Describe this image"`<br>Runs vision models on images from local path (-p), url (-u), or camera (-c) and responds based on prompt.                                                          |
+| Command      | Example and Description                                                                                                                                                                                                                                                                                                         |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ask**      | `ask "your prompt"`<br>Prompt the LLM for a fast, crisp (default up to 300 words), single turn response<br><br>`ask -f`<br>Browses the configured prompts folder, lists prompt templates for user to run.<br><br>`ask`<br>Enables user to enter free form, multi-line prompt text. End with Enter, then CTRL+D to see response. |
+| **config**   | `navamai config ask save true`<br>Edit `navamai.yml` file config from command line                                                                                                                                                                                                                                              |
+| **expand**   | `expand intents "Financial Analysis"`<br>Expand a set of intents and prompts within an intents template                                                                                                                                                                                                                         |
+| **init**     | `navamai init`<br>Initialize navamai in any folder. Copies `navamai.yml` default config and quick start Intents and Embeds folders and files. Checks before overwriting. Use --force option to force overwrite files and folders.                                                                                               |
+| **intents**  | `navamai intents "Financial Analysis"`<br>Interactively choose from a list of intents within a template to expand into content embeds                                                                                                                                                                                           |
+| **test**     | `navamai test ask`<br>Tests navamai command using all providers and models defined in `navamai.yml` config and provides a test summary.                                                                                                                                                                                         |
+| **trends**   | `navamai trends --days 7`<br>Visualize latency and token length trends based on `navamai test` runs for `ask` and `vision` commands across models and providers.                                                                                                                                                                |
+| **validate** | `navamai validate "Financial Analysis"`<br>Validates prior generated embeds running another model and reports the percentage difference between validated and original content.                                                                                                                                                 |
+| **vision**   | `navamai vision -p path/to/image.png "Describe this image"`<br>Runs vision models on images from local path (-p), url (-u), or camera (-c) and responds based on prompt.                                                                                                                                                        |
 
 ## Test and Evaluate Models and Providers
 
@@ -150,7 +151,7 @@ Each `navamai test` command run saves the test summary data in `Metrics` folder 
 The visualization uses sparklines to show data trends over time. Use this to decide when/if to switch models based on performance trends.
 ## Chatbot UI in command prompt
 
-NavamAI can work like a chatbot UI in your terminal or command prompt. Just type `navamai ask "your prompt here"` and you will receive streaming response back just like a chatbot. The response is rich formatted for code blocks with highlights, markdown tables, and markdown text formatting.
+NavamAI can work like a chatbot UI in your terminal or command prompt. Just type `ask "your prompt here"` and you will receive streaming response back just like a chatbot. The response is rich formatted for code blocks with highlights, markdown tables, and markdown text formatting.
 
 Use the `navamai ask` command when you want to run a single turn prompt-response or question-answer.
 
@@ -206,7 +207,7 @@ model-mapping:
 
 ## Run multiple models side by side
 
-Want to compare multiple models side by side? All you need to do is open multiple shells or Terminal instances. Now in each of these, one by one, change the model, run same `navamai ask "prompt"` and compare the results side by side. Simple!
+Want to compare multiple models side by side? All you need to do is open multiple shells or Terminal instances. Now in each of these, one by one, change the model, run same `ask "prompt"` and compare the results side by side. Simple!
 
 ![](https://raw.githubusercontent.com/navamai/assets/main/images/compare-models-1.png)
 
@@ -262,47 +263,6 @@ $ navamai intents "Financial Analysis"
 Select an option: 3
 
 # this will generate and save embed for intent #3
-```
-
-
-## Automating commands
-
-You can do many interesting things when the command line is your interface to your large or small language model. For example, you can chain these commands using pipe symbol and in turn chain response from one model turn into prompt for another model turn, and so on. Here is a command line version of simple chaining. This will chain the output of prior command as input {} to the next one. How cool is that! It is fun to try this with a local model at no cost for simple prompts.
-
-```bash
-navamai ask "what is the currency of USA" | xargs -I {} echo "\"How many INR is {}\"" | xargs navamai ask
-
-1 USD = 74.89 INR  
-```
-
-In the same vein you can also use basic navamai commands and write simple bash scripts to automate your workflow even further. Here is a bash script to make chaining more reusable and simpler.
-
-```bash
-# Save this script as `navamai-chain.sh` and make it executable with `chmod +x navamai-chain.sh`
-
-# Initial prompt passed as the first argument
-response=$(navamai ask "$1")
-
-# Loop through the rest of the arguments
-shift  # Shift the arguments to skip the first one
-while [[ $# -gt 0 ]]; do
-    prompt="$1"
-    response=$(navamai ask "$(echo $prompt | sed "s/{}/$response/")")
-    shift
-done
-
-# Output the final response
-echo "$response"
-```
-
-Voilà! You have created your custom navamai command. This now makes chaining much simpler and powerful.
-
-```bash
-$ ./navamai-chain.sh "Who was US president in 2018?" \
-> "Who is son to {}" \
-> "Who is sister to {}"
-
-Ivanka Trump
 ```
 
 ## Validate Generations

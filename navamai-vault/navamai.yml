@@ -1,6 +1,7 @@
 ask:
-  max-tokens: 300
+  max-tokens: 1000
   model: gpt4mini
+  prompts-folder: Prompts
   provider: openai
   save: false
   save-folder: Raw
