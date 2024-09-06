@@ -1,1 +1,0 @@
-The currency of the USA is the United States Dollar (USD).

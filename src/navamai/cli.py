@@ -232,6 +232,7 @@ def init(force):
         package = "navamai"
         scaffold_dir = "scaffold"
 
+        console.print(f"Copying scaffold files from {package}...", style="green")
         with importlib.resources.path(package, scaffold_dir) as scaffold_path:
             if not scaffold_path.exists():
                 click.echo(
@@ -245,7 +246,7 @@ def init(force):
 
                 if not target_dir.exists():
                     target_dir.mkdir(parents=True, exist_ok=True)
-                    created_folders.append(str(rel_path))
+                    console.print(f"Created folder {target_dir}")
 
                 for file in files:
                     source_file = Path(root) / file
@@ -260,15 +261,9 @@ def init(force):
                             copied_files.append(str(rel_path / file))
                     else:
                         shutil.copy2(source_file, target_file)
-                        copied_files.append(str(rel_path / file))
+                        console.print(f"Copied {file} to {target_dir}")
 
-        # Summarize actions
-        summary = f"Initialized navamai in {current_dir}"
-        if copied_files:
-            summary += f"\nCopied files: {', '.join(copied_files)}"
-        if created_folders:
-            summary += f"\nCreated folders: {', '.join(created_folders)}"
-        click.echo(summary)
+        console.print(f"Initialized navamai in {current_dir}", style="bold green")
 
     except Exception as e:
         click.echo(f"An error occurred during initialization: {e}")

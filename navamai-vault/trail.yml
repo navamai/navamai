@@ -328,3 +328,38 @@
   prompt_file: null
   source_file: null
   timestamp: '2024-09-04T20:00:46.424562'
+- command: ask  --prompt=what is the distance to moon
+  destination_file: Raw/distance-between-earth-constant-orbits-earth-elliptical-however-average-distance.md
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-06T05:50:18.033533'
+- command: ask  --prompt=what is the distance to moon
+  destination_file: Raw/average-distance-between-earth-approximately-kilometers-miles-facts-about-distance.md
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-06T05:51:01.213802'
+- command: ask  --prompt=what is the distance to moon
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-06T09:37:28.280660'
+- command: ask  --prompt=what is the distance to moon
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-06T09:38:45.586602'
+- command: ask  --prompt=what is the distance to moon
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-06T09:44:11.107371'
+- command: ask  --file --prompt=None
+  destination_file: null
+  prompt_file: Prompts/Table of Top Stocks.md
+  source_file: null
+  timestamp: '2024-09-06T09:44:33.567846'
+- command: ask  --file --prompt=None
+  destination_file: null
+  prompt_file: Prompts/Stock Analysis.md
+  source_file: null
+  timestamp: '2024-09-06T09:44:44.885098'

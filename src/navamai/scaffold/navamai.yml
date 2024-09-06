@@ -1,8 +1,8 @@
 ask:
   max-tokens: 1000
-  model: gpt4mini
+  model: haiku3
   prompts-folder: Prompts
-  provider: openai
+  provider: bedrock
   save: false
   save-folder: Raw
   system: Be crisp in your response. Only respond to the prompt using valid markdown
@@ -95,6 +95,7 @@ model-mapping:
   gpt4mini: gpt-4o-mini
   gpt4o: gpt-4o
   haiku: claude-3-haiku-20240307
+  haiku3: anthropic.claude-3-haiku-20240307-v1:0
   llama: llama3.1
   llava: llava
   mistral: mistral-nemo
@@ -102,7 +103,11 @@ model-mapping:
   opus: claude-3-opus-20240229
   qwen: qwen2
   sonnet: claude-3-5-sonnet-20240620
+  sonnet3: anthropic.claude-3-sonnet-20240229-v1:0
 provider-model-mapping:
+  bedrock:
+  - sonnet3
+  - haiku3
   claude:
   - sonnet
   - opus

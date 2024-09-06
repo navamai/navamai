@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "navamai"
-version = "0.1.24"
+version = "0.1.25"
 description = "NavamAI enhances your craft with personal, fast, and quality AI. Turn your Terminal or Shell into a rich personal AI. Supports 10 GenAI models by 5 providers. Pairs with Markdown, VS Code, Obsidian."
 authors = ["NavamAI <team@navamai.com>"]
 license = "Apache-2.0"
@@ -25,6 +25,7 @@ pyyaml = "^6.0.2"
 opencv-python = "^4.8.0"
 pillow = "^10.4.0"
 term-image = "^0.7.2"
+boto3 = "^1.35.13"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.2"
