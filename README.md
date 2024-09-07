@@ -1,20 +1,23 @@
 # NavamAI enhances your craft with AI
 NavamAI enhances your craft with personal, fast, and quality AI. Turn your Terminal or Shell into a rich personal AI. Supports 10 GenAI models by 5 providers. Pairs with Markdown, VS Code, Obsidian.
 
-You can switch private models or hosted frontier LLMs with ease. NavamAI comes with configurable support for more than 10 leading models (GPT 4o, Sonnet 3.5, Gemini 1.5 Pro, Mistral NeMo...) from five providers (Ollama, Anthropic, OpenAI, Groq, Google).
+You can switch private models or hosted frontier LLMs with ease. NavamAI comes with configurable support for more than 15 leading models (GPT 4o, Sonnet 3.5, Gemini 1.5 Pro, Mistral NeMo, Sonar Llama 3.1...) from 7 providers (Ollama, Anthropic, OpenAI, Groq, Google, Bedrock, and Perplexity).
 
 NavamAI works with markdown content (text files with simple formatting commands). So you can use it with many popular tools like VS Code and Obsidian to quickly and seamlessly design a custom workflow that enhances your craft.
 
-NavamAI is very simple to use out of the box as you learn its handful of powerful commands. As you get comfortable you can customize NavamAI commands simply by changing one configuration file and align NavamAI to suit your workflow. Everything in NavamAI has sensible defaults to get started quickly. When you are ready, everything is configurable and extensible including commands, models, providers, prompts, model parameters, folders, and document types.
+NavamAI is very simple to use out of the box as you learn its handful of powerful commands. As you get comfortable you can customize NavamAI commands simply by changing one configuration file and align NavamAI to suit your workflow. Everything in NavamAI has sensible defaults to get started quickly. When you are ready, everything is configurable and extensible including commands, models, providers, prompts, model parameters, folders, and document types. 
+
+You are completely in control of your personal AI workflow with NavamAI.
 
 ## Quick Start
 
 Go to a folder where you want to initialize NavamAI. This could be your Obsidian vault or a VC Code project folder or even an empty folder.
 
 ```bash
-pip install -U navamai
+pip install -U navamai # upgrade or install latest NavamAI
 navamai init # copies config file, quick start samples
-ask "How old is the oldest pyramid?"
+ask -i # displays active provider and model
+ask "How old is the oldest pyramid?" # start prompting the model
 ```
 
 ### Models Setup
@@ -25,7 +28,10 @@ export ANTHROPIC_API_KEY= # https://docs.anthropic.com/en/api/getting-started
 export OPENAI_API_KEY= # https://openai.com/index/openai-api/
 export GROQ_API_KEY= # https://console.groq.com/keys
 export GEMINI_API_KEY= # https://ai.google.dev/gemini-api
+export PERPLEXITY_KEY= # https://www.perplexity.ai/settings/api
 ```
+
+If you do not want to use any of the model then all you need to do is remove the corresponding entries from `navamai.yml` in the `model-mapping` and the `provider-model-mapping` sections. Also ensure that none of the other model configs only refer to available models.
 
 For local models [install Ollama](https://ollama.com/) and download the latest [models](https://ollama.com/library) you want to run.
 

@@ -1,1 +1,0 @@
-Intent and prompt templates will be saved here.

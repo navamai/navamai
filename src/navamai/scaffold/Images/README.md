@@ -1,1 +1,0 @@
-Original input images for vision models will be saved here.

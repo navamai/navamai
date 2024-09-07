@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "2064c386e88333fc",
+        "id": "eed9ed96fa95c40e",
         "type": "tabs",
         "children": [
           {
-            "id": "57d32466285c9183",
+            "id": "30bf557d5f0b4527",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Posts/Startup Growth Hacks merged.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Posts/Startup Growth Hacks merged.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Posts/Startup Growth Hacks merged.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Posts/Startup Growth Hacks merged.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -146,8 +138,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "57d32466285c9183",
+  "active": "30bf557d5f0b4527",
   "lastOpenFiles": [
+    "Posts/Stock Analysis NVDA 09-06.md",
+    "Posts/Stock Analysis AAPL 09-06.md",
+    "Posts/analysis-brief-overview-company-primary-business-apple-multinational-technology-company.md",
+    "Posts/analysis-brief-overview-company-primary-business-nvidia-corporation-leading-technology.md",
+    "Raw/analysis-brief-overview-company-primary-business-nvidia-corporation-leading-technology.md",
+    "Posts/Startup Growth Hacks merged.md",
     "Metrics/test_summary_20240906.yml",
     "Raw/average-distance-between-earth-approximately-kilometers-miles-facts-about-distance.md",
     "Raw/distance-between-earth-constant-orbits-earth-elliptical-however-average-distance.md",
@@ -166,11 +164,9 @@
     "Raw/analysis-overview-company-apple-multinational-technology-company-designs-manufactures-markets.md",
     "Raw/analysis-overview-company-nvidia-corporation-leading-technology-company-primarily-known.md",
     "Prompts/Stock Analysis.md",
-    "Metrics/test_summary_20240904.yml",
     "Prompts/Table of Top Stocks.md",
     "Prompts/Table of Planets.md",
     "Posts/Anthropic CEO upstream interview researched merged.md",
-    "Posts/Startup Growth Hacks merged.md",
     "Posts/Startup Growth Hacks expanded.md",
     "Posts/Startup Growth Hacks.md",
     "Posts/Pieter Levels Startup Hacks expanded.md",
@@ -183,10 +179,6 @@
     "Vision/buildings-image-include-shard-gherkin-walkie-talkie-fenchurch-street-cheesegrater.webp",
     "Vision/buildings-image-include-shard-gherkin-walkie-talkie-fenchurch-street-cheesegrater.md",
     "Raw/Automating video creation.md",
-    "Raw/macro-factor-nature-impact-scale-impact-recent-example-interest-rates.md",
-    "Raw/quantum-entanglement-quantum-entanglement-phenomenon-quantum-physics-where-particles-become.md",
-    "Raw/README.md",
-    "Raw/Pieter Levels Startup Hacks.md",
     "Images/london-skyline.webp",
     "Images/hackathon.jpg",
     "Vision/gesture-shown-image-commonly-recognized-devil-horns-often-associated-music.jpg",

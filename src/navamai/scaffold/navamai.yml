@@ -1,13 +1,13 @@
 ask:
-  max-tokens: 1000
-  model: haiku3
+  max-tokens: 2000
+  model: gpt4mini
   prompts-folder: Prompts
-  provider: bedrock
-  save: false
-  save-folder: Raw
+  provider: openai
+  save: true
+  save-folder: Posts
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
-  temperature: 0.3
+  temperature: 0.0
 expand-intents:
   lookup-folder: Intents
   max-tokens: 4000
@@ -102,6 +102,7 @@ model-mapping:
   mixtral: mixtral-8x7b-32768
   opus: claude-3-opus-20240229
   qwen: qwen2
+  sonar: llama-3.1-sonar-large-128k-online
   sonnet: claude-3-5-sonnet-20240620
   sonnet3: anthropic.claude-3-sonnet-20240229-v1:0
 provider-model-mapping:
@@ -126,6 +127,8 @@ provider-model-mapping:
   openai:
   - gpt4o
   - gpt4mini
+  perplexity:
+  - sonar
 test:
   ask: How old is the oldest pyramid?
   vision: How many people are in this image.
@@ -144,8 +147,8 @@ validate:
     revised response otherwise return the same response.
 vision:
   max-tokens: 300
-  model: gpt4mini
-  provider: openai
+  model: sonar
+  provider: perplexity
   save: true
   save-folder: Vision
   system: Analyze the image and respond to the prompt using valid markdown syntax.

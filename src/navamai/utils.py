@@ -10,6 +10,7 @@ from navamai.groq import Groq
 from navamai.ollama import Ollama
 from navamai.openai import Openai
 from navamai.bedrock import Bedrock
+from navamai.perplexity import Perplexity
 
 def trail(f):
     @functools.wraps(f)
@@ -71,5 +72,7 @@ def get_provider_instance(provider):
         return Gemini()
     elif provider == "bedrock":
         return Bedrock()
+    elif provider == "perplexity":
+        return Perplexity()
     else:
         raise ValueError(f"Unsupported provider: {provider}")

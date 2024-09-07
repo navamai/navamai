@@ -350,3 +350,219 @@
         response_time: 5.740236043930054
         status: Success
         token_count: 14
+'2024-09-06T23:05:57.647046':
+  perplexity:
+    sonar:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.2331457138061523
+        status: Success
+        token_count: 30
+'2024-09-06T23:05:59.647573':
+  bedrock:
+    sonnet3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.951927900314331
+        status: Success
+        token_count: 56
+'2024-09-06T23:06:00.560095':
+  bedrock:
+    haiku3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.8749368190765381
+        status: Success
+        token_count: 38
+'2024-09-06T23:06:01.950584':
+  claude:
+    sonnet:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.3355050086975098
+        status: Success
+        token_count: 53
+'2024-09-06T23:06:04.745411':
+  claude:
+    opus:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.716548204421997
+        status: Success
+        token_count: 37
+'2024-09-06T23:06:05.590880':
+  claude:
+    haiku:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.790031909942627
+        status: Success
+        token_count: 38
+'2024-09-06T23:06:06.575578':
+  gemini:
+    gemini-pro:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.9399318695068359
+        status: Success
+        token_count: 7
+'2024-09-06T23:06:07.313463':
+  gemini:
+    gemini-flash:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.6891729831695557
+        status: Success
+        token_count: 24
+'2024-09-06T23:06:08.028570':
+  groq:
+    mixtral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.6605589389801025
+        status: Success
+        token_count: 90
+'2024-09-06T23:06:10.805870':
+  ollama:
+    llama:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.740755319595337
+        status: Success
+        token_count: 24
+'2024-09-06T23:06:13.419529':
+  ollama:
+    llava:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.5669407844543457
+        status: Success
+        token_count: 26
+'2024-09-06T23:06:17.336984':
+  ollama:
+    mistral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.8684911727905273
+        status: Success
+        token_count: 18
+'2024-09-06T23:06:20.416733':
+  ollama:
+    gemma:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.039853811264038
+        status: Success
+        token_count: 6
+'2024-09-06T23:06:23.138488':
+  ollama:
+    qwen:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.6732919216156006
+        status: Success
+        token_count: 19
+'2024-09-06T23:06:23.693205':
+  openai:
+    gpt4o:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.497589111328125
+        status: Success
+        token_count: 12
+'2024-09-06T23:06:24.288117':
+  openai:
+    gpt4mini:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.5387918949127197
+        status: Success
+        token_count: 35
+'2024-09-06T23:06:37.133475':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in this image.
+        response_time: 3.7834348678588867
+        status: Success
+        token_count: 83
+'2024-09-06T23:06:43.997425':
+  claude:
+    opus:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in this image.
+        response_time: 6.8297200202941895
+        status: Success
+        token_count: 66
+'2024-09-06T23:06:45.217444':
+  claude:
+    haiku:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in this image.
+        response_time: 1.1608078479766846
+        status: Success
+        token_count: 24
+'2024-09-06T23:06:47.310629':
+  gemini:
+    gemini-pro:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in this image.
+        response_time: 2.0504612922668457
+        status: Success
+        token_count: 3
+'2024-09-06T23:06:48.538038':
+  gemini:
+    gemini-flash:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in this image.
+        response_time: 1.1486012935638428
+        status: Success
+        token_count: 3
+'2024-09-06T23:06:51.837748':
+  ollama:
+    llava:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in this image.
+        response_time: 3.238726854324341
+        status: Success
+        token_count: 10
+'2024-09-06T23:06:54.787646':
+  openai:
+    gpt4o:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in this image.
+        response_time: 2.8731656074523926
+        status: Success
+        token_count: 10
+'2024-09-06T23:06:57.540385':
+  openai:
+    gpt4mini:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in this image.
+        response_time: 2.698554039001465
+        status: Success
+        token_count: 14
