@@ -408,3 +408,8 @@
   prompt_file: Prompts/Stock Analysis.md
   source_file: null
   timestamp: '2024-09-06T22:55:56.268098'
+- command: ask  --prompt=what is the distance from Webb to Earth?
+  destination_file: Posts/james-space-telescope-located-second-lagrange-point-which-approximately-million.md
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-07T09:42:18.722869'

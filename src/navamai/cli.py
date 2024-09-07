@@ -21,6 +21,7 @@ import navamai.configure as configure
 import navamai.images as images
 import navamai.markdown as markdown
 import navamai.metrics as metrics
+import navamai.auditor as auditor
 import navamai.utils as utils
 from navamai.utils import trail
 
@@ -31,6 +32,9 @@ console = Console()
 def cli():
     pass
 
+@cli.command()
+def audit():
+    auditor.trail_auditor('trail.yml')
 
 @cli.command()
 @click.option("-d", "--days", default=7, help="Number of days to analyze")
