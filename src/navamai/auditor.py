@@ -158,7 +158,7 @@ class Auditor:
         report += "| Common Command Sequences | " + ", ".join(f"{cmd1} → {cmd2} ({count})" for (cmd1, cmd2), count in behavior_analysis['common_command_sequences']) + " |\n"
         report += "| Recent Prompt Complexity | " + ", ".join(f"{timestamp}: {complexity} words" for timestamp, complexity in behavior_analysis['prompt_complexity_over_time'][-5:]) + " |\n"
 
-        report += "\n## ASCII Timeline Visualization\n"
+        report += "\n## Command Frequency Timeline\n"
         report += "```\n" + self.create_ascii_timeline() + "\n```\n"
 
         return report
@@ -234,7 +234,7 @@ def trail_auditor(filename: str):
     
     console.print(behavior_table)
 
-    console.print("\n[bold]ASCII Timeline Visualization:[/bold]")
+    console.print("\n[bold]Command Frequency Timeline:[/bold]")
     console.print(auditor.create_ascii_timeline())
 
     # Generate and save markdown report

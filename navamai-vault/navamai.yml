@@ -1,9 +1,9 @@
 ask:
   max-tokens: 2000
-  model: gpt4mini
+  model: sonar
   prompts-folder: Prompts
-  provider: openai
-  save: true
+  provider: perplexity
+  save: false
   save-folder: Posts
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
