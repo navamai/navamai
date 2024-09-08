@@ -30,24 +30,26 @@ class Provider(ABC):
 
     def ask(self, prompt: str, title: str = None) -> str:
         full_response = ""
-        
+
         # Get the terminal height
         terminal_height = self.console.height
-        
-        with Live(console=self.console, refresh_per_second=16, auto_refresh=False) as live:
+
+        with Live(
+            console=self.console, refresh_per_second=16, auto_refresh=False
+        ) as live:
             for chunk in self.stream_response(prompt):
                 full_response += chunk
-                
+
                 # Split the response into lines
-                lines = full_response.split('\n')
-                
+                lines = full_response.split("\n")
+
                 # If the response exceeds the terminal height, slice it
                 if len(lines) > terminal_height - 2:  # Leave 2 lines for padding
-                    lines = lines[-(terminal_height - 2):]
-                
+                    lines = lines[-(terminal_height - 2) :]
+
                 # Join the lines back together
-                display_text = '\n'.join(lines)
-                
+                display_text = "\n".join(lines)
+
                 # Update the live display
                 live.update(Markdown(display_text), refresh=True)
 

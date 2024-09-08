@@ -15,7 +15,9 @@ def display_image(image_path):
         img.draw()
     else:
         console.print(f"Use VS Code Terminal for displaying images.", style="yellow")
-        console.print(f"Processed image saved to config > save-folder if save is enabled.")
+        console.print(
+            f"Processed image saved to config > save-folder if save is enabled."
+        )
 
 
 def capture_image():

@@ -1,8 +1,8 @@
 import importlib.resources
 import mimetypes
 import os
-import sys
 import shutil
+import sys
 import tempfile
 import time
 from pathlib import Path
@@ -17,11 +17,11 @@ from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.table import Table
 
+import navamai.auditor as auditor
 import navamai.configure as configure
 import navamai.images as images
 import navamai.markdown as markdown
 import navamai.metrics as metrics
-import navamai.auditor as auditor
 import navamai.utils as utils
 from navamai.utils import trail
 
@@ -32,9 +32,11 @@ console = Console()
 def cli():
     pass
 
+
 @cli.command()
 def audit():
-    auditor.trail_auditor('trail.yml')
+    auditor.trail_auditor("trail.yml")
+
 
 @cli.command()
 @click.option("-d", "--days", default=7, help="Number of days to analyze")
@@ -230,7 +232,6 @@ def init(force):
 
     current_dir = Path.cwd()
     copied_files = []
-    created_folders = []
 
     try:
         package = "navamai"
@@ -250,7 +251,7 @@ def init(force):
 
                 if not target_dir.exists():
                     target_dir.mkdir(parents=True, exist_ok=True)
-                    console.print(f"Created folder {target_dir}")
+                    console.print(f"Created folder {target_dir}", style="bold cyan")
 
                 for file in files:
                     source_file = Path(root) / file
@@ -265,7 +266,7 @@ def init(force):
                             copied_files.append(str(rel_path / file))
                     else:
                         shutil.copy2(source_file, target_file)
-                        console.print(f"Copied {file} to {target_dir}")
+                        console.print(f"Copied {file} to {target_dir}", style="cyan")
 
         console.print(f"Initialized navamai in {current_dir}", style="bold green")
 
@@ -281,79 +282,98 @@ def config(config_path, value):
     configure.edit_config(keys, value)
     click.echo(f"Updated config: {' > '.join(keys)} = {value}")
 
+@cli.command()
+@click.argument("section", required=False)
+def id(section):
+    section = "ask" if section is None else section
+    config = configure.load_config()
+    model_config = config.get(section)
+
+    provider = model_config.get("provider").lower()
+    provider_instance = utils.get_provider_instance(provider)
+    provider_instance.set_model_config(section)
+
+    model_info = provider_instance.get_model_info()
+    console.print(f"Model Information: [bold magenta]{model_info}[/bold magenta]")
+    sys.exit(0)
+
 
 @cli.command()
-@click.option(
-    "-i",
-    "--identify",
-    is_flag=True,
-    help="Identify the provider and model without running a query",
-)
 @click.argument("prompt", required=False)
-@click.option('-f', '--file', is_flag=True, help='Interactively select a prompt file')
+@click.argument("template", required=False)
 @trail
-def ask(identify, prompt, file):
+def ask(prompt, template):
     config = configure.load_config()
-    ask_config = config.get("ask", {})
+    model_config = config.get("ask", {})
 
-    provider = ask_config.get("provider").lower()
+    provider = model_config.get("provider").lower()
     provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config("ask")
     destination_file = None
     selected_file = None
-    
-    if identify:
-        model_info = provider_instance.get_model_info()
-        console.print(f"Model Information: [bold magenta]{model_info}[/bold magenta]")
-        sys.exit(0)
-    elif prompt:
+
+    if prompt:
         destination_file = provider_instance.ask(prompt)
-    elif file:
-        prompts_dir = ask_config.get("prompts-folder")
+    elif template:
+        with open(template, "r") as f:
+            prompt = f.read().strip()
+
+        prompt_variables = markdown.extract_variables(prompt)
+
+        # check if the prompt has variables. If so, ask for values
+        if prompt_variables:
+            console.print(
+                "The Prompt Template has variables. Enter values for the following variables:",
+                style="yellow",
+            )
+            for variable in prompt_variables:
+                value = click.prompt(variable)
+                prompt = prompt.replace(variable, value)
+
+        destination_file = provider_instance.ask(prompt)
+    else:
+        prompts_dir = model_config.get("prompts-folder")
         if not os.path.exists(prompts_dir):
-            console.print(f"[bold red]Error:[/bold red] Prompts directory not found at {prompts_dir}")
+            console.print(
+                f"[bold red]Error:[/bold red] Prompts directory not found at {prompts_dir}"
+            )
             sys.exit(1)
-        
+
         selected_file = markdown.file_select_paginate(prompts_dir)
         if selected_file:
-            with open(selected_file, 'r') as f:
+            with open(selected_file, "r") as f:
                 prompt = f.read().strip()
-            
+
             prompt_variables = markdown.extract_variables(prompt)
-            
+
             # check if the prompt has variables. If so, ask for values
             if prompt_variables:
-                console.print("The Prompt Template has variables. Enter values for the following variables:", style="yellow")
+                console.print(
+                    "The Prompt Template has variables. Enter values for the following variables:",
+                    style="yellow",
+                )
                 for variable in prompt_variables:
                     value = click.prompt(variable)
                     prompt = prompt.replace(variable, value)
-            
+
             destination_file = provider_instance.ask(prompt)
         else:
             console.print("[yellow]No file selected. Exiting.[/yellow]")
             sys.exit(0)
-    elif not prompt:
-        console.print("Create your prompt here. Press Enter, then CTRL+D to submit.", style="green")
-        # If no prompt is provided, read from stdin
-        prompt = sys.stdin.read().strip()
-        destination_file = provider_instance.ask(prompt)
+
     if not prompt:
         console.print("[bold red]Error:[/bold red] No prompt provided")
         sys.exit(1)
 
-    return {"custom_prompt": prompt, "prompt_file": selected_file, "destination_file": destination_file}
+    return {
+        "custom_prompt": prompt,
+        "prompt_file": selected_file,
+        "destination_file": destination_file,
+    }
 
-
-@cli.command()
-@click.argument("section", required=True)
-@click.option("-d", "--document", help="The document to expand")
-@click.option(
-    "-p", "--prompt", help="Additional prompt to use when expanding the document"
-)
-@trail
-def expand(section: str, document: Optional[str] = None, prompt: Optional[str] = None):
+def document_prompt(config_section: str, document: Optional[str] = None, prompt: Optional[str] = None):
     config = configure.load_config()
-    model_config = config.get(f"expand-{section}", {})
+    model_config = config.get(f"{config_section}")
     lookup_folder = model_config["lookup-folder"]
 
     if not document:
@@ -364,7 +384,7 @@ def expand(section: str, document: Optional[str] = None, prompt: Optional[str] =
         sys.exit(0)
 
     source_document = document
-    file_name = os.path.basename(source_document).replace('.md', '')
+    file_name = os.path.basename(source_document).replace(".md", "")
 
     if not os.path.exists(source_document):
         raise click.ClickException(
@@ -373,7 +393,7 @@ def expand(section: str, document: Optional[str] = None, prompt: Optional[str] =
 
     provider = model_config.get("provider").lower()
     provider_instance = utils.get_provider_instance(provider)
-    provider_instance.set_model_config(f"expand-{section}")
+    provider_instance.set_model_config(f"{config_section}")
 
     custom_prompt = None
     with open(source_document, "r") as file:
@@ -384,20 +404,41 @@ def expand(section: str, document: Optional[str] = None, prompt: Optional[str] =
             prompt=f"{prompt}\n\n{source_contents}", title=f"{document} expanded"
         )
     else:
-        console.print(f"Using system prompt: {model_config.get('system')}", style="cyan")
-        add_custom_prompt = click.confirm("Do you want to add a custom prompt?", default=True)
+        console.print(
+            f"Using system prompt: {model_config.get('system')}", style="cyan"
+        )
+        add_custom_prompt = click.confirm(
+            "Do you want to add a custom prompt?", default=True
+        )
         if add_custom_prompt:
             custom_prompt = click.prompt("Enter a custom prompt")
             destination_file = provider_instance.ask(
                 prompt=f"{custom_prompt}\n\n{source_contents}",
                 title=f"{file_name} expanded",
-            )            
-        else:            
+            )
+        else:
             destination_file = provider_instance.ask(
                 prompt=source_contents, title=f"{file_name} expanded"
             )
+    return source_document, destination_file, custom_prompt
 
-    return {"custom_prompt": custom_prompt, "source_file": source_document, "destination_file": destination_file}
+
+@cli.command()
+@click.argument("section", required=True)
+@click.option("-d", "--document", help="The document to expand")
+@click.option(
+    "-p", "--prompt", help="Additional prompt to use when expanding the document"
+)
+@trail
+def expand(section: str, document: Optional[str] = None, prompt: Optional[str] = None):
+    source_document, destination_file, custom_prompt = document_prompt(
+        config_section=f"expand-{section}", document=document, prompt=prompt
+    )
+    return {
+        "custom_prompt": custom_prompt,
+        "source_file": source_document,
+        "destination_file": destination_file,
+    }
 
 
 @cli.command()

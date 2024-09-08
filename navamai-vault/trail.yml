@@ -521,3 +521,212 @@
   prompt_file: null
   source_file: Raw/Anthropic Prompt Engineering.md
   timestamp: '2024-09-07T15:23:37.734647'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a table comparing prompt engineering for the enterprise, for
+    research, and prompting ChatGPT or Claude.AI fchatbot.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T20:43:03.096652'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a table comparing prompt engineering for the enterprise, for
+    research, and prompting ChatGPT or Claude.AI chatbot.       e
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T20:46:00.317034'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a table comparing prompt engineering for the enterprise, for
+    research, and prompting ChatGPT or Claude.AI chatbot.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T20:47:08.221373'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a table comparing prompt engineering for the enterprise, for
+    research, and prompting ChatGPT or Claude.AI chatbot.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T20:48:12.921655'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Compare prompt engineering for enterprise, for research and for consumer
+    use.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T20:55:26.495319'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Compare prompt engineering for enterprise, for research and for consumer
+    use.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T20:57:22.411580'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a well structured article explaining differences between prompt
+    engineering for enterprise, for research, and for consumer use cases. Create a
+    side by side comparison table in the appropriate section. Reseach related material
+    and provide citations.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T23:08:36.832365'
+- command: ask  --prompt=what is the PEG ratio for NVDA?
+  custom_prompt: what is the PEG ratio for NVDA?
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T07:29:32.817716'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Summarize this
+  destination_file: Posts/Elon Musk Design Process expanded.md
+  prompt_file: null
+  source_file: Raw/Elon Musk Design Process.md
+  timestamp: '2024-09-08T07:49:17.270111'
+- command: ask  --prompt=None
+  custom_prompt: What is the name of the last US president?
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T08:16:54.477061'
+- command: ask  --prompt=what is the PEG ratio for NVDA?
+  custom_prompt: what is the PEG ratio for NVDA?
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T08:17:29.275629'
+- command: ask  --file --prompt=None
+  custom_prompt: Create a table of planets in the solar system. Add columns for size,
+    moons, distance from sun, gravity, composition.
+  destination_file: null
+  prompt_file: Prompts/Table of Planets.md
+  source_file: null
+  timestamp: '2024-09-08T08:17:38.701015'
+- command: ask  --file --prompt=None
+  custom_prompt: "You are an expert stock analyst tasked with providing a detailed\
+    \ analysis and recommendation for a given stock. You will need to conduct thorough\
+    \ research and think step by step to provide a comprehensive response. Follow\
+    \ these instructions carefully:\n\n1. You will be analyzing the stock with the\
+    \ following symbol:\n<stock_symbol>{{MSFT}}</stock_symbol>\n\n2. Begin by reading\
+    \ the most recent SEC filings for the company associated with this stock symbol.\
+    \ Focus on the 10-K and 10-Q reports. Pay close attention to financial statements,\
+    \ management's discussion and analysis, and any risk factors mentioned.\n\n3.\
+    \ Next, search for and read recent media reports about the company, particularly\
+    \ those that have impacted the stock price positively or negatively. Look for\
+    \ news about earnings reports, product launches, management changes, legal issues,\
+    \ or any other significant events.\n\n4. Research the industry to which this company\
+    \ belongs. Read industry reports and analyze macro factors that could impact the\
+    \ stock. Consider economic trends, regulatory changes, technological advancements,\
+    \ and competitive landscape.\n\n5. Using the insights gathered from the previous\
+    \ steps, prepare a detailed analysis of the company's stock. Your analysis should\
+    \ include:\n\n   A. A brief overview of the company and its primary business\n\
+    \   B. Key financial metrics and their trends\n   C. Strengths and weaknesses\
+    \ of the company\n   D. Opportunities and threats in the market\n   E. Competitive\
+    \ position within the industry\n   F. Potential catalysts for stock price movement\n\
+    \   G. Table of key stock indicators including Market Cap, ROCE, P/E Ratio, Free\
+    \ Cash Flow, etc.\n\n6. Based on your analysis, provide a recommendation of either\
+    \ BUY, HOLD, or SELL for the stock. Include a detailed rationale for your recommendation,\
+    \ citing specific factors from your research that support your conclusion.\n\n\
+    7. Present your findings in the following markdown format:\n\n# Analysis\n[Your\
+    \ detailed analysis goes here, covering points A-G from step 5]\n\n# Recommendation\n\
+    Recommendation: [BUY/HOLD/SELL]\n\n## Rationale:\n[Provide a thorough explanation\
+    \ of your recommendation, referencing key points from your analysis]\n\nRemember\
+    \ to think critically and consider multiple perspectives before making your recommendation.\
+    \ Your analysis should be objective, well-reasoned, and supported by the information\
+    \ you've gathered."
+  destination_file: null
+  prompt_file: Prompts/Stock Analysis.md
+  source_file: null
+  timestamp: '2024-09-08T08:17:58.306757'
+- command: ask  --prompt=None
+  custom_prompt: What is the distance to Webb?
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T08:18:48.493201'
+- command: ask  --prompt=what is the PEG ratio for NVDA? --template=None
+  custom_prompt: what is the PEG ratio for NVDA?
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T10:04:17.541626'
+- command: ask  --prompt=None --template=None
+  custom_prompt: Create a table of planets in the solar system. Add columns for size,
+    moons, distance from sun, gravity, composition.
+  destination_file: null
+  prompt_file: Prompts/Table of Planets.md
+  source_file: null
+  timestamp: '2024-09-08T10:04:23.961668'
+- command: ask  --prompt=None --template=None
+  custom_prompt: "You are an expert stock analyst tasked with providing a detailed\
+    \ analysis and recommendation for a given stock. You will need to conduct thorough\
+    \ research and think step by step to provide a comprehensive response. Follow\
+    \ these instructions carefully:\n\n1. You will be analyzing the stock with the\
+    \ following symbol:\n<stock_symbol>{{AAPL}}</stock_symbol>\n\n2. Begin by reading\
+    \ the most recent SEC filings for the company associated with this stock symbol.\
+    \ Focus on the 10-K and 10-Q reports. Pay close attention to financial statements,\
+    \ management's discussion and analysis, and any risk factors mentioned.\n\n3.\
+    \ Next, search for and read recent media reports about the company, particularly\
+    \ those that have impacted the stock price positively or negatively. Look for\
+    \ news about earnings reports, product launches, management changes, legal issues,\
+    \ or any other significant events.\n\n4. Research the industry to which this company\
+    \ belongs. Read industry reports and analyze macro factors that could impact the\
+    \ stock. Consider economic trends, regulatory changes, technological advancements,\
+    \ and competitive landscape.\n\n5. Using the insights gathered from the previous\
+    \ steps, prepare a detailed analysis of the company's stock. Your analysis should\
+    \ include:\n\n   A. A brief overview of the company and its primary business\n\
+    \   B. Key financial metrics and their trends\n   C. Strengths and weaknesses\
+    \ of the company\n   D. Opportunities and threats in the market\n   E. Competitive\
+    \ position within the industry\n   F. Potential catalysts for stock price movement\n\
+    \   G. Table of key stock indicators including Market Cap, ROCE, P/E Ratio, Free\
+    \ Cash Flow, etc.\n\n6. Based on your analysis, provide a recommendation of either\
+    \ BUY, HOLD, or SELL for the stock. Include a detailed rationale for your recommendation,\
+    \ citing specific factors from your research that support your conclusion.\n\n\
+    7. Present your findings in the following markdown format:\n\n# Analysis\n[Your\
+    \ detailed analysis goes here, covering points A-G from step 5]\n\n# Recommendation\n\
+    Recommendation: [BUY/HOLD/SELL]\n\n## Rationale:\n[Provide a thorough explanation\
+    \ of your recommendation, referencing key points from your analysis]\n\nRemember\
+    \ to think critically and consider multiple perspectives before making your recommendation.\
+    \ Your analysis should be objective, well-reasoned, and supported by the information\
+    \ you've gathered."
+  destination_file: null
+  prompt_file: Prompts/Stock Analysis.md
+  source_file: null
+  timestamp: '2024-09-08T10:04:36.391470'
+- command: ask  --prompt=prompt --template=None
+  custom_prompt: prompt
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T10:05:27.683571'
+- command: ask  --prompt=prompt --template=None
+  custom_prompt: prompt
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T10:06:23.611421'
+- command: ask  --prompt=template=Table of Planets --template=None
+  custom_prompt: template=Table of Planets
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T10:07:31.555793'
+- command: ask  --prompt=prompt= --template=None
+  custom_prompt: prompt=
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T10:08:30.225543'
+- command: ask  --prompt=what is the PEG ratio for NVDA? --template=None
+  custom_prompt: what is the PEG ratio for NVDA?
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T10:08:46.496141'
+- command: ask  --prompt=what is the PEG ratio for NVDA? --template=None
+  custom_prompt: what is the PEG ratio for NVDA?
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-08T10:21:58.874316'

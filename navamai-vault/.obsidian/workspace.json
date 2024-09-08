@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "f5462302daed24ce",
+        "id": "b7aa69e68db9f36c",
         "type": "tabs",
         "children": [
           {
-            "id": "f157d53ca3f6015e",
+            "id": "f937f65ba4ff74e0",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -138,8 +138,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f157d53ca3f6015e",
+  "active": "f937f65ba4ff74e0",
   "lastOpenFiles": [
+    "Metrics/test_summary_20240908.yml",
+    "Posts/Elon Musk Design Process expanded.md",
+    "Posts/Startup Growth Hacks 100 plus.md",
+    "Posts/Anthropic CEO upstream interview summary.md",
+    "Posts/Anthropic Prompt Engineering Use Cases - sonnet.md",
+    "Posts/Anthropic Prompt Engineering expanded.md",
+    "Posts/Anthropic Prompt Engineering Use Cases - gpt4o.md",
+    "Metrics/test_summary_20240907.yml",
+    "Posts/Startup Growth Hacks merged.md",
     "Audits/trail_analysis_report_20240907_180634.md",
     "Audits/trail_analysis_report_20240907_180621.md",
     "Audits/trail_analysis_report_20240907_180547.md",
@@ -147,7 +156,6 @@
     "Audits/trail_analysis_report_20240907_180440.md",
     "Audits/trail_analysis_report_20240907_175935.md",
     "Posts/Anthropic Prompt Engineering sonar.md",
-    "Posts/Anthropic Prompt Engineering expanded.md",
     "Posts/Anthropic Prompt Engineering claude.md",
     "Posts/Anthropic Prompt Engineering gpt4o.md",
     "Audits/trail_analysis_report_20240907_144608.md",
@@ -159,13 +167,6 @@
     "Audits/trail_analysis_report_20240907_141355.md",
     "Audits/trail_analysis_report_20240907_140027.md",
     "Posts/Anthropic Prompt Engineering - gpt4o.md",
-    "Posts/Anthropic Prompt Engineering - sonar.md",
-    "Audits/trail_analysis_report_20240907_110727.md",
-    "Posts/Anthropic Prompt Engineering.md expanded.md",
-    "Posts/RawAnthropic Prompt Engineering.md expanded.md",
-    "Raw/Anthropic Prompt Engineering.md",
-    "Audits/trail_analysis_report_20240907_100827.md",
-    "Audits/trail_analysis_report_20240907_100652.md",
     "Audits/command_timeline.png",
     "command_timeline.png",
     "Audits",
@@ -179,7 +180,6 @@
     "Documents/Top-Gen-AI-Web-Top-50-List-Inline-3.png",
     "Documents/NVDA-F2Q25-Quarterly-Presentation-FINAL.pdf",
     "Documents/Rev_by_Mkt_Qtrly_Trend_Q424.pdf",
-    "Documents/nvda-sec.pdf",
     "Vision/buildings-image-include-shard-gherkin-walkie-talkie-fenchurch-street-cheesegrater.webp",
     "Images/london-skyline.webp",
     "Images/hackathon.jpg",

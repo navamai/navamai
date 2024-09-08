@@ -1,13 +1,15 @@
 # NavamAI enhances your craft with AI
-NavamAI enhances your craft with personal, fast, and quality AI. Turn your Terminal or Shell into a rich personal AI. Supports 10 GenAI models by 5 providers. Pairs with Markdown, VS Code, Obsidian.
+NavamAI enhances your craft with personal, fast, and quality AI. Turn your Terminal or Shell into a rich personal AI. Supports 15 GenAI models by 7 providers. Pairs with Markdown, VS Code, Obsidian.
 
-You can switch private models or hosted frontier LLMs with ease. NavamAI comes with configurable support for more than 15 leading models (GPT 4o, Sonnet 3.5, Gemini 1.5 Pro, Mistral NeMo, Sonar Llama 3.1...) from 7 providers (Ollama, Anthropic, OpenAI, Groq, Google, Bedrock, and Perplexity).
+**Command Is All You Need:** So, the LLM science fans will get the pun in our tagline - Command is all you need. It is a play on the famous paper that introduced the world to Transformer model architecture - Attention is all you need. With NavamAI a simple command via your favorite terminal or shell is all you need to bend an large or small language model to your wishes. NavamAI provides a rich UI right there within your command prompt. No browser tabs to open, no apps to install, no context switching... just pure, simple, fast workflow. Try it with a simple command like `ask "create a table of planets"` and see your Terminal come to life just like a chat UI with fast streaming responses, markdown formatted tables, and even code blocks with color highlights if your prompt requires code in response!
 
-NavamAI works with markdown content (text files with simple formatting commands). So you can use it with many popular tools like VS Code and Obsidian to quickly and seamlessly design a custom workflow that enhances your craft.
+**Top Models and Providers:** You can switch private models or hosted frontier LLMs with ease. NavamAI comes with configurable support for more than 15 leading models (GPT 4o, Sonnet 3.5, Gemini 1.5 Pro, Mistral NeMo, Sonar Llama 3.1...) from 7 providers (Ollama, Anthropic, OpenAI, Groq, Google, Bedrock, and Perplexity).
 
-NavamAI is very simple to use out of the box as you learn its handful of powerful commands. As you get comfortable you can customize NavamAI commands simply by changing one configuration file and align NavamAI to suit your workflow. Everything in NavamAI has sensible defaults to get started quickly. When you are ready, everything is configurable and extensible including commands, models, providers, prompts, model parameters, folders, and document types. 
+**Markdown Workflows:** NavamAI works with markdown content (text files with simple formatting commands). So you can use it with many popular tools like VS Code and Obsidian to quickly and seamlessly design a custom workflow that enhances your craft.
 
-You are completely in control of your personal AI workflow with NavamAI.
+**Do More With Less:** NavamAI is very simple to use out of the box as you learn its handful of powerful commands. As you get comfortable you can customize NavamAI commands simply by changing one configuration file and align NavamAI to suit your workflow. Everything in NavamAI has sensible defaults to get started quickly. 
+
+**Make It Your Own:** When you are ready, everything is configurable and extensible including commands, models, providers, prompts, model parameters, folders, and document types. Another magical thing happens when the interface to your generative AI is a humble command prompt. You will experience a sense of being in control. In control of your workflow, your privacy, your intents, and your artifacts. You are completely in control of your personal AI workflow with NavamAI.
 
 ## Quick Start
 
@@ -16,7 +18,7 @@ Go to a folder where you want to initialize NavamAI. This could be your Obsidian
 ```bash
 pip install -U navamai # upgrade or install latest NavamAI
 navamai init # copies config file, quick start samples
-ask -i # displays active provider and model
+navamai id # identifies active provider and model
 ask "How old is the oldest pyramid?" # start prompting the model
 ```
 
@@ -31,7 +33,7 @@ export GEMINI_API_KEY= # https://ai.google.dev/gemini-api
 export PERPLEXITY_KEY= # https://www.perplexity.ai/settings/api
 ```
 
-If you do not want to use any of the model then all you need to do is remove the corresponding entries from `navamai.yml` in the `model-mapping` and the `provider-model-mapping` sections. Also ensure that none of the other model configs only refer to available models.
+If you do not want to use any of the model then all you need to do is remove the corresponding entries from `navamai.yml` in the `model-mapping` and the `provider-model-mapping` sections. Also ensure that the other model configs only refer to available models.
 
 For local models [install Ollama](https://ollama.com/) and download the latest [models](https://ollama.com/library) you want to run.
 
@@ -44,7 +46,7 @@ navamai test vision
 
 ### Python Environment Setup (optional)
 
-Skip this section if you have your Python environment already working.
+*Skip this section if you have your Python environment already working.*
 
 First, you should be running the latest Python on your system with Python package manager upgraded to the latest.
 
@@ -72,6 +74,23 @@ To leave the virtual environment using `deactivate` command. Re-enter using same
 
 Now you are ready to install NavamAI.
 
+## Command Reference
+
+Note that `navamai`, `ask` and `expand` are top level commands available to you when you install NavamAI. You can also use `navamai ask` and `navamai expand` if you prefer.
+
+| Command      | Example and Description                                                                                                                                                                                                                                                                                                                                            |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **ask**      | `ask "your prompt"`<br>Prompt the LLM for a fast, crisp (default up to 300 words), single turn response<br><br>`ask`<br>Browses the configured prompts folder, lists prompt templates for user to run.                                                                                                                                                             |
+| **audit**    | `navamai audit`<br>Analyze your own usage of NavamAI over time with an insightful command line dashboard and markdown report.                                                                                                                                                                                                                                      |
+| **config**   | `navamai config ask save true`<br>Edit `navamai.yml` file config from command line                                                                                                                                                                                                                                                                                 |
+| **expand**   | `expand transcript`<br>Browse a set of transcripts and run custom prompts to expand content.<br><br>`expand intents`<br>Expand a set of intents and prompts within an intents template<br><br>`expand your-command`<br>You can configure your own extensions to expand command by simply copying and changing any of the existing `expand-existing` model configs. |
+| **id**       | `navamai id`<br>Identifies the current provider and model for `ask` command<br><br>`navamai id section-name`<br>Identifies the provider and model defined in specific section                                                                                                                                                                                      |
+| **init**     | `navamai init`<br>Initialize navamai in any folder. Copies `navamai.yml` default config and quick start Intents and Embeds folders and files. Checks before overwriting. Use --force option to force overwrite files and folders.                                                                                                                                  |
+| **intents**  | `navamai intents "Financial Analysis"`<br>Interactively choose from a list of intents within a template to expand into content embeds                                                                                                                                                                                                                              |
+| **test**     | `navamai test ask`<br>Tests navamai command using all providers and models defined in `navamai.yml` config and provides a test summary.<br><br>`navamai test vision`<br>Test vision models.                                                                                                                                                                        |
+| **trends**   | `navamai trends`<br>Visualize latency and token length trends based on `navamai test` runs for `ask` and `vision` commands across models and providers. You can trend for a period of days using  `--days 7` command option.                                                                                                                                       |
+| **validate** | `navamai validate "Financial Analysis"`<br>Validates prior generated embeds running another model and reports the percentage difference between validated and original content.                                                                                                                                                                                    |
+| **vision**   | `navamai vision -p path/to/image.png "Describe this image"`<br>Runs vision models on images from local path (-p), url (-u), or camera (-c) and responds based on prompt.                                                                                                                                                                                           |
 
 ## NavamAI Expands Your Content
 
@@ -110,27 +129,6 @@ This workflow can get really useful very fast. As each template has linked embed
 
 ![](https://raw.githubusercontent.com/navamai/navamai/main/images/navamai-intents-workflow.webp)
 
-## Why NavamAI
-
-So, the LLM science fans will get the pun in our tagline - Command is all you need. It is a play on the famous paper that introduced the world to Transformer model architecture - Attention is all you need. With NavamAI a simple command via your favorite terminal or shell is all you need to bend an large or small language model to your wishes. NavamAI provides a rich UI right there within your command prompt. No browser tabs to open, no apps to install, no context switching... just pure, simple, fast workflow. Try it with a simple command like `ask "create a table of planets"` and see your Terminal come to life just like a chat UI with fast streaming responses, markdown formatted tables, and even code blocks with color highlights if your prompt requires code in response! 
-
-Another magical thing happens when the interface to your generative AI is a humble command prompt. You will experience a sense of being in control. In control of your workflow, your privacy, your intents, and your artifacts.
-
-## Command Reference
-
-Note that `navamai`, `ask` and `expand` are top level commands available to you when you install NavamAI. You can also use `navamai ask` and `navamai expand` if you prefer.
-
-| Command      | Example and Description                                                                                                                                                                                                                                                                                                         |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **ask**      | `ask "your prompt"`<br>Prompt the LLM for a fast, crisp (default up to 300 words), single turn response<br><br>`ask -f`<br>Browses the configured prompts folder, lists prompt templates for user to run.<br><br>`ask`<br>Enables user to enter free form, multi-line prompt text. End with Enter, then CTRL+D to see response. |
-| **config**   | `navamai config ask save true`<br>Edit `navamai.yml` file config from command line                                                                                                                                                                                                                                              |
-| **expand**   | `expand intents "Financial Analysis"`<br>Expand a set of intents and prompts within an intents template                                                                                                                                                                                                                         |
-| **init**     | `navamai init`<br>Initialize navamai in any folder. Copies `navamai.yml` default config and quick start Intents and Embeds folders and files. Checks before overwriting. Use --force option to force overwrite files and folders.                                                                                               |
-| **intents**  | `navamai intents "Financial Analysis"`<br>Interactively choose from a list of intents within a template to expand into content embeds                                                                                                                                                                                           |
-| **test**     | `navamai test ask`<br>Tests navamai command using all providers and models defined in `navamai.yml` config and provides a test summary.                                                                                                                                                                                         |
-| **trends**   | `navamai trends --days 7`<br>Visualize latency and token length trends based on `navamai test` runs for `ask` and `vision` commands across models and providers.                                                                                                                                                                |
-| **validate** | `navamai validate "Financial Analysis"`<br>Validates prior generated embeds running another model and reports the percentage difference between validated and original content.                                                                                                                                                 |
-| **vision**   | `navamai vision -p path/to/image.png "Describe this image"`<br>Runs vision models on images from local path (-p), url (-u), or camera (-c) and responds based on prompt.                                                                                                                                                        |
 
 ## Test and Evaluate Models and Providers
 
@@ -155,6 +153,17 @@ Each `navamai test` command run saves the test summary data in `Metrics` folder 
 ![](https://raw.githubusercontent.com/navamai/navamai/main/images/trends.webp)
 
 The visualization uses sparklines to show data trends over time. Use this to decide when/if to switch models based on performance trends.
+
+## Run multiple models side by side
+
+Want to compare multiple models side by side? All you need to do is open multiple shells or Terminal instances. Now in each of these, one by one, change the model, run same `ask "prompt"` and compare the results side by side. Simple!
+
+![](https://raw.githubusercontent.com/navamai/assets/main/images/compare-models-1.png)
+
+![](https://raw.githubusercontent.com/navamai/assets/main/images/compare-models-2.png)
+
+As NavamAI commands use the `navamai.yml` config in the current folder every time they run, you can create more complex parallel running, multi-model and cross-provider workflows by simply copying the config file into multiple folders and running commands there. This way you can be running some long running tasks on a local model in one folder and terminal. While you are doing your day to day workflow in another. And so on.
+
 ## Chatbot UI in command prompt
 
 NavamAI can work like a chatbot UI in your terminal or command prompt. Just type `ask "your prompt here"` and you will receive streaming response back just like a chatbot. The response is rich formatted for code blocks with highlights, markdown tables, and markdown text formatting.
@@ -211,15 +220,6 @@ model-mapping:
 ```
 
 
-## Run multiple models side by side
-
-Want to compare multiple models side by side? All you need to do is open multiple shells or Terminal instances. Now in each of these, one by one, change the model, run same `ask "prompt"` and compare the results side by side. Simple!
-
-![](https://raw.githubusercontent.com/navamai/assets/main/images/compare-models-1.png)
-
-![](https://raw.githubusercontent.com/navamai/assets/main/images/compare-models-2.png)
-
-As NavamAI commands use the `navamai.yml` config in the current folder every time they run, you can create more complex parallel running, multi-model and cross-provider workflows by simply copying the config file into multiple folders and running commands there. This way you can be running some long running tasks on a local model in one folder and terminal. While you are doing your day to day workflow in another. And so on.
 
 ## Privacy controls 
 

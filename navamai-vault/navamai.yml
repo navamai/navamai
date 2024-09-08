@@ -1,8 +1,8 @@
 ask:
   max-tokens: 500
-  model: gpt4o
+  model: sonar
   prompts-folder: Prompts
-  provider: openai
+  provider: perplexity
   save: false
   save-folder: Posts
   system: Be crisp in your response. Only respond to the prompt using valid markdown
@@ -62,15 +62,8 @@ expand-transcript:
   provider: claude
   save: true
   save-folder: Posts
-  system: You will be given a transcript of a podcast or interview. You will also
-    be given a user prompt to extract content from the transcript. Your job is to
-    carefully read the transcript and extract content in the form of a blog post with
-    Introduction heading followed by a generalized summary based on the extracted
-    content. You will then follow this with another appropriate heading and the extracted
-    content based on the use prompt. You will also research the topic based on popular related papers, 
-    articles, books from experts. You will add relevant citations to the extracted content using
-    markdown citation format. You will add a section at the end of the document for
-    citations with links. Respond using valid markdown. Do not explain your response.
+  system: Respond only using valid markdown syntax. Follow the prompt as instructed
+    and do not explain your response.
   temperature: 0.3
 intents:
   lookup-folder: Intents

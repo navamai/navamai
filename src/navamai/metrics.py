@@ -9,13 +9,6 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-import yaml
-from datetime import datetime
-
-from datetime import datetime
-
-from rich import box
-
 console = Console()
 
 
@@ -215,4 +208,3 @@ def display_trends(processed_data):
         if i + items_per_page < len(tables):
             input("Press Enter to see more...")
             console.clear()
-

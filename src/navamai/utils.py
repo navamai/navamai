@@ -4,13 +4,14 @@ from datetime import datetime
 
 import yaml
 
+from navamai.bedrock import Bedrock
 from navamai.claude import Claude
 from navamai.gemini import Gemini
 from navamai.groq import Groq
 from navamai.ollama import Ollama
 from navamai.openai import Openai
-from navamai.bedrock import Bedrock
 from navamai.perplexity import Perplexity
+
 
 def trail(f):
     @functools.wraps(f)
