@@ -341,7 +341,7 @@ def ask(identify, prompt, file):
         console.print("[bold red]Error:[/bold red] No prompt provided")
         sys.exit(1)
 
-    return {"prompt_file": selected_file, "source_file": None, "destination_file": destination_file}
+    return {"custom_prompt": prompt, "prompt_file": selected_file, "destination_file": destination_file}
 
 
 @cli.command()
@@ -363,17 +363,19 @@ def expand(section: str, document: Optional[str] = None, prompt: Optional[str] =
         console.print("[yellow]No file selected. Exiting.[/yellow]")
         sys.exit(0)
 
-    source_document = f"{lookup_folder}/{document}.md"
+    source_document = document
+    file_name = os.path.basename(source_document).replace('.md', '')
 
     if not os.path.exists(source_document):
         raise click.ClickException(
-            f"Document '{document}' not found in {lookup_folder}"
+            f"Document '{source_document}' not found in {lookup_folder}"
         )
 
     provider = model_config.get("provider").lower()
     provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config(f"expand-{section}")
 
+    custom_prompt = None
     with open(source_document, "r") as file:
         source_contents = file.read()
 
@@ -382,11 +384,20 @@ def expand(section: str, document: Optional[str] = None, prompt: Optional[str] =
             prompt=f"{prompt}\n\n{source_contents}", title=f"{document} expanded"
         )
     else:
-        destination_file = provider_instance.ask(
-            prompt=source_contents, title=f"{document} expanded"
-        )
+        console.print(f"Using system prompt: {model_config.get('system')}", style="cyan")
+        add_custom_prompt = click.confirm("Do you want to add a custom prompt?", default=True)
+        if add_custom_prompt:
+            custom_prompt = click.prompt("Enter a custom prompt")
+            destination_file = provider_instance.ask(
+                prompt=f"{custom_prompt}\n\n{source_contents}",
+                title=f"{file_name} expanded",
+            )            
+        else:            
+            destination_file = provider_instance.ask(
+                prompt=source_contents, title=f"{file_name} expanded"
+            )
 
-    return {"source_file": source_document, "destination_file": destination_file}
+    return {"custom_prompt": custom_prompt, "source_file": source_document, "destination_file": destination_file}
 
 
 @cli.command()

@@ -448,3 +448,76 @@
   prompt_file: null
   source_file: null
   timestamp: '2024-09-07T10:06:35.121669'
+- command: expand  --prompt=Summarize key recommendations --section=transcript --document=None
+  destination_file: Posts/RawAnthropic Prompt Engineering.md expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T10:18:48.908070'
+- command: expand  --section=transcript --document=None --prompt=None
+  destination_file: Posts/RawAnthropic Prompt Engineering.md expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T10:34:02.539315'
+- command: expand  --section=transcript --document=None --prompt=None
+  destination_file: Posts/Anthropic Prompt Engineering.md expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T10:41:30.341509'
+- command: expand  --section=transcript --document=None --prompt=None
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T10:43:29.747232'
+- command: expand  --section=transcript --document=None --prompt=None
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T10:53:58.212073'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a numbered list of prompt engineering tips based on the given
+    transcript. Rank these by most important to least, top to bottom.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T11:00:38.842341'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a numbered list of prompt engineering tips based on the given
+    transcript. Rank these by most important to least, top to bottom.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T13:57:44.677040'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a numbered list of prompt engineering tips based on the given
+    transcript. Rank these by most important to least, top to bottom.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T14:52:05.833508'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a numbered list of prompt engineering tips based on the given
+    transcript. Rank these by most important to least, top to bottom.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T14:53:35.497335'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a numbered list of prompt engineering tips based on the given
+    transcript. Rank these by most important to least, top to bottom.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T14:54:21.053495'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: null
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T15:19:52.182732'
+- command: expand  --section=transcript --document=None --prompt=None
+  custom_prompt: Create a numbered list of prompt engineering tips based on the given
+    transcript. Rank these by most important to least, top to bottom.
+  destination_file: Posts/Anthropic Prompt Engineering expanded.md
+  prompt_file: null
+  source_file: Raw/Anthropic Prompt Engineering.md
+  timestamp: '2024-09-07T15:23:37.734647'
