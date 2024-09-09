@@ -32,7 +32,7 @@ class Claude(Provider):
             for text in stream.text_stream:
                 yield text
 
-    def create_vision_request_data(self, image_data: bytes, prompt: str) -> dict:
+    def create_vision_request_data(self, image_data: bytes, prompt: str, media_type: str) -> dict:
         config = self.model_config
         model = self.resolve_model(config["model"])
         return {
@@ -48,7 +48,7 @@ class Claude(Provider):
                             "type": "image",
                             "source": {
                                 "type": "base64",
-                                "media_type": "image/jpeg",
+                                "media_type": media_type,
                                 "data": base64.b64encode(image_data).decode("utf-8"),
                             },
                         },
@@ -59,9 +59,9 @@ class Claude(Provider):
         }
 
     def stream_vision_response(
-        self, image_data: bytes, prompt: str
+        self, image_data: bytes, prompt: str, media_type: str = None
     ) -> Generator[str, None, None]:
-        request_data = self.create_vision_request_data(image_data, prompt)
+        request_data = self.create_vision_request_data(image_data, prompt, media_type)
         with self.client.messages.stream(**request_data) as stream:
             for text in stream.text_stream:
                 yield text

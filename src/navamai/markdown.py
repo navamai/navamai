@@ -6,8 +6,9 @@ from pathlib import Path
 
 from rich.console import Console
 from rich.prompt import Prompt
-from rich.syntax import Syntax
 from rich.table import Table
+import tiktoken
+from navamai import configure
 
 console = Console()
 
@@ -33,7 +34,50 @@ def list_files(directory, page=1, files_per_page=10):
     return all_files[start:end], total_pages
 
 
-def file_select_paginate(directory):
+def count_tokens(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+    encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
+    return len(encoding.encode(content))
+
+def intent_select_paginate(intents_content, page=1, intents_per_page=10):
+    sections = parse_markdown_sections(intents_content)
+    total_pages = ceil(len(sections) / intents_per_page)
+
+    while True:
+        start = (page - 1) * intents_per_page
+        end = start + intents_per_page
+        current_sections = sections[start:end]
+
+        table = Table(title=f"Available Intents (Page {page} of {total_pages})")
+        table.add_column("Number", no_wrap=True)
+        table.add_column("Intent Title", style="cyan")
+
+        for i, (title, _) in enumerate(current_sections, start + 1):
+            table.add_row(str(i), title)
+
+        console.print(table)
+
+        if total_pages > 1:
+            msg = "Enter intent number, '[blue]n[/blue]' for next page, '[blue]p[/blue]' for previous page, or '[blue]q[/blue]' to quit"
+        else:
+            msg = "Enter intent number or '[blue]q[/blue]' to quit"
+
+        choice = Prompt.ask(msg, default="")
+
+        if choice.lower() == "q":
+            return None
+        elif choice.lower() == "n" and page < total_pages:
+            page += 1
+        elif choice.lower() == "p" and page > 1:
+            page -= 1
+        elif choice.isdigit() and 1 <= int(choice) <= len(sections):
+            selected_index = int(choice) - 1
+            return sections[selected_index]
+        else:
+            console.print("[bold red]Invalid choice. Please try again.[/bold red]")
+
+def file_select_paginate(directory, show_tokens=False, section=None):
     page = 1
     files_per_page = 10
     while True:
@@ -42,9 +86,24 @@ def file_select_paginate(directory):
         table = Table(title=f"Prompt Files (Page {page} of {total_pages})")
         table.add_column("Number", no_wrap=True)
         table.add_column("Filename", style="cyan")
+        if show_tokens:
+            table.add_column("Tokens", style="green")
+            table.add_column("Context", style="magenta")
 
         for i, file in enumerate(files, 1):
-            table.add_row(str(i), file)
+            file_path = os.path.join(directory, file)
+            if show_tokens:
+                config = configure.load_config()
+                model_config = config.get(section)
+                model_context = config.get("model-context")
+                context_length = model_context.get(model_config.get("model"))
+                tokens = count_tokens(file_path)
+                context_ratio = round(tokens / context_length * 100, 2) 
+                token_display = f"{tokens / 1000:.1f}K"
+                context_display = f"{context_ratio}%"
+                table.add_row(str(i), file, token_display, context_display)
+            else:
+                table.add_row(str(i), file)
 
         console.print(table)
         if total_pages > 1:
@@ -64,7 +123,6 @@ def file_select_paginate(directory):
             return os.path.join(directory, files[int(choice) - 1])
         else:
             console.print("[bold red]Invalid choice. Please try again.[/bold red]")
-
 
 def merge_docs(
     source_path,

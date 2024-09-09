@@ -72,9 +72,13 @@ def test(model_config):
             elif model_config == "vision":
                 prompt = test_config.get("vision")
 
+            media_type = None
             if model_config == "vision":
                 if model in config.get("vision-models", []):
-                    image_path = "Images/hackathon.jpg"
+                    image_path = test_config.get("image-path")
+                    # set media_type based on the image extension
+                    extension = os.path.splitext(image_path)[1]
+                    media_type = mimetypes.types_map.get(extension, "image/jpeg")
                 else:
                     console.print(
                         f"Skipping vision test for {provider} - {model} as it's not in the vision-models list.",
@@ -113,7 +117,7 @@ def test(model_config):
                         with open(image_path, "rb") as img_file:
                             image_data = img_file.read()
                         for chunk in provider_instance.stream_vision_response(
-                            image_data, prompt
+                            image_data, prompt, media_type
                         ):
                             full_response += chunk
                             live.update(Markdown(full_response))
@@ -377,7 +381,7 @@ def document_prompt(config_section: str, document: Optional[str] = None, prompt:
     lookup_folder = model_config["lookup-folder"]
 
     if not document:
-        document = markdown.file_select_paginate(lookup_folder)
+        document = markdown.file_select_paginate(lookup_folder, show_tokens=True, section=config_section)
 
     if not document:
         console.print("[yellow]No file selected. Exiting.[/yellow]")
@@ -401,7 +405,7 @@ def document_prompt(config_section: str, document: Optional[str] = None, prompt:
 
     if prompt:
         destination_file = provider_instance.ask(
-            prompt=f"{prompt}\n\n{source_contents}", title=f"{document} expanded"
+            prompt=f"{prompt}\n\n{source_contents}", title=f"{document} updated"
         )
     else:
         console.print(
@@ -414,25 +418,25 @@ def document_prompt(config_section: str, document: Optional[str] = None, prompt:
             custom_prompt = click.prompt("Enter a custom prompt")
             destination_file = provider_instance.ask(
                 prompt=f"{custom_prompt}\n\n{source_contents}",
-                title=f"{file_name} expanded",
+                title=f"{file_name} updated",
             )
         else:
             destination_file = provider_instance.ask(
-                prompt=source_contents, title=f"{file_name} expanded"
+                prompt=source_contents, title=f"{file_name} updated"
             )
     return source_document, destination_file, custom_prompt
 
 
 @cli.command()
 @click.argument("section", required=True)
-@click.option("-d", "--document", help="The document to expand")
+@click.option("-d", "--document", help="The document to refer")
 @click.option(
-    "-p", "--prompt", help="Additional prompt to use when expanding the document"
+    "-p", "--prompt", help="Additional prompt to use when referring the document"
 )
 @trail
-def expand(section: str, document: Optional[str] = None, prompt: Optional[str] = None):
+def refer(section: str, document: Optional[str] = None, prompt: Optional[str] = None):
     source_document, destination_file, custom_prompt = document_prompt(
-        config_section=f"expand-{section}", document=document, prompt=prompt
+        config_section=f"refer-{section}", document=document, prompt=prompt
     )
     return {
         "custom_prompt": custom_prompt,
@@ -451,46 +455,23 @@ def intents(document):
 
     if not document:
         console.print("Select from available documents...", style="green")
-        # List documents in lookup-folder
-        documents = [
-            f.replace(".md", "") for f in os.listdir(lookup_folder) if f.endswith(".md")
-        ]
-        for i, doc in enumerate(documents, 1):
-            click.echo(f"[{i}] {doc}")
+        document = markdown.file_select_paginate(lookup_folder)
 
-        while True:
-            choice = click.prompt("Select a document", type=int)
-            if 1 <= choice <= len(documents):
-                document = documents[choice - 1]
-                break
-            click.echo(
-                f"Invalid choice. Please enter a number between 1 and {len(documents)}."
-            )
-
-    intents_template = os.path.join(lookup_folder, f"{document}.md")
-
-    if not os.path.exists(intents_template):
-        click.echo(f"Error: Intents file {intents_template} not found.")
-        return
+    intents_template = document
 
     with open(intents_template, "r") as file:
         intents_content = file.read()
 
     sections = markdown.parse_markdown_sections(intents_content)
     console.print("Select from available intents to generate embed...", style="green")
+    
+    selected_intent = markdown.intent_select_paginate(intents_content)
 
-    for i, (title, _) in enumerate(sections, 1):
-        click.echo(f"[{i}] {title}")
-
-    while True:
-        choice = click.prompt("Select an option", type=int)
-        if 1 <= choice <= len(sections):
-            break
-        click.echo(
-            f"Invalid choice. Please enter a number between 1 and {len(sections)}."
-        )
-
-    selected_title, selected_prompt = sections[choice - 1]
+    if selected_intent:
+        selected_title, selected_prompt = selected_intent
+    else:
+        console.print("No intent selected. Exiting.")
+        return
 
     # Check if a response file already exists
     response_filename = f"{selected_title}.md"
@@ -650,15 +631,9 @@ def validate(document):
 @click.option("-u", "--url", type=str, help="URL of the online image")
 @click.option("-c", "--camera", is_flag=True, help="Capture image from camera")
 @click.option("-d", "--display", is_flag=True, help="Display image")
-@click.option(
-    "-i",
-    "--identify",
-    is_flag=True,
-    help="Identify the provider and model without running a query",
-)
 @click.argument("prompt", required=False)
 @trail
-def vision(path, url, camera, identify, display, prompt):
+def vision(path, url, camera, display, prompt):
     config = configure.load_config()
     vision_config = config.get("vision", {})
 
@@ -667,17 +642,17 @@ def vision(path, url, camera, identify, display, prompt):
 
     provider_instance = utils.get_provider_instance(provider)
     provider_instance.set_model_config("vision")
-
-    if identify:
-        model_info = provider_instance.get_model_info()
-        console.print(f"Model Information: [bold magenta]{model_info}[/bold magenta]")
-        return
+    lookup_folder = vision_config.get("lookup-folder")
 
     if sum(bool(x) for x in (path, url, camera)) != 1:
-        console.print(
-            "[bold red]Error:[/bold red] Please provide exactly one of: local image file path (-p), image URL (-u), or camera capture (-c)"
-        )
-        return
+        path = markdown.file_select_paginate(lookup_folder)        
+        extension = os.path.splitext(path)[1]
+        media_type = mimetypes.types_map.get(extension, "image/jpeg")
+        if not prompt:
+            console.print(
+                f"Using system prompt: {vision_config.get('system')}", style="cyan"
+            )
+            prompt = click.prompt("Enter a custom prompt")
 
     if not configure.has_vision_capability(model):
         console.print(
@@ -696,6 +671,9 @@ def vision(path, url, camera, identify, display, prompt):
     # Handle image loading
     with console.status("[bold green]Loading image...[/bold green]"):
         if url:
+            # set media_type based on the image extension
+            extension = os.path.splitext(url)[1]
+            media_type = mimetypes.types_map.get(extension, "image/jpeg")
             headers = {
                 "User-Agent": "Navamai/1.0 (https://github.com/navamai/navamai; team@navamai.com) Python/3.12"
             }
@@ -704,10 +682,13 @@ def vision(path, url, camera, identify, display, prompt):
             image_data = response.content
             image_source = "URL"
         elif camera:
+            media_type = "image/jpeg"
             image_data = images.capture_image()
             image_source = "Camera"
         else:
             image_source = path
+            extension = os.path.splitext(path)[1]
+            media_type = mimetypes.types_map.get(extension, "image/jpeg")
             with open(image_source, "rb") as img_file:
                 image_data = img_file.read()
 
@@ -730,11 +711,11 @@ def vision(path, url, camera, identify, display, prompt):
         # Stream the text response
         with Live(console=console, refresh_per_second=8) as live:
             full_response = ""
-            for chunk in provider_instance.stream_vision_response(image_data, prompt):
+            for chunk in provider_instance.stream_vision_response(image_data, prompt, media_type):
                 full_response += chunk
                 live.update(Markdown(full_response))
 
-        if vision_config.get("save", False):
+        if vision_config.get("save", False) and full_response:
             response_file_path = provider_instance.save_response(prompt, full_response)
 
             # Save the original image more efficiently

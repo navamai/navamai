@@ -57,7 +57,7 @@ class Openai(Provider):
         }
 
     def stream_vision_response(
-        self, image_data: bytes, prompt: str
+        self, image_data: bytes, prompt: str, media_type: str
     ) -> Generator[str, None, None]:
         request_data = self.create_vision_request_data(image_data, prompt)
         for chunk in self.client.chat.completions.create(**request_data, stream=True):

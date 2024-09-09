@@ -7,6 +7,9 @@ import requests
 import navamai.configure as configure
 from navamai.provider import Provider
 
+from rich.console import Console
+
+console = Console()
 
 class Ollama(Provider):
     def __init__(self):
@@ -34,7 +37,7 @@ class Ollama(Provider):
         return request_data
 
     def stream_response(
-        self, prompt: str, image_data: bytes = None
+        self, prompt: str, image_data: bytes = None, media_type: str = None
     ) -> Generator[str, None, None]:
         url = f"{self.base_url}/api/generate"
         headers = {"Content-Type": "application/json"}
@@ -52,6 +55,11 @@ class Ollama(Provider):
                         break
 
     def stream_vision_response(
-        self, image_data: bytes, prompt: str
+        self, image_data: bytes, prompt: str, media_type: str
     ) -> Generator[str, None, None]:
-        return self.stream_response(prompt, image_data)
+        # [TODO] Handle this error gracefully. Not sure returning an empty list is the best way to handle this.
+        if media_type == "image/webp":
+            console.print("WebP images are not supported by Ollama Llava", style="red")
+            return []
+        else:
+            return self.stream_response(prompt, image_data, media_type)

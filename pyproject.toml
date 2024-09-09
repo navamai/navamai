@@ -43,4 +43,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 navamai = "navamai.cli:cli"
 ask="navamai.cli:ask"
-expand="navamai.cli:expand"
+refer="navamai.cli:refer"

@@ -18,15 +18,15 @@ class Gemini(Provider):
         genai.configure(api_key=api_key)
         self.full_config = configure.load_config()
 
-    def create_request_data(self, prompt: str, image_data: bytes = None) -> dict:
+    def create_request_data(self, prompt: str, image_data: bytes = None, media_type: str = None) -> dict:
         config = self.model_config
         model = self.resolve_model(config["model"])
 
         contents = []
 
         if image_data:
-            image = Image.open(io.BytesIO(image_data))
-            contents.append({"mime_type": "image/jpeg", "data": image_data})
+            # image = Image.open(io.BytesIO(image_data))
+            contents.append({"mime_type": media_type, "data": image_data})
 
         contents.append(config["system"] + "\n\n" + prompt)
 
@@ -38,9 +38,9 @@ class Gemini(Provider):
         }
 
     def stream_response(
-        self, prompt: str, image_data: bytes = None
+        self, prompt: str, image_data: bytes = None, media_type: str = None
     ) -> Generator[str, None, None]:
-        request_data = self.create_request_data(prompt, image_data)
+        request_data = self.create_request_data(prompt, image_data, media_type)
         model = genai.GenerativeModel(request_data["model"])
         response = model.generate_content(
             request_data["contents"],
@@ -55,6 +55,6 @@ class Gemini(Provider):
                 yield chunk.text
 
     def stream_vision_response(
-        self, image_data: bytes, prompt: str
+        self, image_data: bytes, prompt: str, media_type: str
     ) -> Generator[str, None, None]:
-        return self.stream_response(prompt, image_data)
+        return self.stream_response(prompt, image_data, media_type)

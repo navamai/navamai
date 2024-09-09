@@ -4,6 +4,8 @@ These intents related to research and insights which help making well-informed s
 
 Prompt: Create a table of top 10 macro factors which impact the stock markets. Add columns for nature of impact, scale of impact, and recent example.
 
+![[Macro Factors Impact Stocks.md]]
+
 # Top Companies by ROCE
 
 Prompt: Create a table of top 10 companies by ROCE. Add columns for 5 year growth rate for stock value, revenue, free cash flow.

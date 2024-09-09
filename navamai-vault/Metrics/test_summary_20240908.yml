@@ -142,3 +142,655 @@
         response_time: 2.4097840785980225
         status: Success
         token_count: 97
+'2024-09-08T12:34:26.815967':
+  claude:
+    sonnet:
+      vision:
+        details: '[Errno 2] No such file or directory: ''Images/london-skuline.webp'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:26.838944':
+  claude:
+    opus:
+      vision:
+        details: '[Errno 2] No such file or directory: ''Images/london-skuline.webp'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:26.861271':
+  claude:
+    haiku:
+      vision:
+        details: '[Errno 2] No such file or directory: ''Images/london-skuline.webp'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:26.879506':
+  gemini:
+    gemini-pro:
+      vision:
+        details: '[Errno 2] No such file or directory: ''Images/london-skuline.webp'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:26.897719':
+  gemini:
+    gemini-flash:
+      vision:
+        details: '[Errno 2] No such file or directory: ''Images/london-skuline.webp'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:26.924653':
+  ollama:
+    llava:
+      vision:
+        details: '[Errno 2] No such file or directory: ''Images/london-skuline.webp'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:26.956244':
+  openai:
+    gpt4o:
+      vision:
+        details: '[Errno 2] No such file or directory: ''Images/london-skuline.webp'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:26.982508':
+  openai:
+    gpt4mini:
+      vision:
+        details: '[Errno 2] No such file or directory: ''Images/london-skuline.webp'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:46.785853':
+  claude:
+    sonnet:
+      vision:
+        details: 'Error code: 400 - {''type'': ''error'', ''error'': {''type'': ''invalid_request_error'',
+          ''message'': "messages.0.content.0.image.source.base64.media_type: Input
+          should be ''image/jpeg'', ''image/png'', ''image/gif'' or ''image/webp''"}}'
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:47.398846':
+  claude:
+    opus:
+      vision:
+        details: 'Error code: 400 - {''type'': ''error'', ''error'': {''type'': ''invalid_request_error'',
+          ''message'': "messages.0.content.0.image.source.base64.media_type: Input
+          should be ''image/jpeg'', ''image/png'', ''image/gif'' or ''image/webp''"}}'
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:47.775836':
+  claude:
+    haiku:
+      vision:
+        details: 'Error code: 400 - {''type'': ''error'', ''error'': {''type'': ''invalid_request_error'',
+          ''message'': "messages.0.content.0.image.source.base64.media_type: Input
+          should be ''image/jpeg'', ''image/png'', ''image/gif'' or ''image/webp''"}}'
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:47.810793':
+  gemini:
+    gemini-pro:
+      vision:
+        details: 'Gemini.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:47.837159':
+  gemini:
+    gemini-flash:
+      vision:
+        details: 'Gemini.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:47.872007':
+  ollama:
+    llava:
+      vision:
+        details: 'Ollama.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:47.905539':
+  openai:
+    gpt4o:
+      vision:
+        details: 'Openai.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:34:47.932572':
+  openai:
+    gpt4mini:
+      vision:
+        details: 'Openai.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:41:45.913632':
+  claude:
+    sonnet:
+      vision:
+        details: 'Error code: 400 - {''type'': ''error'', ''error'': {''type'': ''invalid_request_error'',
+          ''message'': "messages.0.content.0.image.source.base64.media_type: Input
+          should be ''image/jpeg'', ''image/png'', ''image/gif'' or ''image/webp''"}}'
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:41:46.390089':
+  claude:
+    opus:
+      vision:
+        details: 'Error code: 400 - {''type'': ''error'', ''error'': {''type'': ''invalid_request_error'',
+          ''message'': "messages.0.content.0.image.source.base64.media_type: Input
+          should be ''image/jpeg'', ''image/png'', ''image/gif'' or ''image/webp''"}}'
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:41:46.940508':
+  claude:
+    haiku:
+      vision:
+        details: 'Error code: 400 - {''type'': ''error'', ''error'': {''type'': ''invalid_request_error'',
+          ''message'': "messages.0.content.0.image.source.base64.media_type: Input
+          should be ''image/jpeg'', ''image/png'', ''image/gif'' or ''image/webp''"}}'
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:41:46.985690':
+  gemini:
+    gemini-pro:
+      vision:
+        details: 'Gemini.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:41:47.015124':
+  gemini:
+    gemini-flash:
+      vision:
+        details: 'Gemini.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:41:47.049678':
+  ollama:
+    llava:
+      vision:
+        details: 'Ollama.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:41:47.113454':
+  openai:
+    gpt4o:
+      vision:
+        details: 'Openai.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:41:47.149863':
+  openai:
+    gpt4mini:
+      vision:
+        details: 'Openai.stream_vision_response() missing 1 required positional argument:
+          ''media_type'''
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:42:09.288680':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 3.021120071411133
+        status: Success
+        token_count: 62
+'2024-09-08T12:42:20.670883':
+  claude:
+    opus:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 11.350441932678223
+        status: Success
+        token_count: 153
+'2024-09-08T12:42:22.478428':
+  claude:
+    haiku:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.7527270317077637
+        status: Success
+        token_count: 22
+'2024-09-08T12:42:23.177345':
+  gemini:
+    gemini-pro:
+      vision:
+        details: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:42:23.854599':
+  gemini:
+    gemini-flash:
+      vision:
+        details: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:42:23.965440':
+  ollama:
+    llava:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 0.05103707313537598
+        status: Success
+        token_count: 0
+'2024-09-08T12:42:28.032053':
+  openai:
+    gpt4o:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 4.011447191238403
+        status: Success
+        token_count: 3
+'2024-09-08T12:42:33.624237':
+  openai:
+    gpt4mini:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 5.540660858154297
+        status: Success
+        token_count: 10
+'2024-09-08T12:44:49.428997':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 2.6927390098571777
+        status: Success
+        token_count: 59
+'2024-09-08T12:44:57.922880':
+  claude:
+    opus:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 8.459963321685791
+        status: Success
+        token_count: 125
+'2024-09-08T12:44:59.309017':
+  claude:
+    haiku:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.3330931663513184
+        status: Success
+        token_count: 22
+'2024-09-08T12:45:01.026387':
+  gemini:
+    gemini-pro:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.6663618087768555
+        status: Success
+        token_count: 2
+'2024-09-08T12:45:02.324262':
+  gemini:
+    gemini-flash:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.22163724899292
+        status: Success
+        token_count: 2
+'2024-09-08T12:45:02.436065':
+  ollama:
+    llava:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 0.05119895935058594
+        status: Success
+        token_count: 0
+'2024-09-08T12:45:06.530321':
+  openai:
+    gpt4o:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 4.036571979522705
+        status: Success
+        token_count: 3
+'2024-09-08T12:45:11.111596':
+  openai:
+    gpt4mini:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 4.524710178375244
+        status: Success
+        token_count: 10
+'2024-09-08T12:47:49.154740':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 2.75437331199646
+        status: Success
+        token_count: 62
+'2024-09-08T12:47:54.458680':
+  claude:
+    opus:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 5.266811847686768
+        status: Success
+        token_count: 42
+'2024-09-08T12:47:56.120057':
+  claude:
+    haiku:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.6001930236816406
+        status: Success
+        token_count: 22
+'2024-09-08T12:47:57.737640':
+  gemini:
+    gemini-pro:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.583514928817749
+        status: Success
+        token_count: 2
+'2024-09-08T12:47:59.171659':
+  gemini:
+    gemini-flash:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.3567111492156982
+        status: Success
+        token_count: 2
+'2024-09-08T12:47:59.235775':
+  ollama:
+    llava:
+      vision:
+        details: module 'rich.console' has no attribute 'print'
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:48:03.170993':
+  openai:
+    gpt4o:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 3.881775140762329
+        status: Success
+        token_count: 3
+'2024-09-08T12:48:08.902140':
+  openai:
+    gpt4mini:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 5.674351215362549
+        status: Success
+        token_count: 10
+'2024-09-08T12:49:27.386300':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 3.229235887527466
+        status: Success
+        token_count: 62
+'2024-09-08T12:49:36.452436':
+  claude:
+    opus:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 9.026925086975098
+        status: Success
+        token_count: 129
+'2024-09-08T12:49:37.770758':
+  claude:
+    haiku:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.2591001987457275
+        status: Success
+        token_count: 22
+'2024-09-08T12:49:39.779973':
+  gemini:
+    gemini-pro:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.9250578880310059
+        status: Success
+        token_count: 2
+'2024-09-08T12:49:41.932441':
+  gemini:
+    gemini-flash:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.38771390914917
+        status: Success
+        token_count: 2
+'2024-09-08T12:49:58.074976':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 2.717910051345825
+        status: Success
+        token_count: 62
+'2024-09-08T12:50:04.531131':
+  claude:
+    opus:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 6.415158987045288
+        status: Success
+        token_count: 94
+'2024-09-08T12:50:05.887089':
+  claude:
+    haiku:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.2845959663391113
+        status: Success
+        token_count: 22
+'2024-09-08T12:50:07.681008':
+  gemini:
+    gemini-pro:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.711371898651123
+        status: Success
+        token_count: 2
+'2024-09-08T12:50:09.530206':
+  gemini:
+    gemini-flash:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 1.246873140335083
+        status: Success
+        token_count: 3
+'2024-09-08T12:50:09.601157':
+  ollama:
+    llava:
+      vision:
+        details: '''NoneType'' object is not iterable'
+        prompt: What is the name of the tallest building in this image?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-08T12:50:16.293523':
+  openai:
+    gpt4o:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 6.634245872497559
+        status: Success
+        token_count: 3
+'2024-09-08T12:50:20.618775':
+  openai:
+    gpt4mini:
+      vision:
+        details: Command executed successfully
+        prompt: What is the name of the tallest building in this image?
+        response_time: 4.259728908538818
+        status: Success
+        token_count: 10
+'2024-09-08T16:38:36.890805':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 3.43058705329895
+        status: Success
+        token_count: 94
+'2024-09-08T16:55:58.066477':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 3.9156529903411865
+        status: Success
+        token_count: 97
+'2024-09-08T16:56:05.586618':
+  claude:
+    opus:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 7.47814679145813
+        status: Success
+        token_count: 60
+'2024-09-08T16:56:07.013960':
+  claude:
+    haiku:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 1.3555021286010742
+        status: Success
+        token_count: 28
+'2024-09-08T16:56:08.846879':
+  gemini:
+    gemini-pro:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 1.742764949798584
+        status: Success
+        token_count: 3
+'2024-09-08T16:56:10.121385':
+  gemini:
+    gemini-flash:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 1.2057106494903564
+        status: Success
+        token_count: 3
+'2024-09-08T16:56:12.806998':
+  ollama:
+    llava:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 2.61698317527771
+        status: Success
+        token_count: 31
+'2024-09-08T16:56:16.248969':
+  openai:
+    gpt4o:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 3.3610129356384277
+        status: Success
+        token_count: 10
+'2024-09-08T16:56:19.874403':
+  openai:
+    gpt4mini:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 3.5582001209259033
+        status: Success
+        token_count: 14

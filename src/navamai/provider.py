@@ -63,7 +63,7 @@ class Provider(ABC):
 
     @abstractmethod
     def stream_vision_response(
-        self, image_data: bytes, prompt: str
+        self, image_data: bytes, prompt: str, media_type: str = None
     ) -> Generator[str, None, None]:
         pass
 
