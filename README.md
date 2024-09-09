@@ -76,33 +76,33 @@ Now you are ready to install NavamAI.
 
 ## Command Reference
 
-Note that `navamai`, `ask` and `expand` are top level commands available to you when you install NavamAI. You can also use `navamai ask` and `navamai expand` if you prefer.
+Note that `navamai`, `ask` and `refer` are top level commands available to you when you install NavamAI. You can also use `navamai ask` and `navamai refer` if you prefer.
 
-| Command      | Example and Description                                                                                                                                                                                                                                                                                                                                            |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **ask**      | `ask "your prompt"`<br>Prompt the LLM for a fast, crisp (default up to 300 words), single turn response<br><br>`ask`<br>Browses the configured prompts folder, lists prompt templates for user to run.                                                                                                                                                             |
-| **audit**    | `navamai audit`<br>Analyze your own usage of NavamAI over time with an insightful command line dashboard and markdown report.                                                                                                                                                                                                                                      |
-| **config**   | `navamai config ask save true`<br>Edit `navamai.yml` file config from command line                                                                                                                                                                                                                                                                                 |
-| **expand**   | `expand transcript`<br>Browse a set of transcripts and run custom prompts to expand content.<br><br>`expand intents`<br>Expand a set of intents and prompts within an intents template<br><br>`expand your-command`<br>You can configure your own extensions to expand command by simply copying and changing any of the existing `expand-existing` model configs. |
-| **id**       | `navamai id`<br>Identifies the current provider and model for `ask` command<br><br>`navamai id section-name`<br>Identifies the provider and model defined in specific section                                                                                                                                                                                      |
-| **init**     | `navamai init`<br>Initialize navamai in any folder. Copies `navamai.yml` default config and quick start Intents and Embeds folders and files. Checks before overwriting. Use --force option to force overwrite files and folders.                                                                                                                                  |
-| **intents**  | `navamai intents "Financial Analysis"`<br>Interactively choose from a list of intents within a template to expand into content embeds                                                                                                                                                                                                                              |
-| **merge**    | `navamai merge "Source File"`<br>Finds `Source File expanded` with placeholder tags `[merge here]` or as custom defined in `merge` config, then merges the two files into `Source File merged`. Use along with `navamai expand section` command to reduce number of tokens processed when editing long text for context but updating only a section.               |
-| **test**     | `navamai test ask`<br>Tests navamai command using all providers and models defined in `navamai.yml` config and provides a test summary.<br><br>`navamai test vision`<br>Test vision models.                                                                                                                                                                        |
-| **trends**   | `navamai trends`<br>Visualize latency and token length trends based on `navamai test` runs for `ask` and `vision` commands across models and providers. You can trend for a period of days using  `--days 7` command option.                                                                                                                                       |
-| **validate** | `navamai validate "Financial Analysis"`<br>Validates prior generated embeds running another model and reports the percentage difference between validated and original content.                                                                                                                                                                                    |
-| **vision**   | `navamai vision -p path/to/image.png "Describe this image"`<br>Runs vision models on images from local path (-p), url (-u), or camera (-c) and responds based on prompt.                                                                                                                                                                                           |
+| Command      | Example and Description                                                                                                                                                                                                                                                                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ask**      | `ask "your prompt"`<br>Prompt the LLM for a fast, crisp (default up to 300 words), single turn response<br><br>`ask`<br>Browses the configured prompts folder, lists prompt templates for user to run.                                                                                                                                                        |
+| **audit**    | `navamai audit`<br>Analyze your own usage of NavamAI over time with an insightful command line dashboard and markdown report.                                                                                                                                                                                                                                 |
+| **config**   | `navamai config ask save true`<br>Edit `navamai.yml` file config from command line                                                                                                                                                                                                                                                                            |
+| **refer**    | `refer transcript`<br>Browse a set of transcripts and run custom prompts to update content.<br><br>`refer intents`<br>Expand a set of intents and prompts within an intents template<br><br>`refer your-command`<br>You can configure your own extensions to refer command by simply copying and changing any of the existing `refer-existing` model configs. |
+| **id**       | `navamai id`<br>Identifies the current provider and model for `ask` command<br><br>`navamai id section-name`<br>Identifies the provider and model defined in specific section                                                                                                                                                                                 |
+| **init**     | `navamai init`<br>Initialize navamai in any folder. Copies `navamai.yml` default config and quick start Intents and Embeds folders and files. Checks before overwriting. Use --force option to force overwrite files and folders.                                                                                                                             |
+| **intents**  | `navamai intents "Financial Analysis"`<br>Interactively choose from a list of intents within a template to refer into content embeds                                                                                                                                                                                                                          |
+| **merge**    | `navamai merge "Source File"`<br>Finds `Source File updated` with placeholder tags `[merge here]` or as custom defined in `merge` config, then merges the two files into `Source File merged`. Use along with `refer section` command to reduce number of tokens processed when editing long text for context but updating only a section.                    |
+| **test**     | `navamai test ask`<br>Tests navamai command using all providers and models defined in `navamai.yml` config and provides a test summary.<br><br>`navamai test vision`<br>Test vision models.                                                                                                                                                                   |
+| **trends**   | `navamai trends`<br>Visualize latency and token length trends based on `navamai test` runs for `ask` and `vision` commands across models and providers. You can trend for a period of days using  `--days 7` command option.                                                                                                                                  |
+| **validate** | `navamai validate "Financial Analysis"`<br>Validates prior generated embeds running another model and reports the percentage difference between validated and original content.                                                                                                                                                                               |
+| **vision**   | `navamai vision -p path/to/image.png "Describe this image"`<br>Runs vision models on images from local path (-p), url (-u), or camera (-c) and responds based on prompt.                                                                                                                                                                                      |
 
 ## NavamAI Expands Your Content
 
 Using NavamAI with few simple commands in your Terminal you can create a simple yet powerful personal AI content manager with your Markdown tool of choice like Obsidian or VS Code. For example, you can write partial blogs posts, write your seed ideas, start with a list of intents and prompts, or capture partial notes from a lecture where you were slightly distracted. 
 
-Then you can use `expand` command in conjunction with custom `expand-section` configs within `navamai.yml` to expand this partial, incomplete, or seed content into complete posts, notes, articles, prompt templates, and even well-researched papers. You can experiment with choice of models and providers, tune model settings in the config by document type, define custom folders for your content, and specify document specific system prompts to get exactly the outcome you desire based on the type of the document. You just have to remember one simple command `expand` and you are all set.
+Then you can use `refer` command in conjunction with custom `refer-section` configs within `navamai.yml` to expand this partial, incomplete, or seed content into complete posts, notes, articles, prompt templates, and even well-researched papers. You can experiment with choice of models and providers, tune model settings in the config by document type, define custom folders for your content, and specify document specific system prompts to get exactly the outcome you desire based on the type of the document. You just have to remember one simple command `refer` and you are all set.
 
 As a quick example, check out the `Posts` folder with sample partially written post on startup growth strategies. Now view the related config section within `navamai.yml` for expanding posts.
 
 ```yaml
-expand-post:
+refer-post:
   lookup-folder: Posts
   max-tokens: 4000
   model: sonnet
@@ -114,13 +114,13 @@ expand-post:
   temperature: 0.5
 ```
 
-Please note that for brevity we are not listing the complete system prompt here. You can obviously change it to suit your workflow. For now, just run `expand post "startup-growth-hacking"` command within the working folder where you initialized NavamAI. Soon the model response starts streaming into your terminal. The expanded post is saved in the `Posts` folder with `expanded` prefix so you can compare with the original.
+Please note that for brevity we are not listing the complete system prompt here. You can obviously change it to suit your workflow. For now, just run `refer post "startup-growth-hacking"` command within the working folder where you initialized NavamAI. Soon the model response starts streaming into your terminal. The expanded post is saved in the `Posts` folder with `updated` prefix so you can compare with the original.
 
-To create a new document type like research papers, class notes, cooking recipes, or whatever, all you need to do is copy and customize one of the `expand-post` or `expand-intents` sections into something like your custom `expnand-notes` section. Then you can run a custom command on your new document type like `expand notes "your-notes-file"` and achieve the same results.
+To create a new document type like research papers, class notes, cooking recipes, or whatever, all you need to do is copy and customize one of the `refer-post` or `refer-intents` sections into something like your custom `expnand-notes` section. Then you can run a custom command on your new document type like `refer notes "your-notes-file"` and achieve the same results.
 
 ## Combining NavamAI Commands
 
-When combined with other NavamAI commands this workflow can get even more powerful. As an example, start by defining your document template for a set of intents and prompts as a simple markdown. For example `Financial Analysis` or `Product Management` are shown here. Next add a few intents as headings like, `Macro Factors Impact Stocks` or `Top Companies by ROCE` and so on. Then add simple prompts under these intents to generate content. You can now use NavamAI to expand on the set of intents and prompts in your document template with the command `expand intents "Financial Analysis"` and the model will brainstorm more related intents and prompts for you to use.
+When combined with other NavamAI commands this workflow can get even more powerful. As an example, start by defining your document template for a set of intents and prompts as a simple markdown. For example `Financial Analysis` or `Product Management` are shown here. Next add a few intents as headings like, `Macro Factors Impact Stocks` or `Top Companies by ROCE` and so on. Then add simple prompts under these intents to generate content. You can now use NavamAI to expand on the set of intents and prompts in your document template with the command `refer intents "Financial Analysis"` and the model will brainstorm more related intents and prompts for you to use.
 
 ![](https://raw.githubusercontent.com/navamai/assets/main/images/obsidian-navamai.png)
 
@@ -255,24 +255,9 @@ intents:
 
 Your intents are tasks you want to execute, goals you want to accomplish, plans you want to realize, decisions you want to make, or questions you want to answer. You control your entire NavamAI experience with your intents. You can save your intents as simple outline of tasks in a text file. You can recall them when you need. You can run models on your intents as you feel fit. You can save results based on your intents.
 
-```bash
-$ navamai intents "Financial Analysis"
-[1] Macro Factors Impact Stocks
-[2] Top Companies by ROCE
-[3] Economic Indicators Analysis
-[4] Sector Performance Comparison
-[5] Global Market Trends
-[6] Emerging Market Opportunities
-[7] ESG Investment Analysis
-[8] Cryptocurrency Market Overview
-[9] Interest Rates and Bond Market Analysis
-[10] Tech Sector Disruption
-Select an option: 3
-
-# this will generate and save embed for intent #3
-```
+![](https://raw.githubusercontent.com/navamai/navamai/main/images/navamai-intents.webp)
 
 ## Validate Generations
 
-You can verify content generated by one LLM with validation from another model. Make sure you only run validate command after you have run `expand intents` command to generate the first pass of embeds. Use `navamai validate "Financial Analysis"` or any intent template that you have created. The workflow for validation is similar to expand intents. Only in this case the validate model config decides which model and provider to use. You can also modify the validation prompt to check for any specific things relevant for your use case. The diff is calculated on original and validated text removing any newlines, white space, or markdown formatting when making the diff comparison using similarity scoring. Use this to automate quality validation of generated content.
+You can verify content generated by one LLM with validation from another model. Make sure you only run validate command after you have run `refer intents` command to generate the first pass of embeds. Use `navamai validate "Financial Analysis"` or any intent template that you have created. The workflow for validation is similar to expand intents. Only in this case the validate model config decides which model and provider to use. You can also modify the validation prompt to check for any specific things relevant for your use case. The diff is calculated on original and validated text removing any newlines, white space, or markdown formatting when making the diff comparison using similarity scoring. Use this to automate quality validation of generated content.
 
