@@ -1,0 +1,21 @@
+Given the constraints of the provided sources, it is challenging to compile a comprehensive list of the top 10 research papers on prompt engineering based on recency, citations, and search rankings. However, here are some recent and relevant papers on the topic, along with a brief abstract and available links:
+
+| **Paper Title** | **Brief Abstract** | **Link to Paper** | **Link to GitHub** | **Star Ratings** |
+|----------------|--------------------|-------------------|--------------------|------------------|
+| **Conversational Prompt Engineering** | Proposes a user-friendly tool to create personalized prompts through a chat model, refining instructions based on user feedback. | [arXiv:2408.04560v1](https://arxiv.org/html/2408.04560v1) | Not available | Not available |
+| **Promptbreeder: Self-referential self-improvement via prompt evolution** | Discusses a method for self-improvement of prompts through evolution, enhancing the performance of large language models. | [arXiv:2309.16797](https://arxiv.org/abs/2309.16797) | Not available | Not available |
+| **Evallm: Interactive evaluation of large language model prompts on user-defined criteria** | Presents a system for interactive evaluation of LLM prompts based on user-defined criteria, enhancing prompt engineering. | [CHI ’24 Proceedings](https://dl.acm.org/doi/abs/10.1145/3532106.3532134) | Not available | Not available |
+| **Automatic prompt optimization with “gradient descent” and beam search** | Describes a method for optimizing prompts using gradient descent and beam search, improving the efficiency of prompt engineering. | [EMNLP 2023 Proceedings](https://aclanthology.org/2023.emnlp-main.0/) | Not available | Not available |
+| **Autoprompt: Eliciting knowledge from language models with automatically generated prompts** | Introduces a method for automatically generating prompts to elicit knowledge from large language models. | [arXiv:2010.15980](https://arxiv.org/abs/2010.15980) | Not available | Not available |
+| **The CLEAR path: A framework for enhancing information literacy through prompt engineering** | Presents a framework for enhancing information literacy using prompt engineering techniques. | [The Journal of Academic Librarianship](https://doi.org/10.1016/j.acalib.2023.102720) | Not available | Not available |
+| **Prompt engineering as an important emerging skill for medical professionals: tutorial** | Highlights the importance of prompt engineering for medical professionals and provides practical recommendations. | [J Med Internet Res](https://doi.org/10.2196/50638) | Not available | Not available |
+| **Prompt engineering with ChatGPT: a guide for academic writers** | Discusses the significance of prompt engineering for academic writers and provides techniques and pitfalls. | [Ann Biomed Eng](https://doi.org/10.1007/s10439-023-03134-6) | Not available | Not available |
+| **How to write effective prompts for large language models** | Offers a practical guide for understanding the capabilities and limitations of large language models and crafting well-structured queries. | [Nat Hum Behav](https://doi.org/10.1038/s41562-024-01634-4) | Not available | Not available |
+| **Out of the echo chamber: Detecting countering debate speeches** | While not exclusively on prompt engineering, it touches on related AI techniques and their applications. | [ACL 2020 Proceedings](https://aclanthology.org/2020.acl-main.707) | Not available | Not available |
+
+### Notes:
+- **Star Ratings**: Not available as this information is typically found on platforms like GitHub or academic databases, which are not provided in the sources.
+- **GitHub Links**: Not available as the sources do not include links to GitHub repositories.
+- **Citations and Search Rankings**: The provided sources do not include detailed citation counts or search rankings, making it difficult to rank the papers based on these criteria.
+
+For more comprehensive and up-to-date information, consider searching academic databases like Google Scholar, arXiv, or specific journal websites.

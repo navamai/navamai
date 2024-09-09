@@ -11,11 +11,28 @@
             "id": "d24a4b9c79967ad9",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Posts/Prompt Engineering State Of The Art.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d56575770f516a6b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Posts/Dive Deep Content Workflow.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -81,6 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Posts/Dive Deep Content Workflow.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Posts/Dive Deep Content Workflow.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +137,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Posts/Dive Deep Content Workflow.md"
+              }
             }
           }
         ]
@@ -138,8 +159,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d24a4b9c79967ad9",
+  "active": "d56575770f516a6b",
   "lastOpenFiles": [
+    "Posts/Prompt Engineering State Of The Art.md",
     "Embeds/Event Planning Portfolio Development.md",
     "Intents/Event Planning updated updated.md",
     "Intents/Event Planning updated.md",
@@ -153,7 +175,6 @@
     "Vision/image-shows-group-people-gathered-together-wearing-shirts-design-standing.md",
     "Vision/image-photo-group-people-appear-organization-suggested-matching-shirts-wearing.jpg",
     "Vision/image-photo-group-people-appear-organization-suggested-matching-shirts-wearing.md",
-    "Posts/Prompt Engineering State Of The Art.md",
     "Raw/Automating video creation.md",
     "Raw/OpenAI - A Survey of Techniques for Maximizing LLM Performance.md",
     "Raw/Anthropic Prompt Engineering.md",

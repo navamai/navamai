@@ -8,63 +8,6 @@ ask:
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
   temperature: 0.0
-expand-intents:
-  lookup-folder: Intents
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
-  save: true
-  save-folder: Intents
-  system: You will be given a document about exploring a topic, explaining the topic
-    in first paragraph. The document will have headings about user intents to explore
-    the topic. These intents will have related prompts to expand on the intent using
-    an LLM. Your job is to brainstorm the topic, research popular papers, articles,
-    books from experts on the topic. Then add more related intents and prompts to
-    the document. Depending on the expected response the prompt should ask for a table,
-    list, or narrative format. Respond with the expanded document following the same
-    structure as the given document. Do not explain your response.
-  temperature: 0.3
-expand-post:
-  lookup-folder: Posts
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
-  save: true
-  save-folder: Posts
-  system: You will be given a partially written blog post on a topic. Your job as
-    an expert blog writer is to expand the post by adding more content. Your response
-    will include the existing post content as is and the new content. Perform these
-    actions step by step. 1) Study given post content. 2) Research related popular
-    papers, articles, books from experts on the topic. 3) Add more related sections
-    and content to the post following the existing structure. 4) Cite relevant research
-    where applicable as you add new content to the post. 5) Create a section in the
-    end of the document for citations with links. 6) Do not explain your response.
-  temperature: 0.5
-expand-sections:
-  lookup-folder: Posts
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
-  save: true
-  save-folder: Posts
-  system: You will be given a post with inline prompts in a markdown blockqoute with
-    "Prompt:" as the prefix. Your job is to execute the prompt and replace the blockquote
-    and prompt by adding new content and sections. If the prompt asks for content
-    to be added in another section of the post, then add the content in the correct
-    section and remove the prompt. Your response will include the existing post headings
-    with placeholder [merge here] replacing existing content and new generated content
-    in new sections. Do not explain your response.
-  temperature: 0.3
-expand-transcript:
-  lookup-folder: Raw
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
-  save: true
-  save-folder: Posts
-  system: Respond only using valid markdown syntax. Follow the prompt as instructed
-    and do not explain your response.
-  temperature: 0.3
 intents:
   lookup-folder: Intents
   max-tokens: 1000
@@ -81,6 +24,23 @@ merge:
   merge-suffix: merged
   placeholder: '[merge here]'
   prompt-prefix: '> Prompt:'
+model-context:
+  gemini-flash: 1000000
+  gemini-pro: 2000000
+  gemma: 8192
+  gpt4mini: 128000
+  gpt4o: 128000
+  haiku: 200000
+  haiku3: 200000
+  llama: 128000
+  llava: 4096
+  mistral: 128000
+  mixtral: 32000
+  opus: 200000
+  qwen: 128000
+  sonar: 128000
+  sonnet: 200000
+  sonnet3: 200000
 model-mapping:
   gemini-flash: gemini-1.5-flash
   gemini-pro: gemini-1.5-pro
@@ -122,9 +82,67 @@ provider-model-mapping:
   - gpt4mini
   perplexity:
   - sonar
+refer-intents:
+  lookup-folder: Intents
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Intents
+  system: You will be given a document about exploring a topic, explaining the topic
+    in first paragraph. The document will have headings about user intents to explore
+    the topic. These intents will have related prompts to expand on the intent using
+    an LLM. Your job is to brainstorm the topic, research popular papers, articles,
+    books from experts on the topic. Then add more related intents and prompts to
+    the document. Depending on the expected response the prompt should ask for a table,
+    list, or narrative format. Respond with the expanded document following the same
+    structure as the given document. Do not explain your response.
+  temperature: 0.3
+refer-post:
+  lookup-folder: Posts
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: You will be given a partially written blog post on a topic. Your job as
+    an expert blog writer is to expand the post by adding more content. Your response
+    will include the existing post content as is and the new content. Perform these
+    actions step by step. 1) Study given post content. 2) Research related popular
+    papers, articles, books from experts on the topic. 3) Add more related sections
+    and content to the post following the existing structure. 4) Cite relevant research
+    where applicable as you add new content to the post. 5) Create a section in the
+    end of the document for citations with links. 6) Do not explain your response.
+  temperature: 0.5
+refer-sections:
+  lookup-folder: Posts
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: You will be given a post with inline prompts in a markdown blockqoute with
+    "Prompt:" as the prefix. Your job is to execute the prompt and replace the blockquote
+    and prompt by adding new content and sections. If the prompt asks for content
+    to be added in another section of the post, then add the content in the correct
+    section and remove the prompt. Your response will include the existing post headings
+    with placeholder [merge here] replacing existing content and new generated content
+    in new sections. Do not explain your response.
+  temperature: 0.3
+refer-transcript:
+  lookup-folder: Raw
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: Respond only using valid markdown syntax. Follow the prompt as instructed
+    and do not explain your response.
+  temperature: 0.3
 test:
   ask: How old is the oldest pyramid?
-  vision: How many people are in this image.
+  image-path: Images/hackathon.jpg
+  vision: How many people are in the image?
 validate:
   lookup-folder: Intents
   max-tokens: 4000
@@ -139,9 +157,10 @@ validate:
     you for accuracy and quality. If there are material improvements then create a
     revised response otherwise return the same response.
 vision:
+  lookup-folder: Images
   max-tokens: 300
-  model: sonar
-  provider: perplexity
+  model: gpt4o
+  provider: openai
   save: true
   save-folder: Vision
   system: Analyze the image and respond to the prompt using valid markdown syntax.

@@ -24,6 +24,9 @@ merge:
   merge-suffix: merged
   placeholder: '[merge here]'
   prompt-prefix: '> Prompt:'
+split:
+  context-ratio: 0.8
+  model: sonnet
 model-context:
   gemini-flash: 1000000
   gemini-pro: 2000000

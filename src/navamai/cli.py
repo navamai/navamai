@@ -37,6 +37,10 @@ def cli():
 def audit():
     auditor.trail_auditor("trail.yml")
 
+@cli.command()
+@click.argument("filepath", required=True)
+def split(filepath):
+    markdown.split_text_by_tokens(filepath)
 
 @cli.command()
 @click.option("-d", "--days", default=7, help="Number of days to analyze")
@@ -457,6 +461,10 @@ def intents(document):
         console.print("Select from available documents...", style="green")
         document = markdown.file_select_paginate(lookup_folder)
 
+    if not document:
+        console.print("[yellow]No file selected. Exiting.[/yellow]")
+        sys.exit(0)
+
     intents_template = document
 
     with open(intents_template, "r") as file:
@@ -465,7 +473,7 @@ def intents(document):
     sections = markdown.parse_markdown_sections(intents_content)
     console.print("Select from available intents to generate embed...", style="green")
     
-    selected_intent = markdown.intent_select_paginate(intents_content)
+    selected_intent = markdown.intent_select_paginate(sections)
 
     if selected_intent:
         selected_title, selected_prompt = selected_intent

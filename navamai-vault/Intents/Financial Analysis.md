@@ -10,6 +10,7 @@ Prompt: Create a table of top 10 macro factors which impact the stock markets. A
 
 Prompt: Create a table of top 10 companies by ROCE. Add columns for 5 year growth rate for stock value, revenue, free cash flow.
 
+![[Top Companies by ROCE.md]]
 
 # Economic Indicators Analysis
 

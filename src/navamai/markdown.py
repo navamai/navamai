@@ -12,6 +12,51 @@ from navamai import configure
 
 console = Console()
 
+def split_text_by_tokens(file_path, model="gpt-3.5-turbo"):
+    config = configure.load_config()
+    split_config = config.get("split")
+    target_model = split_config.get("model")
+    ratio = split_config.get("context-ratio")
+    context_config = config.get("model-context")
+    context_window = context_config.get(target_model)
+    token_limit = round(context_window * ratio, 0)
+    # Initialize the tokenizer
+    enc = tiktoken.encoding_for_model(model)
+
+    # Read the entire file
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+
+    # Tokenize the entire text
+    tokens = enc.encode(text)
+
+    # Split the tokens into chunks
+    chunks = []
+    current_chunk = []
+    current_chunk_tokens = 0
+
+    for token in tokens:
+        if current_chunk_tokens + 1 > token_limit:
+            chunks.append(enc.decode(current_chunk))
+            current_chunk = []
+            current_chunk_tokens = 0
+        
+        current_chunk.append(token)
+        current_chunk_tokens += 1
+
+    # Add the last chunk if it's not empty
+    if current_chunk:
+        chunks.append(enc.decode(current_chunk))
+
+    # Write chunks to separate files
+    base_name = os.path.splitext(file_path)[0]
+    for i, chunk in enumerate(chunks):
+        output_file = f"{base_name} - part {i+1}.txt"
+        with open(output_file, 'w', encoding='utf-8') as file:
+            file.write(chunk)
+
+    return len(chunks)
+
 
 def extract_variables(template):
     # Regular expression pattern to match variables enclosed in double curly braces
@@ -24,15 +69,17 @@ def extract_variables(template):
     return list(set(matches))
 
 
-def list_files(directory, page=1, files_per_page=10):
+def list_files(directory, page=1, files_per_page=10, extension=None):
     all_files = [
-        f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))
+        f for f in os.listdir(directory) 
+        if os.path.isfile(os.path.join(directory, f)) and
+        (extension is None or f.endswith(extension))
     ]
+    all_files.sort()  # Sort the files alphabetically
     total_pages = ceil(len(all_files) / files_per_page)
     start = (page - 1) * files_per_page
     end = start + files_per_page
     return all_files[start:end], total_pages
-
 
 def count_tokens(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -40,8 +87,8 @@ def count_tokens(file_path):
     encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
     return len(encoding.encode(content))
 
-def intent_select_paginate(intents_content, page=1, intents_per_page=10):
-    sections = parse_markdown_sections(intents_content)
+
+def intent_select_paginate(sections, page=1, intents_per_page=10):
     total_pages = ceil(len(sections) / intents_per_page)
 
     while True:
@@ -81,9 +128,9 @@ def file_select_paginate(directory, show_tokens=False, section=None):
     page = 1
     files_per_page = 10
     while True:
-        files, total_pages = list_files(directory, page, files_per_page)
+        files, total_pages = list_files(directory, page, files_per_page, extension=".md")
 
-        table = Table(title=f"Prompt Files (Page {page} of {total_pages})")
+        table = Table(title=f"Markdown Files (Page {page} of {total_pages})")
         table.add_column("Number", no_wrap=True)
         table.add_column("Filename", style="cyan")
         if show_tokens:
