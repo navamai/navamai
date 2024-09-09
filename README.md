@@ -1,7 +1,7 @@
 # NavamAI enhances your craft with AI
 NavamAI enhances your craft with personal, fast, and quality AI. Turn your Terminal or Shell into a rich personal AI. Supports 15 GenAI models by 7 providers. Pairs with Markdown, VS Code, Obsidian.
 
-**Command Is All You Need:** So, the LLM science fans will get the pun in our tagline - Command is all you need. It is a play on the famous paper that introduced the world to Transformer model architecture - Attention is all you need. With NavamAI a simple command via your favorite terminal or shell is all you need to bend an large or small language model to your wishes. NavamAI provides a rich UI right there within your command prompt. No browser tabs to open, no apps to install, no context switching... just pure, simple, fast workflow. Try it with a simple command like `ask "create a table of planets"` and see your Terminal come to life just like a chat UI with fast streaming responses, markdown formatted tables, and even code blocks with color highlights if your prompt requires code in response!
+**Command Is All You Need:** So, the LLM science fans will get the pun in our tagline - Command is all you need. It is a play on the famous paper that introduced the world to Transformer model architecture - Attention is all you need. With NavamAI a simple command via your favorite terminal or shell is all you need to bend an large or small language model to your wishes. NavamAI provides a rich UI right there within your command prompt. No browser tabs to open, no apps to install, no context switching... just pure, simple, fast workflow. Try it with a simple command like `ask "create a table of planets"` and see your Terminal come to life just like a chat UI with fast streaming responses, markdown formatted tables, and even code blocks with color highlights if your prompt requires code in response! NavamAI has released 13 commands to help customize your personal AI workflow.
 
 **Top Models and Providers:** You can switch private models or hosted frontier LLMs with ease. NavamAI comes with configurable support for more than 15 leading models (GPT 4o, Sonnet 3.5, Gemini 1.5 Pro, Mistral NeMo, Sonar Llama 3.1...) from 7 providers (Ollama, Anthropic, OpenAI, Groq, Google, Bedrock, and Perplexity).
 
@@ -78,20 +78,22 @@ Now you are ready to install NavamAI.
 
 Note that `navamai`, `ask` and `refer` are top level commands available to you when you install NavamAI. You can also use `navamai ask` and `navamai refer` if you prefer.
 
-| Command      | Example and Description                                                                                                                                                                                                                                                                                                                                       |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **ask**      | `ask "your prompt"`<br>Prompt the LLM for a fast, crisp (default up to 300 words), single turn response<br><br>`ask`<br>Browses the configured prompts folder, lists prompt templates for user to run.                                                                                                                                                        |
-| **audit**    | `navamai audit`<br>Analyze your own usage of NavamAI over time with an insightful command line dashboard and markdown report.                                                                                                                                                                                                                                 |
-| **config**   | `navamai config ask save true`<br>Edit `navamai.yml` file config from command line                                                                                                                                                                                                                                                                            |
-| **refer**    | `refer transcript`<br>Browse a set of transcripts and run custom prompts to update content.<br><br>`refer intents`<br>Expand a set of intents and prompts within an intents template<br><br>`refer your-command`<br>You can configure your own extensions to refer command by simply copying and changing any of the existing `refer-existing` model configs. |
-| **id**       | `navamai id`<br>Identifies the current provider and model for `ask` command<br><br>`navamai id section-name`<br>Identifies the provider and model defined in specific section                                                                                                                                                                                 |
-| **init**     | `navamai init`<br>Initialize navamai in any folder. Copies `navamai.yml` default config and quick start Intents and Embeds folders and files. Checks before overwriting. Use --force option to force overwrite files and folders.                                                                                                                             |
-| **intents**  | `navamai intents "Financial Analysis"`<br>Interactively choose from a list of intents within a template to refer into content embeds                                                                                                                                                                                                                          |
-| **merge**    | `navamai merge "Source File"`<br>Finds `Source File updated` with placeholder tags `[merge here]` or as custom defined in `merge` config, then merges the two files into `Source File merged`. Use along with `refer section` command to reduce number of tokens processed when editing long text for context but updating only a section.                    |
-| **test**     | `navamai test ask`<br>Tests navamai command using all providers and models defined in `navamai.yml` config and provides a test summary.<br><br>`navamai test vision`<br>Test vision models.                                                                                                                                                                   |
-| **trends**   | `navamai trends`<br>Visualize latency and token length trends based on `navamai test` runs for `ask` and `vision` commands across models and providers. You can trend for a period of days using  `--days 7` command option.                                                                                                                                  |
-| **validate** | `navamai validate "Financial Analysis"`<br>Validates prior generated embeds running another model and reports the percentage difference between validated and original content.                                                                                                                                                                               |
-| **vision**   | `navamai vision -p path/to/image.png "Describe this image"`<br>Runs vision models on images from local path (-p), url (-u), or camera (-c) and responds based on prompt.                                                                                                                                                                                      |
+|  #  | Command      | Example and Description                                                                                                                                                                                                                                                                                                                                       |
+| :-: | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  1  | **ask**      | `ask "your prompt"`<br>Prompt the LLM for a fast, crisp (default up to 300 words), single turn response<br><br>`ask`<br>Browses the configured prompts folder, lists prompt templates for user to run.                                                                                                                                                        |
+|  2  | **audit**    | `navamai audit`<br>Analyze your own usage of NavamAI over time with an insightful command line dashboard and markdown report.                                                                                                                                                                                                                                 |
+|  3  | **config**   | `navamai config ask save true`<br>Edit `navamai.yml` file config from command line                                                                                                                                                                                                                                                                            |
+|  4  | **refer**    | `refer transcript`<br>Browse a set of transcripts and run custom prompts to update content.<br><br>`refer intents`<br>Expand a set of intents and prompts within an intents template<br><br>`refer your-command`<br>You can configure your own extensions to refer command by simply copying and changing any of the existing `refer-existing` model configs. |
+|  5  | **id**       | `navamai id`<br>Identifies the current provider and model for `ask` command<br><br>`navamai id section-name`<br>Identifies the provider and model defined in specific section                                                                                                                                                                                 |
+|  6  | **init**     | `navamai init`<br>Initialize navamai in any folder. Copies `navamai.yml` default config and quick start Intents and Embeds folders and files. Checks before overwriting. Use --force option to force overwrite files and folders.                                                                                                                             |
+|  7  | **intents**  | `navamai intents "Financial Analysis"`<br>Interactively choose from a list of intents within a template to refer into content embeds                                                                                                                                                                                                                          |
+|  8  | **merge**    | `navamai merge "Source File"`<br>Finds `Source File updated` with placeholder tags `[merge here]` or as custom defined in `merge` config, then merges the two files into `Source File merged`. Use along with `refer section` command to reduce number of tokens processed when editing long text for context but updating only a section.                    |
+|  9  | **split**    | `navamai split "Large File"`<br>Use this command to split a large file into chunks within a specified ratio of target model context. You can configure target model and ratio in `split` section of the configuration. Original file remains untouched and new files with same name and `part #` suffix are created.                                          |
+| 10  | **test**     | `navamai test ask`<br>Tests navamai command using all providers and models defined in `navamai.yml` config and provides a test summary.<br><br>`navamai test vision`<br>Test vision models.                                                                                                                                                                   |
+| 11  | **trends**   | `navamai trends`<br>Visualize latency and token length trends based on `navamai test` runs for `ask` and `vision` commands across models and providers. You can trend for a period of days using  `--days 7` command option.                                                                                                                                  |
+| 12  | **validate** | `navamai validate "Financial Analysis"`<br>Validates prior generated embeds running another model and reports the percentage difference between validated and original content.                                                                                                                                                                               |
+| 13  | **vision**   | `navamai vision -p path/to/image.png "Describe this image"`<br>Runs vision models on images from local path (-p), url (-u), or camera (-c) and responds based on prompt.                                                                                                                                                                                      |
+
 
 ## NavamAI Expands Your Content
 
@@ -165,29 +167,6 @@ Want to compare multiple models side by side? All you need to do is open multipl
 
 As NavamAI commands use the `navamai.yml` config in the current folder every time they run, you can create more complex parallel running, multi-model and cross-provider workflows by simply copying the config file into multiple folders and running commands there. This way you can be running some long running tasks on a local model in one folder and terminal. While you are doing your day to day workflow in another. And so on.
 
-## Chatbot UI in command prompt
-
-NavamAI can work like a chatbot UI in your terminal or command prompt. Just type `ask "your prompt here"` and you will receive streaming response back just like a chatbot. The response is rich formatted for code blocks with highlights, markdown tables, and markdown text formatting.
-
-Use the `navamai ask` command when you want to run a single turn prompt-response or question-answer.
-
-```bash
-
-$ navamai ask "create a table of 5 tallest buildings with floors, construction, height, city"
-
-  
-  Building                Floors   Construction Start   Height (ft)   City      
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
-  Burj Khalifa            163      2004                 2717          Dubai     
-  Shanghai Tower          128      2008                 2073          Shanghai  
-  Makkah Royal Clock      120      2004                 1971          Mecca     
-  Tower                                                                         
-  Ping An Finance         115      2010                 1965          Shenzhen  
-  Centre                                                                        
-  Lotte World Tower       108      2011                 1819          Seoul 
-
-```
-
 
 ## Workflow freedom
 
@@ -250,6 +229,14 @@ intents:
   temperature: 0.0
 ```
 
+
+## Audit Trail
+
+NavamAI saves a trail of commands, prompts, templates, lookup folders, and saved files in `trail.yml` file. You can visualize this anytime using `navamai audit` command to gain insights of your NavamAI usage over time.
+
+![](https://raw.githubusercontent.com/navamai/navamai/main/images/audit-summary.webp)
+
+![](https://raw.githubusercontent.com/navamai/navamai/main/images/audit-prompt-analysis.webp)
 
 ## Intent driven 
 
