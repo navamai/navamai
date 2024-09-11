@@ -358,13 +358,22 @@ def ask(prompt, template):
             # check if the prompt has variables. If so, ask for values
             if prompt_variables:
                 console.print(
-                    "The Prompt Template has variables. Enter values for the following variables:",
+                    "The Prompt Template has variables. Please enter values.",
                     style="yellow",
                 )
                 for variable in prompt_variables:
                     if variable == "TEXT_FILE":
+                        console.print(
+                            "TEXT_FILE:",
+                            style="yellow",
+                        )
                         # open the file and read the contents into value
                         variable_file = markdown.file_select_paginate(model_config.get("lookup-folder"))
+
+                        if not variable_file:
+                            console.print("[yellow]No file selected. Exiting.[/yellow]")
+                            sys.exit(0)
+
                         with open(variable_file, "r") as f:
                             value = f.read()
                         

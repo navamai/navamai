@@ -102,7 +102,7 @@ refer-intents-to-expand:
     list, or narrative format. Respond with the expanded document following the same
     structure as the given document. Do not explain your response.
   temperature: 0.3
-refer-post-to-epdate:
+refer-post-to-update:
   lookup-folder: Posts
   max-tokens: 4000
   model: sonnet
