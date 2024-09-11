@@ -325,7 +325,7 @@ def ask(prompt, template):
         destination_file = provider_instance.ask(prompt)
     elif template:
         with open(template, "r") as f:
-            prompt = f.read().strip()
+            template_prompt = f.read().strip()
 
         prompt_variables = markdown.extract_variables(prompt)
 
@@ -337,9 +337,9 @@ def ask(prompt, template):
             )
             for variable in prompt_variables:
                 value = click.prompt(variable)
-                prompt = prompt.replace(variable, value)
+                template_prompt = template_prompt.replace(variable, value)
 
-        destination_file = provider_instance.ask(prompt)
+        destination_file = provider_instance.ask(template_prompt)
     else:
         prompts_dir = model_config.get("prompts-folder")
         if not os.path.exists(prompts_dir):
@@ -351,9 +351,9 @@ def ask(prompt, template):
         selected_file = markdown.file_select_paginate(prompts_dir)
         if selected_file:
             with open(selected_file, "r") as f:
-                prompt = f.read().strip()
+                template_prompt = f.read().strip()
 
-            prompt_variables = markdown.extract_variables(prompt)
+            prompt_variables = markdown.extract_variables(template_prompt)
 
             # check if the prompt has variables. If so, ask for values
             if prompt_variables:
@@ -377,12 +377,12 @@ def ask(prompt, template):
                         with open(variable_file, "r") as f:
                             value = f.read()
                         
-                        prompt = prompt.replace(variable, value)
+                        template_prompt = template_prompt.replace(variable, value)
                     else:
                         value = click.prompt(variable)
-                        prompt = prompt.replace(variable, value)
+                        template_prompt = template_prompt.replace(variable, value)
 
-            destination_file = provider_instance.ask(prompt)
+            destination_file = provider_instance.ask(template_prompt)
         else:
             console.print("[yellow]No file selected. Exiting.[/yellow]")
             sys.exit(0)
