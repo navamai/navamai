@@ -1,9 +1,10 @@
 ask:
   max-tokens: 500
-  model: sonar
+  model: sonnet
   prompts-folder: Prompts
-  provider: perplexity
-  save: false
+  provider: claude
+  save: true
+  lookup-folder: Raw
   save-folder: Posts
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
@@ -85,7 +86,7 @@ provider-model-mapping:
   - gpt4mini
   perplexity:
   - sonar
-refer-intents:
+refer-intents-to-expand:
   lookup-folder: Intents
   max-tokens: 4000
   model: sonnet
@@ -101,7 +102,7 @@ refer-intents:
     list, or narrative format. Respond with the expanded document following the same
     structure as the given document. Do not explain your response.
   temperature: 0.3
-refer-post:
+refer-post-to-epdate:
   lookup-folder: Posts
   max-tokens: 4000
   model: sonnet
@@ -117,7 +118,7 @@ refer-post:
     where applicable as you add new content to the post. 5) Create a section in the
     end of the document for citations with links. 6) Do not explain your response.
   temperature: 0.5
-refer-sections:
+refer-inline-prompts-to-run:
   lookup-folder: Posts
   max-tokens: 4000
   model: sonnet
@@ -132,7 +133,7 @@ refer-sections:
     with placeholder [merge here] replacing existing content and new generated content
     in new sections. Do not explain your response.
   temperature: 0.3
-refer-transcript:
+refer-text-to-extract:
   lookup-folder: Raw
   max-tokens: 4000
   model: sonnet

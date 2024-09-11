@@ -37,6 +37,7 @@ def cli():
 def audit():
     auditor.trail_auditor("trail.yml")
 
+
 @cli.command()
 @click.argument("filepath", required=True)
 def split(filepath):
@@ -361,8 +362,16 @@ def ask(prompt, template):
                     style="yellow",
                 )
                 for variable in prompt_variables:
-                    value = click.prompt(variable)
-                    prompt = prompt.replace(variable, value)
+                    if variable == "TEXT_FILE":
+                        # open the file and read the contents into value
+                        variable_file = markdown.file_select_paginate(model_config.get("lookup-folder"))
+                        with open(variable_file, "r") as f:
+                            value = f.read()
+                        
+                        prompt = prompt.replace(variable, value)
+                    else:
+                        value = click.prompt(variable)
+                        prompt = prompt.replace(variable, value)
 
             destination_file = provider_instance.ask(prompt)
         else:
