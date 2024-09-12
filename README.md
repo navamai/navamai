@@ -1,6 +1,6 @@
-# NavamAI enhances your craft with AI
+# NavamAI supercharges you with AI
 
-Use NavamAI to enhance your craft with personal, fast, and quality AI. Turn your Terminal into a configurable, interactive, and unobtrusive personal AI app. Power of 15 LLMs and 7 providers at your finger tips. Pair with workflows in Markdown, VS Code, Obsidian, and GitHub. Get productive fast with three simple commands.
+Use NavamAI to supercharge your productivity and workflow with personal, fast, and quality AI. Turn your Terminal into a configurable, interactive, and unobtrusive personal AI app. Power of 15 LLMs and 7 providers at your finger tips. Pair with workflows in Markdown, VS Code, Obsidian, and GitHub. Get productive fast with three simple commands.
 
 [![](https://raw.githubusercontent.com/navamai/navamai/main/images/navamai-youtube.png)](https://www.youtube.com/watch?v=OOEng_XshS4)
 
