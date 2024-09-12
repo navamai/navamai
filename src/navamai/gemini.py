@@ -18,7 +18,9 @@ class Gemini(Provider):
         genai.configure(api_key=api_key)
         self.full_config = configure.load_config()
 
-    def create_request_data(self, prompt: str, image_data: bytes = None, media_type: str = None) -> dict:
+    def create_request_data(
+        self, prompt: str, image_data: bytes = None, media_type: str = None
+    ) -> dict:
         config = self.model_config
         model = self.resolve_model(config["model"])
 

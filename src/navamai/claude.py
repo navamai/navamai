@@ -32,7 +32,9 @@ class Claude(Provider):
             for text in stream.text_stream:
                 yield text
 
-    def create_vision_request_data(self, image_data: bytes, prompt: str, media_type: str) -> dict:
+    def create_vision_request_data(
+        self, image_data: bytes, prompt: str, media_type: str
+    ) -> dict:
         config = self.model_config
         model = self.resolve_model(config["model"])
         return {

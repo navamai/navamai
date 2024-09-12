@@ -3,13 +3,13 @@ import json
 from typing import Generator
 
 import requests
+from rich.console import Console
 
 import navamai.configure as configure
 from navamai.provider import Provider
 
-from rich.console import Console
-
 console = Console()
+
 
 class Ollama(Provider):
     def __init__(self):

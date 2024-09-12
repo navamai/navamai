@@ -43,6 +43,7 @@ def audit():
 def split(filepath):
     markdown.split_text_by_tokens(filepath)
 
+
 @cli.command()
 @click.option("-d", "--days", default=7, help="Number of days to analyze")
 def trends(days):
@@ -291,6 +292,7 @@ def config(config_path, value):
     configure.edit_config(keys, value)
     click.echo(f"Updated config: {' > '.join(keys)} = {value}")
 
+
 @cli.command()
 @click.argument("section", required=False)
 def id(section):
@@ -369,7 +371,9 @@ def ask(prompt, template):
                             style="yellow",
                         )
                         # open the file and read the contents into value
-                        variable_file = markdown.file_select_paginate(model_config.get("lookup-folder"))
+                        variable_file = markdown.file_select_paginate(
+                            model_config.get("lookup-folder")
+                        )
 
                         if not variable_file:
                             console.print("[yellow]No file selected. Exiting.[/yellow]")
@@ -377,7 +381,7 @@ def ask(prompt, template):
 
                         with open(variable_file, "r") as f:
                             value = f.read()
-                        
+
                         template_prompt = template_prompt.replace(variable, value)
                     else:
                         value = click.prompt(variable)
@@ -398,13 +402,18 @@ def ask(prompt, template):
         "destination_file": destination_file,
     }
 
-def document_prompt(config_section: str, document: Optional[str] = None, prompt: Optional[str] = None):
+
+def document_prompt(
+    config_section: str, document: Optional[str] = None, prompt: Optional[str] = None
+):
     config = configure.load_config()
     model_config = config.get(f"{config_section}")
     lookup_folder = model_config["lookup-folder"]
 
     if not document:
-        document = markdown.file_select_paginate(lookup_folder, show_tokens=True, section=config_section)
+        document = markdown.file_select_paginate(
+            lookup_folder, show_tokens=True, section=config_section
+        )
 
     if not document:
         console.print("[yellow]No file selected. Exiting.[/yellow]")
@@ -491,7 +500,7 @@ def intents(document):
 
     sections = markdown.parse_markdown_sections(intents_content)
     console.print("Select from available intents to generate embed...", style="green")
-    
+
     selected_intent = markdown.intent_select_paginate(sections)
 
     if selected_intent:
@@ -672,7 +681,7 @@ def vision(path, url, camera, display, prompt):
     lookup_folder = vision_config.get("lookup-folder")
 
     if sum(bool(x) for x in (path, url, camera)) != 1:
-        path = markdown.file_select_paginate(lookup_folder)        
+        path = markdown.file_select_paginate(lookup_folder)
         extension = os.path.splitext(path)[1]
         media_type = mimetypes.types_map.get(extension, "image/jpeg")
         if not prompt:
@@ -738,7 +747,9 @@ def vision(path, url, camera, display, prompt):
         # Stream the text response
         with Live(console=console, refresh_per_second=8) as live:
             full_response = ""
-            for chunk in provider_instance.stream_vision_response(image_data, prompt, media_type):
+            for chunk in provider_instance.stream_vision_response(
+                image_data, prompt, media_type
+            ):
                 full_response += chunk
                 live.update(Markdown(full_response))
 
