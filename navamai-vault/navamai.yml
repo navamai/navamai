@@ -1,10 +1,10 @@
 ask:
+  lookup-folder: Raw
   max-tokens: 4000
   model: sonnet
   prompts-folder: Prompts
   provider: claude
   save: true
-  lookup-folder: Raw
   save-folder: Posts
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
@@ -25,9 +25,6 @@ merge:
   merge-suffix: merged
   placeholder: '[merge here]'
   prompt-prefix: '> Prompt:'
-split:
-  context-ratio: 0.8
-  model: sonnet
 model-context:
   gemini-flash: 1000000
   gemini-pro: 2000000
@@ -86,6 +83,21 @@ provider-model-mapping:
   - gpt4mini
   perplexity:
   - sonar
+refer-inline-prompts-to-run:
+  lookup-folder: Posts
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: You will be given a post with inline prompts in a markdown blockqoute with
+    "Prompt:" as the prefix. Your job is to execute the prompt and replace the blockquote
+    and prompt by adding new content and sections. If the prompt asks for content
+    to be added in another section of the post, then add the content in the correct
+    section and remove the prompt. Your response will include the existing post headings
+    with placeholder [merge here] replacing existing content and new generated content
+    in new sections. Do not explain your response.
+  temperature: 0.3
 refer-intents-to-expand:
   lookup-folder: Intents
   max-tokens: 4000
@@ -118,21 +130,6 @@ refer-post-to-update:
     where applicable as you add new content to the post. 5) Create a section in the
     end of the document for citations with links. 6) Do not explain your response.
   temperature: 0.5
-refer-inline-prompts-to-run:
-  lookup-folder: Posts
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
-  save: true
-  save-folder: Posts
-  system: You will be given a post with inline prompts in a markdown blockqoute with
-    "Prompt:" as the prefix. Your job is to execute the prompt and replace the blockquote
-    and prompt by adding new content and sections. If the prompt asks for content
-    to be added in another section of the post, then add the content in the correct
-    section and remove the prompt. Your response will include the existing post headings
-    with placeholder [merge here] replacing existing content and new generated content
-    in new sections. Do not explain your response.
-  temperature: 0.3
 refer-text-to-extract:
   lookup-folder: Raw
   max-tokens: 4000
@@ -143,6 +140,9 @@ refer-text-to-extract:
   system: Respond only using valid markdown syntax. Follow the prompt as instructed
     and do not explain your response.
   temperature: 0.3
+split:
+  context-ratio: 0.8
+  model: sonnet
 test:
   ask: How old is the oldest pyramid?
   image-path: Images/hackathon.jpg
@@ -163,8 +163,8 @@ validate:
 vision:
   lookup-folder: Images
   max-tokens: 300
-  model: sonar
-  provider: perplexity
+  model: sonnet
+  provider: claude
   save: true
   save-folder: Vision
   system: Analyze the image and respond to the prompt using valid markdown syntax.

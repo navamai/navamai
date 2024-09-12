@@ -71,19 +71,18 @@ def extract_variables(template):
     return list(set(matches))
 
 
-def list_files(directory, page=1, files_per_page=10, extension=None):
+def list_files(directory, page=1, files_per_page=10, extensions=None):
     all_files = [
         f
         for f in os.listdir(directory)
         if os.path.isfile(os.path.join(directory, f))
-        and (extension is None or f.endswith(extension))
+        and (extensions is None or any(f.endswith(ext) for ext in extensions))
     ]
     all_files.sort()  # Sort the files alphabetically
     total_pages = ceil(len(all_files) / files_per_page)
     start = (page - 1) * files_per_page
     end = start + files_per_page
     return all_files[start:end], total_pages
-
 
 def count_tokens(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
@@ -129,15 +128,16 @@ def intent_select_paginate(sections, page=1, intents_per_page=10):
             console.print("[bold red]Invalid choice. Please try again.[/bold red]")
 
 
-def file_select_paginate(directory, show_tokens=False, section=None):
+def file_select_paginate(directory, show_tokens=False, section=None, extensions=None):
     page = 1
     files_per_page = 10
     while True:
         files, total_pages = list_files(
-            directory, page, files_per_page, extension=".md"
+            directory, page, files_per_page, extensions=extensions
         )
 
-        table = Table(title=f"Markdown Files (Page {page} of {total_pages})")
+        extensions_str = ", ".join(extensions) if extensions else "All"
+        table = Table(title=f"{extensions_str} Files (Page {page} of {total_pages})")
         table.add_column("Number", no_wrap=True)
         table.add_column("Filename", style="cyan")
         if show_tokens:
@@ -177,7 +177,6 @@ def file_select_paginate(directory, show_tokens=False, section=None):
             return os.path.join(directory, files[int(choice) - 1])
         else:
             console.print("[bold red]Invalid choice. Please try again.[/bold red]")
-
 
 def merge_docs(
     source_path,
