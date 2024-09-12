@@ -1,1 +1,0 @@
-User created and generated blog posts will be saved here.

@@ -1,5 +1,5 @@
 ask:
-  max-tokens: 500
+  max-tokens: 4000
   model: sonnet
   prompts-folder: Prompts
   provider: claude

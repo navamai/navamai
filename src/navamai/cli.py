@@ -320,6 +320,7 @@ def ask(prompt, template):
     provider_instance.set_model_config("ask")
     destination_file = None
     selected_file = None
+    template_prompt = None
 
     if prompt:
         destination_file = provider_instance.ask(prompt)
@@ -387,7 +388,7 @@ def ask(prompt, template):
             console.print("[yellow]No file selected. Exiting.[/yellow]")
             sys.exit(0)
 
-    if not prompt:
+    if not prompt and not template_prompt:
         console.print("[bold red]Error:[/bold red] No prompt provided")
         sys.exit(1)
 

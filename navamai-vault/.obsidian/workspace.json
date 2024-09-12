@@ -4,35 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "92ea7d9cdf5e8e8c",
+        "id": "60d7760f56f8f73b",
         "type": "tabs",
         "children": [
           {
-            "id": "d24a4b9c79967ad9",
+            "id": "d9e5eda615d80aa3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Posts/Prompt Engineering State Of The Art.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d56575770f516a6b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Posts/Dive Deep Content Workflow.md",
+                "file": "Posts/mermaid-quadrant-charts-based-reference-mermaid-quadrantchart-title-prompt-engineering.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Posts/Dive Deep Content Workflow.md",
+                "file": "Posts/mermaid-quadrant-charts-based-reference-mermaid-quadrantchart-title-prompt-engineering.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Posts/Dive Deep Content Workflow.md",
+                "file": "Posts/mermaid-quadrant-charts-based-reference-mermaid-quadrantchart-title-prompt-engineering.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Posts/Dive Deep Content Workflow.md"
+                "file": "Posts/mermaid-quadrant-charts-based-reference-mermaid-quadrantchart-title-prompt-engineering.md"
               }
             }
           }
@@ -159,43 +146,43 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d56575770f516a6b",
+  "active": "d9e5eda615d80aa3",
   "lastOpenFiles": [
+    "Posts/mermaid-quadrant-charts-based-reference-mermaid-quadrantchart-title-prompt-engineering.md",
+    "Posts/mermaid-flowchart-manufacturing-design-process-common-mistakes-everyone-chief-engineer.md",
+    "Posts/mermaid-flowcharts-based-reference-mermaid-graph-technological-innovation-business-process.md",
+    "Posts/mermaid-based-reference-mermaid-mindmap-innovation-business-process-innovation-interface.md",
+    "Posts/mermaid-mindmap-prompt-engineering-strategies-write-clear-instructions-include-details.md",
+    "Raw/OpenAI Prompt Engineering.md",
+    "Raw/OpenAI - A Survey of Techniques for Maximizing LLM Performance.md",
+    "Posts/mermaid-flowchart-based-mermaid-graph-technological-innovation-business-process-innovation.md",
+    "Posts/mermaid-flowchart-technological-innovation-business-process-innovation-business-model-innovation.md",
+    "Prompts/Mermaid Topic Visualization.md",
+    "Posts/mermaid-graph-technological-innovation-business-process-innovation-business-model-innovation.md",
+    "Posts/mermaid-flowchart-subgraph-manufacturing-manufacturing-design-direction-manufacturing-underrated-effort.md",
+    "Posts/mermaid-mindmap-innovation-technological-innovation-reduces-importance-business-process-innovation.md",
+    "Posts/mermaid-flowchart-technological-innovation-reduces-importance-business-process-innovation-reduces.md",
+    "Posts/mermaid-flowchart-start-requirements-delete-process-simplify-optimize-accelerate-cycle.md",
+    "Posts/mermaid-mindmap-impact-technological-innovation-scaling-potential-continue-could-business.md",
     "Posts/Prompt Engineering State Of The Art.md",
+    "Posts/mermaid-mindmap-technology-technological-innovation-business-process-innovation-business-model.md",
+    "Posts/Dive Deep Content Workflow.md",
     "Embeds/Event Planning Portfolio Development.md",
     "Intents/Event Planning updated updated.md",
     "Intents/Event Planning updated.md",
     "Embeds/Macro Factors Impact Stocks.md",
-    "Posts/Dive Deep Content Workflow.md",
     "Embeds/Payment Methods for Event Planning Startup.md",
     "Audits/trail_analysis_report_20240908_183330.md",
     "Vision/gesture-shown-image-commonly-known-thumbs-generally-signifies-approval-agreement.jpg",
     "Vision/gesture-shown-image-commonly-known-thumbs-generally-signifies-approval-agreement.md",
     "Vision/image-shows-group-people-gathered-together-wearing-shirts-design-standing.jpg",
-    "Vision/image-shows-group-people-gathered-together-wearing-shirts-design-standing.md",
     "Vision/image-photo-group-people-appear-organization-suggested-matching-shirts-wearing.jpg",
-    "Vision/image-photo-group-people-appear-organization-suggested-matching-shirts-wearing.md",
-    "Raw/Automating video creation.md",
-    "Raw/OpenAI - A Survey of Techniques for Maximizing LLM Performance.md",
-    "Raw/Anthropic Prompt Engineering.md",
-    "Posts/Automating video creation updated updated.md",
-    "Posts/Automating video creation updated.md",
     "Vision/aerial-london-night-river-thames-foreground-tower-bridge-several-other.webp",
-    "Vision/aerial-london-night-river-thames-foreground-tower-bridge-several-other.md",
     "Vision/image-depicts-stunning-aerial-london-iconic-tower-bridge-prominently-featured.webp",
-    "Vision/image-depicts-stunning-aerial-london-iconic-tower-bridge-prominently-featured.md",
     "Vision/image-shows-group-people-gathered-appears-outdoor-standing-around-posing.jpg",
-    "Vision/image-shows-group-people-gathered-appears-outdoor-standing-around-posing.md",
     "Vision/image-showcases-stunning-aerial-london-iconic-skyline-elements-include-tower.webp",
-    "Vision/image-showcases-stunning-aerial-london-iconic-skyline-elements-include-tower.md",
     "Vision/image-shows-large-group-photo-taken-aerial-perspective-depicts-circular.jpg",
-    "Vision/image-shows-large-group-photo-taken-aerial-perspective-depicts-circular.md",
     "Metrics/test_summary_20240908.yml",
-    "Posts/Elon Musk Design Process expanded.md",
-    "Posts/Startup Growth Hacks 100 plus.md",
-    "Posts/Anthropic CEO upstream interview summary.md",
-    "Posts/Anthropic Prompt Engineering Use Cases - sonnet.md",
-    "Posts/Anthropic Prompt Engineering expanded.md",
     "Metrics/test_summary_20240907.yml",
     "Audits/command_timeline.png",
     "command_timeline.png",
