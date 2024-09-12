@@ -163,8 +163,8 @@ validate:
 vision:
   lookup-folder: Images
   max-tokens: 300
-  model: sonar
-  provider: perplexity
+  model: sonnet
+  provider: claude
   save: true
   save-folder: Vision
   system: Analyze the image and respond to the prompt using valid markdown syntax.
