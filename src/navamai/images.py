@@ -6,6 +6,7 @@ import term_image.image as TermImage
 from PIL import Image
 from rich.console import Console
 
+
 console = Console()
 
 
@@ -21,7 +22,10 @@ def display_image(image_path):
 
 
 def capture_image():
-    cap = cv2.VideoCapture(0)
+    # [TODO] Fix warning
+    # WARNING: AVCaptureDeviceTypeExternal is deprecated for Continuity Cameras. Please use AVCaptureDeviceTypeContinuityCamera and add NSCameraUseContinuityCameraDeviceType to your Info.plist.
+
+    cap = cv2.VideoCapture(1)
     if not cap.isOpened():
         raise IOError("Cannot access the camera")
 

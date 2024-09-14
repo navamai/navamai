@@ -24,6 +24,7 @@ import navamai.markdown as markdown
 import navamai.metrics as metrics
 import navamai.utils as utils
 from navamai.utils import trail
+import navamai.gather as gather_utils
 
 console = Console()
 
@@ -36,6 +37,16 @@ def cli():
 @cli.command()
 def audit():
     auditor.trail_auditor("trail.yml")
+
+
+@cli.command()
+@click.argument("type", required=True)
+@click.argument("url", required=True)
+def gather(type, url):
+    if type == "article":
+        gather_utils.article(url)
+    else:
+        console.print(f"Invalid type: {type}", style="red")
 
 
 @cli.command()

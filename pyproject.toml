@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "navamai"
-version = "0.1.43"
+version = "0.1.44"
 description = "Use NavamAI to supercharge your productivity and workflow with personal, fast, and quality AI. Turn your Terminal into a configurable, interactive, and unobtrusive personal AI app. Power of 15 LLMs and 7 providers at your finger tips. Pair with workflows in Markdown, VS Code, Obsidian, and GitHub. Get productive fast with three simple commands."
 authors = ["NavamAI <team@navamai.com>"]
 license = "Apache-2.0"
@@ -14,7 +14,7 @@ click = "^8.1.7"
 tiktoken = "^0.7.0"
 rich = "^13.7.1"
 requests = "^2.32.3"
-lxml = "^5.3.0"
+lxml = {extras = ["html_clean"], version = "^4.6.3"}
 anthropic = "^0.34.1"
 google-api-python-client = "^2.142.0"
 groq = "^0.9.0"
@@ -27,6 +27,11 @@ term-image = "^0.7.2"
 boto3 = "^1.35.13"
 plotext = "^5.2.8"
 chardet = "^5.2.0"
+beautifulsoup4 = "^4.12.3"
+markdown2 = "^2.5.0"
+readability-lxml = "^0.8.1"
+html2text = "^2024.2.26"
+robotexclusionrulesparser = "^1.7.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.2"
