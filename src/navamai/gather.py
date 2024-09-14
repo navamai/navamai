@@ -10,13 +10,7 @@ from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskID
 from robotexclusionrulesparser import RobotExclusionRulesParser
 import navamai.configure as configure
 
-config = configure.load_config()
-gather_config = config.get("gather")
-
-# Define a custom User-Agent
-CUSTOM_USER_AGENT = f"{gather_config.get('user-agent')} ({gather_config.get('user-website')}; {gather_config.get('user-email')}) python-requests/2.26.0"
-
-def article_scrape(url, progress: Progress, task_id: TaskID, save_folder):
+def article_scrape(url, progress: Progress, task_id: TaskID, save_folder, CUSTOM_USER_AGENT):
     progress.update(task_id, description="Checking robots.txt", completed=5)
     rerp = RobotExclusionRulesParser()
     robots_url = urljoin(url, '/robots.txt')
@@ -96,6 +90,11 @@ def article_scrape(url, progress: Progress, task_id: TaskID, save_folder):
     return file_path
 
 def article(url):
+    config = configure.load_config()
+    gather_config = config.get("gather")
+
+    # Define a custom User-Agent
+    CUSTOM_USER_AGENT = f"{gather_config.get('user-agent')} ({gather_config.get('user-website')}; {gather_config.get('user-email')}) python-requests/2.26.0"
     save_folder = gather_config.get("save-folder")
     with Progress(
         SpinnerColumn(),
@@ -104,5 +103,5 @@ def article(url):
         TextColumn("[progress.description]{task.description}"),
     ) as progress:
         task = progress.add_task(description="Starting...", total=100)
-        result = article_scrape(url, progress, task, save_folder)
+        result = article_scrape(url, progress, task, save_folder, CUSTOM_USER_AGENT)
     return result
