@@ -820,3 +820,39 @@
   prompt_file: null
   source_file: null
   timestamp: '2024-09-12T18:33:57.777326'
+- command: refer  --section=gather-to-dataset --document=None --prompt=None
+  custom_prompt: Create a markdown table of insights from the paper
+  destination_file: Posts/Attention Is All You Need updated.md
+  prompt_file: null
+  source_file: Gather/Attention Is All You Need.md
+  timestamp: '2024-09-13T22:26:25.317257'
+- command: refer  --section=gather-to-dataset --document=None --prompt=None
+  custom_prompt: What are the key insights?
+  destination_file: Posts/Attention Is All You Need updated.md
+  prompt_file: null
+  source_file: Gather/Attention Is All You Need.md
+  timestamp: '2024-09-13T22:27:29.721230'
+- command: refer  --section=gather-text --document=None --prompt=None
+  custom_prompt: What are the key features of NavamAI?
+  destination_file: Posts/About NavamAI updated.md
+  prompt_file: null
+  source_file: Gather/About NavamAI.md
+  timestamp: '2024-09-13T22:31:19.729276'
+- command: vision  --prompt=None --path=None --url=None
+  custom_prompt: null
+  destination_file: Vision/image-presents-hierarchical-diagram-cloud-computing-layers-cloud-clients-examples.png
+  prompt_file: null
+  source_file: Gather/images/300px-Cloud_computing_service_models_%281%29.png
+  timestamp: '2024-09-13T22:33:38.125905'
+- command: refer  --section=gather --document=None --prompt=None
+  custom_prompt: What are the leading players?
+  destination_file: Posts/Cloud computing - Wikipedia updated.md
+  prompt_file: null
+  source_file: Gather/Cloud computing - Wikipedia.md
+  timestamp: '2024-09-13T22:34:39.385960'
+- command: vision  --prompt=None --path=None --url=None
+  custom_prompt: null
+  destination_file: Vision/image-showcases-concept-called-actionable-intents-using-platform-called-navamai.png
+  prompt_file: null
+  source_file: Gather/images/Actionable-Intents.png
+  timestamp: '2024-09-13T22:35:20.413630'

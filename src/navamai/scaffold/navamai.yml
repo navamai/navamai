@@ -1,10 +1,10 @@
 ask:
-  max-tokens: 500
+  lookup-folder: Raw
+  max-tokens: 4000
   model: sonnet
   prompts-folder: Prompts
   provider: claude
   save: true
-  lookup-folder: Raw
   save-folder: Posts
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
@@ -19,15 +19,17 @@ intents:
   system: Only respond to the prompt using valid markdown syntax. When responding
     with markdown headings start at level 2. Do not explain your response.
   temperature: 0.3
+gather:
+  user-agent: NavamAI/1.0
+  user-website: https://www.navamai.com
+  user-email: team@navamai.com
+  save-folder: Gather
 merge:
   dest-suffix: expanded
   lookup-folder: Posts
   merge-suffix: merged
   placeholder: '[merge here]'
   prompt-prefix: '> Prompt:'
-split:
-  context-ratio: 0.8
-  model: sonnet
 model-context:
   gemini-flash: 1000000
   gemini-pro: 2000000
@@ -45,12 +47,16 @@ model-context:
   sonar: 128000
   sonnet: 200000
   sonnet3: 200000
+  o1m: 128000
+  o1p: 128000
 model-mapping:
   gemini-flash: gemini-1.5-flash
   gemini-pro: gemini-1.5-pro
   gemma: gemma2
   gpt4mini: gpt-4o-mini
   gpt4o: gpt-4o
+  o1p: o1-preview
+  o1m: o1-mini
   haiku: claude-3-haiku-20240307
   haiku3: anthropic.claude-3-haiku-20240307-v1:0
   llama: llama3.1
@@ -84,8 +90,25 @@ provider-model-mapping:
   openai:
   - gpt4o
   - gpt4mini
+  - o1m
+  - o1p
   perplexity:
   - sonar
+refer-inline-prompts-to-run:
+  lookup-folder: Posts
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: You will be given a post with inline prompts in a markdown blockqoute with
+    "Prompt:" as the prefix. Your job is to execute the prompt and replace the blockquote
+    and prompt by adding new content and sections. If the prompt asks for content
+    to be added in another section of the post, then add the content in the correct
+    section and remove the prompt. Your response will include the existing post headings
+    with placeholder [merge here] replacing existing content and new generated content
+    in new sections. Do not explain your response.
+  temperature: 0.3
 refer-intents-to-expand:
   lookup-folder: Intents
   max-tokens: 4000
@@ -118,21 +141,17 @@ refer-post-to-update:
     where applicable as you add new content to the post. 5) Create a section in the
     end of the document for citations with links. 6) Do not explain your response.
   temperature: 0.5
-refer-inline-prompts-to-run:
-  lookup-folder: Posts
+refer-gather:
+  lookup-folder: Gather
   max-tokens: 4000
   model: sonnet
   provider: claude
   save: true
   save-folder: Posts
-  system: You will be given a post with inline prompts in a markdown blockqoute with
-    "Prompt:" as the prefix. Your job is to execute the prompt and replace the blockquote
-    and prompt by adding new content and sections. If the prompt asks for content
-    to be added in another section of the post, then add the content in the correct
-    section and remove the prompt. Your response will include the existing post headings
-    with placeholder [merge here] replacing existing content and new generated content
-    in new sections. Do not explain your response.
-  temperature: 0.3
+  system: You will be given a paper or an article in markdown to analyze.
+    Response in valid markdown syntax.
+    Follow the prompt as instructed and do not explain your response.
+  temperature: 0.0
 refer-text-to-extract:
   lookup-folder: Raw
   max-tokens: 4000
@@ -143,6 +162,9 @@ refer-text-to-extract:
   system: Respond only using valid markdown syntax. Follow the prompt as instructed
     and do not explain your response.
   temperature: 0.3
+split:
+  context-ratio: 0.8
+  model: sonnet
 test:
   ask: How old is the oldest pyramid?
   image-path: Images/hackathon.jpg
@@ -161,7 +183,7 @@ validate:
     you for accuracy and quality. If there are material improvements then create a
     revised response otherwise return the same response.
 vision:
-  lookup-folder: Images
+  lookup-folder: Gather/images
   max-tokens: 300
   model: sonnet
   provider: claude

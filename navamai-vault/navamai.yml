@@ -141,6 +141,17 @@ refer-post-to-update:
     where applicable as you add new content to the post. 5) Create a section in the
     end of the document for citations with links. 6) Do not explain your response.
   temperature: 0.5
+refer-gather:
+  lookup-folder: Gather
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: You will be given a paper or an article in markdown to analyze.
+    Response in valid markdown syntax.
+    Follow the prompt as instructed and do not explain your response.
+  temperature: 0.0
 refer-text-to-extract:
   lookup-folder: Raw
   max-tokens: 4000
@@ -172,7 +183,7 @@ validate:
     you for accuracy and quality. If there are material improvements then create a
     revised response otherwise return the same response.
 vision:
-  lookup-folder: Images
+  lookup-folder: Gather/images
   max-tokens: 300
   model: sonnet
   provider: claude
