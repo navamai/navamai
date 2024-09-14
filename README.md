@@ -2,7 +2,7 @@
 
 Use NavamAI to supercharge your productivity and workflow with personal, fast, and quality AI. Turn your Terminal into a configurable, interactive, and unobtrusive personal AI app. Power of 15 LLMs and 7 providers at your finger tips. Pair with workflows in Markdown, VS Code, Obsidian, and GitHub. Get productive fast with three simple commands.
 
-[![](https://raw.githubusercontent.com/navamai/navamai/main/images/navamai-youtube.png)](https://www.youtube.com/watch?v=OOEng_XshS4)
+[![](https://raw.githubusercontent.com/navamai/navamai/main/images/navamai-youtube.png)](https://www.youtube.com/watch?v=rnKpeChON3g)
 
 **Command Is All You Need:** So, the LLM science fans will get the pun in our tagline. It is a play on the famous paper that introduced the world to Transformer model architecture - Attention is all you need. With NavamAI a simple command via your favorite terminal or shell is all you need to bend an large or small language model to your wishes. NavamAI provides a rich UI right there within your command prompt. No browser tabs to open, no apps to install, no context switching... just pure, simple, fast workflow. Try it with a simple command like `ask "create a table of planets"` and see your Terminal come to life just like a chat UI with fast streaming responses, markdown formatted tables, and even code blocks with color highlights if your prompt requires code in response! NavamAI has released 14 commands to help customize your personal AI workflow.
 
