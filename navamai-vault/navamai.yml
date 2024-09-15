@@ -9,6 +9,17 @@ ask:
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
   temperature: 0.0
+run:
+  lookup-folder: Code
+app:
+  lookup-folder: Apps
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Apps
+  system: Generate a React app based on the given prompt. Use Tailwind CSS for styling. Include all necessary components and logic. Respond with a complete, runnable React application.
+  temperature: 0.3
 intents:
   lookup-folder: Intents
   max-tokens: 1000

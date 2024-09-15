@@ -856,3 +856,76 @@
   prompt_file: null
   source_file: Gather/images/Actionable-Intents.png
   timestamp: '2024-09-13T22:35:20.413630'
+- command: app  --prompt=Create a todo app to add, edit, remove, lists tasks
+  custom_prompt: null
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-14T12:19:40.171980'
+- command: app  --prompt=Create a todo app to add, edit, remove, lists tasks
+  custom_prompt: null
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-14T12:25:47.076379'
+- command: ask  --prompt=generate a react app for playing the game of snake --template=None
+  custom_prompt: generate a react app for playing the game of snake
+  destination_file: Posts/import-react-usestate-useeffect-usecallback-react-import-snake-const-grid_size.md
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-14T12:48:03.478538'
+- command: ask  --prompt=generate a react app for todo manager. use tailwindcss for
+    styles --template=None
+  custom_prompt: generate a react app for todo manager. use tailwindcss for styles
+  destination_file: Posts/import-react-usestate-react-import-todolist-components-todolist-import-todoform.md
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-14T12:49:08.850467'
+- command: ask  --prompt=None --template=None
+  custom_prompt: null
+  destination_file: Posts/package-manager-version-private-scripts-build-build-start-start-vitest.md
+  prompt_file: Prompts/Create React App.md
+  source_file: null
+  timestamp: '2024-09-14T19:13:23.100645'
+- command: ask  --prompt=None --template=None
+  custom_prompt: null
+  destination_file: Posts/typescript-import-render-preact-import-import-index-render-document-getelementbyid.md
+  prompt_file: Prompts/Create React App.md
+  source_file: null
+  timestamp: '2024-09-14T19:32:20.295841'
+- command: ask  --prompt=None --template=None
+  custom_prompt: null
+  destination_file: Posts/manager-imports-preact-https-preact-preact-https-preact-preact-render.md
+  prompt_file: Prompts/Create React App.md
+  source_file: null
+  timestamp: '2024-09-14T19:34:46.781124'
+- command: ask  --prompt=None --template=None
+  custom_prompt: null
+  destination_file: Posts/manager-create-manage-todos-including-delete-capabilities-import_map-imports-preact.md
+  prompt_file: Prompts/Create React App.md
+  source_file: null
+  timestamp: '2024-09-14T20:29:16.228434'
+- command: ask  --prompt=None --template=None
+  custom_prompt: null
+  destination_file: Posts/manager-manager-create-delete-tasks-features-package-manager-version-private.md
+  prompt_file: Prompts/Create React App.md
+  source_file: null
+  timestamp: '2024-09-14T21:36:30.139581'
+- command: ask  --prompt=None --template=None
+  custom_prompt: null
+  destination_file: Posts/todomaster-manager-create-delete-features-install-script-create-project-create.md
+  prompt_file: Prompts/Create React App.md
+  source_file: null
+  timestamp: '2024-09-14T22:09:45.183763'
+- command: ask  --prompt=None --template=None
+  custom_prompt: null
+  destination_file: Posts/todomaster-manager-create-delete-update-features-install-script-mkdir-todomaster.md
+  prompt_file: Prompts/Create React App.md
+  source_file: null
+  timestamp: '2024-09-15T11:53:01.148481'
+- command: ask  --prompt=None --template=None
+  custom_prompt: null
+  destination_file: Posts/todomaster-manager-create-update-delete-features-install-script-mkdir-todomaster.md
+  prompt_file: Prompts/Create React App.md
+  source_file: null
+  timestamp: '2024-09-15T12:05:11.970763'

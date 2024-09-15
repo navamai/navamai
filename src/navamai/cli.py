@@ -25,6 +25,7 @@ import navamai.metrics as metrics
 import navamai.utils as utils
 from navamai.utils import trail
 import navamai.gather as gather_utils
+import navamai.code as code
 
 console = Console()
 
@@ -33,11 +34,21 @@ console = Console()
 def cli():
     pass
 
+@cli.command()
+def run():
+    config = configure.load_config()
+    run_config = config.get("run")
+    lookup_folder = run_config.get("lookup-folder")
+    selected_file = markdown.file_select_paginate(lookup_folder)
+    if not selected_file:
+        console.print("[yellow]No file selected. Exiting.[/yellow]")
+        sys.exit(0)
+    else:
+        code.process_markdown_file(selected_file)
 
 @cli.command()
 def audit():
     auditor.trail_auditor("trail.yml")
-
 
 @cli.command()
 @click.argument("type", required=True)
