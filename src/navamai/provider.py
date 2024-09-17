@@ -85,7 +85,7 @@ class Provider(ABC):
             words = [
                 word.lower() for word in re.findall(r"\w+", response) if len(word) >= 5
             ]
-            filename = "-".join(words[:10]) + ".md"
+            filename = "-".join(words[:5]) + ".md"
 
         filepath = os.path.join(responses_folder, filename)
 

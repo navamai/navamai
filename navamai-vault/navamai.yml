@@ -5,12 +5,28 @@ ask:
   prompts-folder: Prompts
   provider: claude
   save: true
-  save-folder: Posts
+  save-folder: Code
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
   temperature: 0.0
 run:
   lookup-folder: Code
+  save-folder: ../../Apps
+refer-iterate-code:
+  lookup-folder: Code
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Code
+  system: You will be given a markdown file with code blocks. 
+    The file have a level 2 heading titled "Instructions".
+    Follow the instructions within that section to improve the code blocks.
+    Respond with the updated markdown file replacing the improved code blocks.
+    Do not remove any sections, code blocks, or headings.
+    Add "Updates" heading and mention the changes made.
+    Do not explain your response.
+  temperature: 0.3
 app:
   lookup-folder: Apps
   max-tokens: 4000

@@ -5,8 +5,8 @@ import subprocess
 import webbrowser
 import time
 
-def process_markdown_file(file_path):
-    apps_parent_folder = 'Apps'
+def process_markdown_file(file_path, app_folder):
+    apps_parent_folder = app_folder
 
     # Ensure we're using absolute paths
     current_dir = os.getcwd()
@@ -104,21 +104,22 @@ def process_markdown_file(file_path):
     if os.path.exists(run_script_path):
         print("Running run script...")
         try:
-            # Run the script in the background
-            subprocess.Popen(['/bin/bash', run_script_path], cwd=full_app_folder)   
+            # Run the script in the foreground
+            subprocess.run(['/bin/bash', run_script_path], cwd=full_app_folder, check=True)
             
-            # Wait a bit for the app to start
-            print("Waiting for the app to start... in 3 seconds")
-            time.sleep(3)
-            
-            # Open the browser
-            print("Opening the browser...")
-            webbrowser.open('http://localhost:5173')
-                     
         except subprocess.CalledProcessError as e:
             print(f"Error running run script: {e}")
             print(f"Script exit code: {e.returncode}")
             print(f"Script output: {e.output}")
             raise
+        finally:
+            # Run cleanup script after the app exits
+            cleanup_script_path = os.path.join(apps_parent_folder, 'cleanup_script.sh')
+            if os.path.exists(cleanup_script_path):
+                print("Running cleanup script...")
+                try:
+                    subprocess.run(['/bin/bash', cleanup_script_path], check=True)
+                except subprocess.CalledProcessError as e:
+                    print(f"Error running cleanup script: {e}")
 
     print(f"All operations completed for the app in '{full_app_folder}'.")

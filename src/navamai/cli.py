@@ -39,12 +39,13 @@ def run():
     config = configure.load_config()
     run_config = config.get("run")
     lookup_folder = run_config.get("lookup-folder")
+    save_folder = run_config.get("save-folder")
     selected_file = markdown.file_select_paginate(lookup_folder)
     if not selected_file:
         console.print("[yellow]No file selected. Exiting.[/yellow]")
         sys.exit(0)
     else:
-        code.process_markdown_file(selected_file)
+        code.process_markdown_file(selected_file, app_folder=save_folder)
 
 @cli.command()
 def audit():
