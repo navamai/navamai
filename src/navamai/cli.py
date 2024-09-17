@@ -18,14 +18,14 @@ from rich.panel import Panel
 from rich.table import Table
 
 import navamai.auditor as auditor
+import navamai.code as code
 import navamai.configure as configure
+import navamai.gather as gather_utils
 import navamai.images as images
 import navamai.markdown as markdown
 import navamai.metrics as metrics
 import navamai.utils as utils
 from navamai.utils import trail
-import navamai.gather as gather_utils
-import navamai.code as code
 
 console = Console()
 
@@ -33,6 +33,7 @@ console = Console()
 @click.group()
 def cli():
     pass
+
 
 @cli.command()
 def run():
@@ -47,9 +48,11 @@ def run():
     else:
         code.process_markdown_file(selected_file, app_folder=save_folder)
 
+
 @cli.command()
 def audit():
     auditor.trail_auditor("trail.yml")
+
 
 @cli.command()
 @click.argument("type", required=True)
@@ -190,7 +193,9 @@ def test(model_config):
 
                 except Exception as e:
                     error_message = str(e)
-                    console.print(f"An error occurred: {error_message}", style="bold red")
+                    console.print(
+                        f"An error occurred: {error_message}", style="bold red"
+                    )
                     summary.append(
                         {
                             "Provider": provider,
@@ -240,8 +245,8 @@ def test(model_config):
         status_style = "green" if entry["Status"] == "Success" else "red"
         response_time = (
             f"{entry['Response Time']:.2f}s"
-            if isinstance(entry['Response Time'], float)
-            and entry['Response Time'] != float("inf")
+            if isinstance(entry["Response Time"], float)
+            and entry["Response Time"] != float("inf")
             else "N/A"
         )
         table.add_row(

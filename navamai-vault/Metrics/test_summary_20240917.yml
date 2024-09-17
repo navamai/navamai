@@ -1,0 +1,168 @@
+'2024-09-17T05:24:55.484828':
+  bedrock:
+    sonnet3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.904299020767212
+        status: Success
+        token_count: 56
+'2024-09-17T05:24:56.464497':
+  bedrock:
+    haiku3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.968756914138794
+        status: Success
+        token_count: 38
+'2024-09-17T05:24:57.963542':
+  claude:
+    sonnet:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.4565441608428955
+        status: Success
+        token_count: 53
+'2024-09-17T05:25:00.130034':
+  claude:
+    opus:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.1251540184020996
+        status: Success
+        token_count: 37
+'2024-09-17T05:25:00.918575':
+  claude:
+    haiku:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.7576417922973633
+        status: Success
+        token_count: 38
+'2024-09-17T05:25:01.955159':
+  gemini:
+    gemini-pro:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.0069959163665771
+        status: Success
+        token_count: 7
+'2024-09-17T05:25:02.886411':
+  gemini:
+    gemini-flash:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.8627409934997559
+        status: Success
+        token_count: 24
+'2024-09-17T05:25:03.601586':
+  groq:
+    mixtral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.672034740447998
+        status: Success
+        token_count: 90
+'2024-09-17T05:25:06.632614':
+  ollama:
+    llama:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.0073928833007812
+        status: Success
+        token_count: 24
+'2024-09-17T05:25:09.487063':
+  ollama:
+    llava:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.818376064300537
+        status: Success
+        token_count: 26
+'2024-09-17T05:25:13.393148':
+  ollama:
+    mistral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.872382879257202
+        status: Success
+        token_count: 18
+'2024-09-17T05:25:16.690601':
+  ollama:
+    gemma:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.262084722518921
+        status: Success
+        token_count: 6
+'2024-09-17T05:25:19.388118':
+  ollama:
+    qwen:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.6619362831115723
+        status: Success
+        token_count: 19
+'2024-09-17T05:25:20.331180':
+  openai:
+    gpt4o:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.8966801166534424
+        status: Success
+        token_count: 12
+'2024-09-17T05:25:21.255295':
+  openai:
+    gpt4mini:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.879349946975708
+        status: Success
+        token_count: 35
+'2024-09-17T05:25:21.570841':
+  openai:
+    o1m:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Your organization must
+          qualify for at least usage tier 5 to access ''o1-mini''. See https://platform.openai.com/docs/guides/rate-limits/usage-tiers
+          for more details on usage tiers.", ''type'': ''invalid_request_error'',
+          ''param'': ''model'', ''code'': ''below_usage_tier''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-17T05:25:21.805330':
+  openai:
+    o1p:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Your organization must
+          qualify for at least usage tier 5 to access ''o1-preview''. See https://platform.openai.com/docs/guides/rate-limits/usage-tiers
+          for more details on usage tiers.", ''type'': ''invalid_request_error'',
+          ''param'': ''model'', ''code'': ''below_usage_tier''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-09-17T05:25:25.205597':
+  perplexity:
+    sonar:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.360881805419922
+        status: Success
+        token_count: 93

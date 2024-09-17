@@ -84,6 +84,7 @@ def list_files(directory, page=1, files_per_page=10, extensions=None):
     end = start + files_per_page
     return all_files[start:end], total_pages
 
+
 def count_tokens(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
         content = file.read()
@@ -177,6 +178,7 @@ def file_select_paginate(directory, show_tokens=False, section=None, extensions=
             return os.path.join(directory, files[int(choice) - 1])
         else:
             console.print("[bold red]Invalid choice. Please try again.[/bold red]")
+
 
 def merge_docs(
     source_path,

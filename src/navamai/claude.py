@@ -6,6 +6,7 @@ import anthropic
 import navamai.configure as configure
 from navamai.provider import Provider
 
+
 class Claude(Provider):
     def __init__(self):
         super().__init__()

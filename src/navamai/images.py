@@ -6,7 +6,6 @@ import term_image.image as TermImage
 from PIL import Image
 from rich.console import Console
 
-
 console = Console()
 
 
