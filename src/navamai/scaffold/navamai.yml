@@ -1,3 +1,13 @@
+app:
+  lookup-folder: Apps
+  max-tokens: 10000
+  model: gemini-pro
+  provider: gemini
+  save: true
+  save-folder: Apps
+  system: Only respond to the prompt using valid markdown syntax. 
+    Do not explain your response.
+  temperature: 0.5
 ask:
   lookup-folder: Raw
   max-tokens: 4000
@@ -9,33 +19,11 @@ ask:
   system: Be crisp in your response. Only respond to the prompt using valid markdown
     syntax. Do not explain your response.
   temperature: 0.0
-run:
-  lookup-folder: Code
-  save-folder: ../../Apps
-refer-iterate-code:
-  lookup-folder: Code
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
-  save: true
-  save-folder: Code
-  system: You will be given a markdown file with code blocks. 
-    The file have a level 2 heading titled "Instructions".
-    Follow the instructions within that section to improve the code blocks.
-    Respond with the updated markdown file replacing the improved code blocks.
-    Do not remove any sections, code blocks, or headings.
-    Add "Updates" heading and mention the changes made.
-    Do not explain your response.
-  temperature: 0.3
-app:
-  lookup-folder: Apps
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
-  save: true
-  save-folder: Apps
-  system: Generate a React app based on the given prompt. Use Tailwind CSS for styling. Include all necessary components and logic. Respond with a complete, runnable React application.
-  temperature: 0.3
+gather:
+  save-folder: Gather
+  user-agent: NavamAI/1.0
+  user-email: team@navamai.com
+  user-website: https://www.navamai.com
 intents:
   lookup-folder: Intents
   max-tokens: 1000
@@ -46,11 +34,6 @@ intents:
   system: Only respond to the prompt using valid markdown syntax. When responding
     with markdown headings start at level 2. Do not explain your response.
   temperature: 0.3
-gather:
-  user-agent: NavamAI/1.0
-  user-website: https://www.navamai.com
-  user-email: team@navamai.com
-  save-folder: Gather
 merge:
   dest-suffix: expanded
   lookup-folder: Posts
@@ -69,27 +52,27 @@ model-context:
   llava: 4096
   mistral: 128000
   mixtral: 32000
+  o1m: 128000
+  o1p: 128000
   opus: 200000
   qwen: 128000
   sonar: 128000
   sonnet: 200000
   sonnet3: 200000
-  o1m: 128000
-  o1p: 128000
 model-mapping:
   gemini-flash: gemini-1.5-flash
   gemini-pro: gemini-1.5-pro
   gemma: gemma2
   gpt4mini: gpt-4o-mini
   gpt4o: gpt-4o
-  o1p: o1-preview
-  o1m: o1-mini
   haiku: claude-3-haiku-20240307
   haiku3: anthropic.claude-3-haiku-20240307-v1:0
   llama: llama3.1
   llava: llava
   mistral: mistral-nemo
   mixtral: mixtral-8x7b-32768
+  o1m: o1-mini
+  o1p: o1-preview
   opus: claude-3-opus-20240229
   qwen: qwen2
   sonar: llama-3.1-sonar-large-128k-online
@@ -121,6 +104,17 @@ provider-model-mapping:
   - o1p
   perplexity:
   - sonar
+refer-gather:
+  lookup-folder: Gather
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
+  save: true
+  save-folder: Posts
+  system: You will be given a paper or an article in markdown to analyze. Response
+    in valid markdown syntax. Follow the prompt as instructed and do not explain your
+    response.
+  temperature: 0.0
 refer-inline-prompts-to-run:
   lookup-folder: Posts
   max-tokens: 4000
@@ -152,6 +146,19 @@ refer-intents-to-expand:
     list, or narrative format. Respond with the expanded document following the same
     structure as the given document. Do not explain your response.
   temperature: 0.3
+refer-iterate-code:
+  lookup-folder: Code
+  max-tokens: 10000
+  model: gemini-pro
+  provider: gemini
+  save: true
+  save-folder: Code
+  system: You will be given a markdown file with code blocks. The file have a level
+    2 heading titled "Instructions". Follow the instructions within that section to
+    improve the code blocks. Respond with the updated markdown file replacing the
+    improved code blocks. Do not remove any sections, code blocks, or headings. Add
+    "Updates" heading and mention the changes made. Do not explain your response.
+  temperature: 0.5
 refer-post-to-update:
   lookup-folder: Posts
   max-tokens: 4000
@@ -168,17 +175,6 @@ refer-post-to-update:
     where applicable as you add new content to the post. 5) Create a section in the
     end of the document for citations with links. 6) Do not explain your response.
   temperature: 0.5
-refer-gather:
-  lookup-folder: Gather
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
-  save: true
-  save-folder: Posts
-  system: You will be given a paper or an article in markdown to analyze.
-    Response in valid markdown syntax.
-    Follow the prompt as instructed and do not explain your response.
-  temperature: 0.0
 refer-text-to-extract:
   lookup-folder: Raw
   max-tokens: 4000
@@ -189,6 +185,9 @@ refer-text-to-extract:
   system: Respond only using valid markdown syntax. Follow the prompt as instructed
     and do not explain your response.
   temperature: 0.3
+run:
+  lookup-folder: Code
+  save-folder: ../../Apps
 split:
   context-ratio: 0.8
   model: sonnet

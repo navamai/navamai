@@ -2,9 +2,13 @@ import os
 import re
 import shutil
 import subprocess
-import time
 import webbrowser
+import time
 
+def open_vite_server():
+    url = "http://localhost:5173"
+    print(f"Opening Vite server at {url}")
+    webbrowser.open(url)
 
 def process_markdown_file(file_path, app_folder):
     apps_parent_folder = app_folder
@@ -21,7 +25,7 @@ def process_markdown_file(file_path, app_folder):
 
     # Extract the install script and app folder name
     install_script_match = re.search(
-        r"^#+\s+Install script\n\n```bash\n([\s\S]+?)\n```", content, re.MULTILINE
+        r"^#+\s+Install script\n\n```bash\n([\s\S]+?)\n```", content, re.MULTILINE | re.IGNORECASE
     )
     if not install_script_match:
         raise ValueError("Install script not found in the markdown file")
@@ -36,12 +40,13 @@ def process_markdown_file(file_path, app_folder):
         raise ValueError("Could not determine app folder name from install script")
 
     app_folder = app_folder_match.group(1)
-    if app_folder != app_folder_match.group(2):
-        print(
-            f"Warning: mkdir and cd commands use different folder names. Using '{app_folder}'."
-        )
 
     full_app_folder = os.path.join(apps_parent_folder, app_folder)
+    
+    # Remove the app folder if it already exists including all its contents
+    if os.path.exists(full_app_folder):
+        print(f"Removing existing app folder: {full_app_folder}")
+        shutil.rmtree(full_app_folder)
 
     # Create the apps parent folder if it doesn't exist
     os.makedirs(apps_parent_folder, exist_ok=True)
@@ -53,24 +58,25 @@ def process_markdown_file(file_path, app_folder):
 
     # check if the install script already exists
     if os.path.exists(install_script_path):
-        print(f"Warning: Install script already exists. Continuing without installing.")
-    else:
-        with open(install_script_path, "w") as file:
-            file.write(install_script)
-        os.chmod(install_script_path, 0o755)
+        os.remove(install_script_path)
+        
+    with open(install_script_path, "w") as file:
+        file.write(install_script)
 
-        print(f"Install script path: {install_script_path}")
+    os.chmod(install_script_path, 0o755)
 
-        print("Running install script...")
-        try:
-            subprocess.run(
-                ["/bin/bash", install_script_path], check=True, cwd=apps_parent_folder
-            )
-        except subprocess.CalledProcessError as e:
-            print(f"Error running install script: {e}")
-            print(f"Script exit code: {e.returncode}")
-            print(f"Script output: {e.output}")
-            raise
+    print(f"Install script path: {install_script_path}")
+
+    print("Running install script...")
+    try:
+        subprocess.run(
+            ["/bin/bash", install_script_path], check=True, cwd=apps_parent_folder
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Error running install script: {e}")
+        print(f"Script exit code: {e.returncode}")
+        print(f"Script output: {e.output}")
+        raise
 
     # Process other code blocks
     pattern = re.compile(
@@ -119,10 +125,28 @@ def process_markdown_file(file_path, app_folder):
     if os.path.exists(run_script_path):
         print("Running run script...")
         try:
-            # Run the script in the foreground
-            subprocess.run(
-                ["/bin/bash", run_script_path], cwd=full_app_folder, check=True
+            # Start the run script in a separate process
+            process = subprocess.Popen(
+                ["/bin/bash", run_script_path], 
+                cwd=full_app_folder, 
+                stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE
             )
+            
+            # Wait for a short time to allow the server to start
+            time.sleep(5)
+            
+            # Open the Vite server URL
+            open_vite_server()
+            
+            # Wait for the process to complete
+            stdout, stderr = process.communicate()
+            
+            if process.returncode != 0:
+                print(f"Run script exited with non-zero status: {process.returncode}")
+                print(f"stdout: {stdout.decode()}")
+                print(f"stderr: {stderr.decode()}")
+                raise subprocess.CalledProcessError(process.returncode, run_script_path)
 
         except subprocess.CalledProcessError as e:
             print(f"Error running run script: {e}")

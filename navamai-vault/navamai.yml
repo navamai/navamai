@@ -1,14 +1,13 @@
 app:
   lookup-folder: Apps
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
+  max-tokens: 10000
+  model: gemini-pro
+  provider: gemini
   save: true
   save-folder: Apps
-  system: Generate a React app based on the given prompt. Use Tailwind CSS for styling.
-    Include all necessary components and logic. Respond with a complete, runnable
-    React application.
-  temperature: 0.3
+  system: Only respond to the prompt using valid markdown syntax. 
+    Do not explain your response.
+  temperature: 0.5
 ask:
   lookup-folder: Raw
   max-tokens: 4000
@@ -149,9 +148,9 @@ refer-intents-to-expand:
   temperature: 0.3
 refer-iterate-code:
   lookup-folder: Code
-  max-tokens: 4000
-  model: sonnet
-  provider: claude
+  max-tokens: 10000
+  model: gemini-pro
+  provider: gemini
   save: true
   save-folder: Code
   system: You will be given a markdown file with code blocks. The file have a level
@@ -159,7 +158,7 @@ refer-iterate-code:
     improve the code blocks. Respond with the updated markdown file replacing the
     improved code blocks. Do not remove any sections, code blocks, or headings. Add
     "Updates" heading and mention the changes made. Do not explain your response.
-  temperature: 0.3
+  temperature: 0.5
 refer-post-to-update:
   lookup-folder: Posts
   max-tokens: 4000
