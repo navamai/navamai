@@ -25,6 +25,7 @@ Also create a level 2 heading "Install script".
 Create a "install_app" shell script in code block with the necessary command-line instructions to set up the project locally.
 Ensure you start the script by creating and changing to an app folder. Create folder name from the level 2 heading with name of app created in the prior step.
 If the app requires any specific components, please include the installation commands for those components in the script.
+Make sure to install any Material-UI components used within the app.
 
 Create a level 2 heading "Run script".
 Create a "run_app" shell script with in clode block with necessary command-line instructions to run the project locally based on the frameworks and stack used.

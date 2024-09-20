@@ -1,13 +1,3 @@
-app:
-  lookup-folder: Apps
-  max-tokens: 10000
-  model: gemini-pro
-  provider: gemini
-  save: true
-  save-folder: Apps
-  system: Only respond to the prompt using valid markdown syntax. 
-    Do not explain your response.
-  temperature: 0.5
 ask:
   lookup-folder: Raw
   max-tokens: 4000
@@ -16,9 +6,9 @@ ask:
   provider: claude
   save: true
   save-folder: Code
-  system: Be crisp in your response. Only respond to the prompt using valid markdown
-    syntax. Do not explain your response.
-  temperature: 0.0
+  system: Only respond to the prompt using valid markdown syntax. 
+    Do not explain your response.
+  temperature: 0.5
 gather:
   save-folder: Gather
   user-agent: NavamAI/1.0
@@ -148,9 +138,9 @@ refer-intents-to-expand:
   temperature: 0.3
 refer-iterate-code:
   lookup-folder: Code
-  max-tokens: 10000
-  model: gemini-pro
-  provider: gemini
+  max-tokens: 4000
+  model: sonnet
+  provider: claude
   save: true
   save-folder: Code
   system: You will be given a markdown file with code blocks. The file have a level
