@@ -10,7 +10,7 @@ console = Console()
 
 def open_vite_server():
     url = "http://localhost:5173"
-    console.print(f"Starting app in browser", style="bold green")
+    console.print(f"Starting the app in browser", style="bold green")
     webbrowser.open(url)
 
 def process_markdown_file(file_path, app_folder):
@@ -64,16 +64,11 @@ def process_markdown_file(file_path, app_folder):
 
     os.chmod(install_script_path, 0o755)
 
-    console.print("Installing app...", style="green")
+    console.print("Installing the app...", style="green")
     try:
-        with open(os.devnull, 'w') as devnull:
-            subprocess.run(
-                ["/bin/bash", install_script_path],
-                check=True,
-                cwd=apps_parent_folder,
-                stdout=devnull,
-                stderr=devnull
-            )
+        subprocess.run(
+            ["/bin/bash", install_script_path], check=True, cwd=apps_parent_folder
+        )
     except subprocess.CalledProcessError as e:
         print(f"Error running install script: {e}")
         print(f"Script exit code: {e.returncode}")
@@ -118,20 +113,20 @@ def process_markdown_file(file_path, app_folder):
         if filename.endswith(".sh"):
             os.chmod(full_path, 0o755)
 
-    console.print(f"Installed app successfully...", style="green")
+    console.print(f"Successfully install the app...", style="green")
     # Run run script if it exists
     run_script_path = os.path.join(full_app_folder, "run_script.sh")
     if os.path.exists(run_script_path):
         console.print("Running the app...", style="green")
         try:
-            # Start the run script in a separate process, redirecting output to /dev/null
-            with open(os.devnull, 'w') as devnull:
-                process = subprocess.Popen(
-                    ["/bin/bash", run_script_path], 
-                    cwd=full_app_folder, 
-                    stdout=devnull, 
-                    stderr=devnull
-                )            
+            # Start the run script in a separate process
+            process = subprocess.Popen(
+                ["/bin/bash", run_script_path], 
+                cwd=full_app_folder, 
+                stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE
+            )
+            
             # Wait for a short time to allow the server to start
             time.sleep(5)
             
@@ -158,7 +153,7 @@ def process_markdown_file(file_path, app_folder):
             if os.path.exists(cleanup_script_path):
                 console.print("Running cleanup script...", style="green")
                 try:
-                    subprocess.run(["/bin/bash", cleanup_script_path], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    subprocess.run(["/bin/bash", cleanup_script_path], check=True)
                 except subprocess.CalledProcessError as e:
                     print(f"Error running cleanup script: {e}")
 
