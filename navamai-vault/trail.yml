@@ -1065,3 +1065,15 @@
   prompt_file: Prompts/Create Vite App.md
   source_file: null
   timestamp: '2024-09-19T20:53:54.844126'
+- command: ask  --prompt=None --template=None
+  custom_prompt: null
+  destination_file: Code/manager-create-manager-install-script.md
+  prompt_file: Prompts/Create Streamlit App.md
+  source_file: null
+  timestamp: '2024-09-21T09:54:08.111388'
+- command: refer  --section=text-to-extract --document=None --prompt=None
+  custom_prompt: List key insights
+  destination_file: Posts/Sarah and Elad on LLMs updated.md
+  prompt_file: null
+  source_file: Raw/LLMs/Sarah and Elad on LLMs.md
+  timestamp: '2024-09-21T09:59:07.158755'

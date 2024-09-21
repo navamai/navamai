@@ -127,12 +127,11 @@ def process_markdown_file(file_path, app_folder):
                 stderr=subprocess.PIPE
             )
             
-            # Wait for a short time to allow the server to start
-            time.sleep(5)
-            
-            # Open the Vite server URL
-            open_vite_server()
-            
+            # check if "create vite" string is in the install script
+            if "create vite" in install_script:
+                time.sleep(5)
+                open_vite_server()
+
             # Wait for the process to complete
             stdout, stderr = process.communicate()
             

@@ -72,18 +72,22 @@ def extract_variables(template):
 
 
 def list_files(directory, page=1, files_per_page=10, extensions=None):
-    all_files = [
-        f
-        for f in os.listdir(directory)
-        if os.path.isfile(os.path.join(directory, f))
-        and (extensions is None or any(f.endswith(ext) for ext in extensions))
-    ]
+    all_files = []
+    
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if extensions is None or any(file.endswith(ext) for ext in extensions):
+                relative_path = os.path.relpath(root, directory)
+                if relative_path == '.':
+                    all_files.append(file)
+                else:
+                    all_files.append(os.path.join(relative_path, file))
+    
     all_files.sort()  # Sort the files alphabetically
     total_pages = ceil(len(all_files) / files_per_page)
     start = (page - 1) * files_per_page
     end = start + files_per_page
     return all_files[start:end], total_pages
-
 
 def count_tokens(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
