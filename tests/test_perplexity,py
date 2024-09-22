@@ -1,0 +1,78 @@
+import pytest
+from unittest.mock import patch, MagicMock
+from navamai.perplexity import Perplexity
+
+@pytest.fixture
+def perplexity_instance():
+    with patch('os.environ.get', return_value='fake_api_key'):
+        yield Perplexity()
+
+def test_init(perplexity_instance):
+    assert isinstance(perplexity_instance, Perplexity)
+    assert perplexity_instance.url == "https://api.perplexity.ai/chat/completions"
+    assert hasattr(perplexity_instance, 'full_config')
+    assert perplexity_instance.headers['Authorization'] == "Bearer fake_api_key"
+
+def test_create_request_data(perplexity_instance):
+    perplexity_instance.model_config = {
+        "model": "codellama-34b-instruct",
+        "max-tokens": 1000,
+        "temperature": 0.7,
+        "system": "You are a helpful assistant."
+    }
+    
+    prompt = "Hello, Perplexity!"
+    request_data = perplexity_instance.create_request_data(prompt)
+    
+    assert request_data["model"] == "codellama-34b-instruct"
+    assert request_data["max_tokens"] == 1000
+    assert request_data["temperature"] == 0.7
+    assert request_data["messages"] == [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "Hello, Perplexity!"}
+    ]
+    assert request_data["top_p"] == 0.9
+    assert request_data["return_citations"] is True
+    assert request_data["search_domain_filter"] == ["perplexity.ai"]
+    assert request_data["return_images"] is False
+    assert request_data["return_related_questions"] is False
+    assert request_data["search_recency_filter"] == "month"
+    assert request_data["top_k"] == 0
+    assert request_data["stream"] is False
+    assert request_data["presence_penalty"] == 0
+    assert request_data["frequency_penalty"] == 1
+
+@pytest.mark.asyncio
+async def test_stream_response(perplexity_instance):
+    perplexity_instance.model_config = {
+        "model": "codellama-34b-instruct",
+        "max-tokens": 1000,
+        "temperature": 0.7,
+        "system": "You are a helpful assistant."
+    }
+    
+    mock_response = MagicMock()
+    mock_response.status_code = 200
+    mock_response.iter_lines.return_value = [
+        b'data: {"choices":[{"delta":{"content":"Hello"}}]}',
+        b'data: {"choices":[{"delta":{"content":", human!"}}]}',
+        b'data: {"choices":[{"delta":{"content":null}}]}'
+    ]
+    
+    with patch('requests.post', return_value=mock_response):
+        response = perplexity_instance.stream_response("Hello, Perplexity!")
+        result = list(response)
+        
+        assert result == ["Hello", ", human!"]
+
+def test_create_vision_request_data(perplexity_instance):
+    with pytest.raises(NotImplementedError):
+        perplexity_instance.create_vision_request_data(b"fake_image_data", "Describe this image")
+
+def test_stream_vision_response(perplexity_instance):
+    with pytest.raises(NotImplementedError):
+        next(perplexity_instance.stream_vision_response(b"fake_image_data", "Describe this image"))
+
+def test_resolve_model(perplexity_instance):
+    assert perplexity_instance.resolve_model("codellama-34b-instruct") == "codellama-34b-instruct"
+    assert perplexity_instance.resolve_model("sonar-medium-chat") == "sonar-medium-chat"

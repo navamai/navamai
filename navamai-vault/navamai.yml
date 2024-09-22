@@ -1,11 +1,11 @@
 ask:
   lookup-folder: Raw
   max-tokens: 4000
-  model: sonnet
+  model: haiku3
   prompts-folder: Prompts
-  provider: claude
-  save: true
-  save-folder: Code
+  provider: bedrock
+  save: false
+  save-folder: Posts
   system: Only respond to the prompt using valid markdown syntax. 
     Do not explain your response.
   temperature: 0.5

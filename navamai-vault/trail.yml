@@ -1077,3 +1077,9 @@
   prompt_file: null
   source_file: Raw/LLMs/Sarah and Elad on LLMs.md
   timestamp: '2024-09-21T09:59:07.158755'
+- command: ask  --prompt=what is the sun and moon distance? --template=None
+  custom_prompt: what is the sun and moon distance?
+  destination_file: null
+  prompt_file: null
+  source_file: null
+  timestamp: '2024-09-22T05:51:26.369704'

@@ -1,0 +1,83 @@
+import pytest
+from unittest.mock import patch, MagicMock
+from navamai.ollama import Ollama
+
+@pytest.fixture
+def ollama_instance():
+    with patch('requests.post'):
+        yield Ollama()
+
+def test_init(ollama_instance):
+    assert isinstance(ollama_instance, Ollama)
+    assert ollama_instance.base_url == "http://localhost:11434"
+    assert hasattr(ollama_instance, 'full_config')
+
+def test_create_request_data(ollama_instance):
+    ollama_instance.model_config = {
+        "model": "llama2",
+        "max-tokens": 1000,
+        "temperature": 0.7,
+        "system": "You are a helpful assistant."
+    }
+    
+    prompt = "Hello, Ollama!"
+    request_data = ollama_instance.create_request_data(prompt)
+    
+    assert request_data["model"] == "llama2"
+    assert request_data["prompt"] == "Hello, Ollama!"
+    assert request_data["stream"] is True
+    assert request_data["system"] == "You are a helpful assistant."
+    assert request_data["options"]["num_predict"] == 1000
+    assert request_data["options"]["temperature"] == 0.7
+
+def test_create_request_data_with_image(ollama_instance):
+    ollama_instance.model_config = {
+        "model": "llava",
+        "max-tokens": 1000,
+        "temperature": 0.7,
+        "system": "You are a helpful assistant."
+    }
+    
+    prompt = "Describe this image"
+    image_data = b"fake_image_data"
+    request_data = ollama_instance.create_request_data(prompt, image_data)
+    
+    assert "images" in request_data
+    assert len(request_data["images"]) == 1
+    assert isinstance(request_data["images"][0], str)
+
+@pytest.mark.asyncio
+async def test_stream_response(ollama_instance):
+    ollama_instance.model_config = {
+        "model": "llama2",
+        "max-tokens": 1000,
+        "temperature": 0.7,
+        "system": "You are a helpful assistant."
+    }
+    
+    mock_response = MagicMock()
+    mock_response.iter_lines.return_value = [
+        b'{"response": "Hello", "done": false}',
+        b'{"response": ", human!", "done": true}'
+    ]
+    
+    with patch('requests.post', return_value=mock_response):
+        response = ollama_instance.stream_response("Hello, Ollama!")
+        result = list(response)
+        
+        assert result == ["Hello", ", human!"]
+
+def test_stream_vision_response(ollama_instance):
+    image_data = b"fake_image_data"
+    prompt = "Describe this image"
+    
+    with patch.object(ollama_instance, 'stream_response', return_value=iter(["It's an image"])):
+        response = ollama_instance.stream_vision_response(image_data, prompt, "image/jpeg")
+        assert list(response) == ["It's an image"]
+    
+    with pytest.raises(StopIteration):
+        next(ollama_instance.stream_vision_response(image_data, prompt, "image/webp"))
+
+def test_resolve_model(ollama_instance):
+    assert ollama_instance.resolve_model("llama2") == "llama2"
+    assert ollama_instance.resolve_model("llava") == "llava"
