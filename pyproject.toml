@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "navamai"
-version = "0.1.56"
+version = "0.1.57"
 description = "Use NavamAI to supercharge your productivity and workflow with personal, fast, and quality AI. Turn your Terminal into a configurable, interactive, and unobtrusive personal AI app. Power of 15 LLMs and 7 providers at your finger tips. Pair with workflows in Markdown, VS Code, Obsidian, and GitHub. Get productive fast with three simple commands."
 authors = ["NavamAI <team@navamai.com>"]
 license = "Apache-2.0"

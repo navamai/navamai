@@ -5,6 +5,7 @@ from openai import OpenAI
 
 import navamai.configure as configure
 from navamai.provider import Provider
+import os
 
 
 class Openai(Provider):
@@ -63,3 +64,32 @@ class Openai(Provider):
         for chunk in self.client.chat.completions.create(**request_data, stream=True):
             if chunk.choices[0].delta.content is not None:
                 yield chunk.choices[0].delta.content
+
+    def generate_image(self, prompt: str) -> str:
+        config = self.model_config
+        model = self.resolve_model(config["model"])
+        
+        response = self.client.images.generate(
+            model=model,
+            prompt=prompt,
+            n=1,
+            size=config.get("size", "1024x1024"),
+            response_format="b64_json"
+        )
+
+        image_data = base64.b64decode(response.data[0].b64_json)
+        return self.save_image_response(prompt, image_data)
+
+    def save_image_response(self, prompt: str, image_data: bytes) -> str:
+        responses_folder = self.model_config.get("save-folder", "image_responses")
+        os.makedirs(responses_folder, exist_ok=True)
+
+        words = [word.lower() for word in prompt.split()[:5]]
+        filename = "-".join(words) + ".png"
+        filepath = os.path.join(responses_folder, filename)
+
+        with open(filepath, "wb") as f:
+            f.write(image_data)
+
+        self.console.print(f"Image saved to: {filepath}")
+        return filepath

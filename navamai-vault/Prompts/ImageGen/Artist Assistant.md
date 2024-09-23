@@ -1,0 +1,1 @@
+Paint a {{SUBJECT}} in {{ENVRONMENT}} in {{STYLE}} style, using {{MATERIAL}}.

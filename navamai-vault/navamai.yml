@@ -1,14 +1,23 @@
 ask:
   lookup-folder: Raw
-  max-tokens: 4000
-  model: haiku3
+  max-tokens: 500
+  model: sonnet
   prompts-folder: Prompts
-  provider: bedrock
+  provider: claude
   save: false
   save-folder: Posts
-  system: Only respond to the prompt using valid markdown syntax. 
-    Do not explain your response.
+  system: Only respond to the prompt using valid markdown syntax. Do not explain your
+    response.
   temperature: 0.5
+image:
+  lookup-folder: Prompts/ImageGen
+  max-tokens: 300
+  model: dall-e-3
+  provider: openai
+  save: true
+  save-folder: Images/Generated
+  system: Generate an image based on the given prompt.
+  size: "1024x1024"
 gather:
   save-folder: Gather
   user-agent: NavamAI/1.0
@@ -68,6 +77,8 @@ model-mapping:
   sonar: llama-3.1-sonar-large-128k-online
   sonnet: claude-3-5-sonnet-20240620
   sonnet3: anthropic.claude-3-sonnet-20240229-v1:0
+  dalle3: dall-e-3
+  dalle2: dall-e-2
 provider-model-mapping:
   bedrock:
   - sonnet3
@@ -92,6 +103,8 @@ provider-model-mapping:
   - gpt4mini
   - o1m
   - o1p
+  - dalle3
+  - dalle2
   perplexity:
   - sonar
 refer-gather:
@@ -217,3 +230,6 @@ vision-models:
 - gemini-pro
 - gemini-flash
 - llava
+image-models:
+- dalle3
+- dalle2
