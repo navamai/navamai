@@ -18,6 +18,8 @@ image:
   save-folder: Images/Generated
   system: Generate an image based on the given prompt.
   size: "1024x1024"
+  generation-seconds: 15
+  temperature: 0.7
 gather:
   save-folder: Gather
   user-agent: NavamAI/1.0

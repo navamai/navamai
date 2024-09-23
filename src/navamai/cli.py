@@ -1,3 +1,9 @@
+# Copyright 2024 and beyond, NavamAI. All Rights Reserved.
+# https://www.navamai.com/
+# This code is Apache-2.0 licensed. Please see the LICENSE file in our repository for the full license text.
+# You may use this code under the terms of the Apache-2.0 license. 
+# This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
 import importlib.resources
 import mimetypes
 import os
@@ -7,6 +13,7 @@ import tempfile
 import time
 from pathlib import Path
 from typing import Optional
+import threading
 
 import click
 import requests
@@ -16,6 +23,7 @@ from rich.live import Live
 from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.table import Table
+from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
 
 import navamai.auditor as auditor
 import navamai.code as code
@@ -347,14 +355,13 @@ def id(section):
     console.print(f"Model Information: [bold magenta]{model_info}[/bold magenta]")
     sys.exit(0)
 
-
-@cli.command()
+@click.command()
 @click.argument("prompt", required=False)
 @click.option("-t", "--template", help="Path to a prompt template file")
-@trail
 def image(prompt, template):
     config = configure.load_config()
     image_config = config.get("image", {})
+    generation_seconds = image_config.get("generation-seconds", 30)
 
     provider = image_config.get("provider").lower()
     provider_instance = utils.get_provider_instance(provider)
@@ -364,8 +371,7 @@ def image(prompt, template):
     template_prompt = None
 
     if prompt:
-        console.print("Generating image...", style="green")
-        destination_file = provider_instance.generate_image(prompt)
+        destination_file = generate_image_with_progress(provider_instance, prompt, generation_seconds)
     elif template:
         with open(template, "r") as f:
             template_prompt = f.read().strip()
@@ -373,6 +379,7 @@ def image(prompt, template):
         prompt_variables = markdown.extract_variables(template_prompt)
 
         if prompt_variables:
+            console = Console()
             console.print(
                 "The Prompt Template has variables. Enter values for the following variables:",
                 style="yellow",
@@ -380,11 +387,11 @@ def image(prompt, template):
             for variable in prompt_variables:
                 value = click.prompt(variable)
                 template_prompt = template_prompt.replace(variable, value)
-        console.print("Generating image...", style="green")
-        destination_file = provider_instance.generate_image(template_prompt)
+        destination_file = generate_image_with_progress(provider_instance, template_prompt, generation_seconds)
     else:
         prompts_dir = image_config.get("lookup-folder")
         if not os.path.exists(prompts_dir):
+            console = Console()
             console.print(
                 f"[bold red]Error:[/bold red] Prompts directory not found at {prompts_dir}"
             )
@@ -398,6 +405,7 @@ def image(prompt, template):
             prompt_variables = markdown.extract_variables(template_prompt)
 
             if prompt_variables:
+                console = Console()
                 console.print(
                     "The Prompt Template has variables. Please enter values.",
                     style="yellow",
@@ -405,13 +413,14 @@ def image(prompt, template):
                 for variable in prompt_variables:
                     value = click.prompt(variable)
                     template_prompt = template_prompt.replace("{{" + variable + "}}", value)
-            console.print("Generating image...", style="green")
-            destination_file = provider_instance.generate_image(template_prompt)
+            destination_file = generate_image_with_progress(provider_instance, template_prompt, generation_seconds)
         else:
+            console = Console()
             console.print("[yellow]No file selected. Exiting.[/yellow]")
             sys.exit(0)
 
     if not prompt and not template_prompt:
+        console = Console()
         console.print("[bold red]Error:[/bold red] No prompt provided")
         sys.exit(1)
 
@@ -420,6 +429,46 @@ def image(prompt, template):
         "prompt_file": selected_file,
         "destination_file": destination_file,
     }
+
+def show_progress(duration, stop_event, progress_complete):
+    console = Console()
+    with Progress(
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        BarColumn(),
+        TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+        console=console,
+    ) as progress:
+        task = progress.add_task(f"Generating image in {duration}s", total=duration)
+        for remaining in range(duration, 0, -1):
+            if stop_event.is_set():
+                break
+            progress.update(task, advance=1, description=f"Generating image in {remaining}s")
+            time.sleep(1)
+        
+        if not stop_event.is_set():
+            progress.update(task, completed=duration)
+            progress_complete.set()
+
+def generate_image_with_progress(provider_instance, prompt, duration):
+    stop_event = threading.Event()
+    progress_complete = threading.Event()
+    progress_thread = threading.Thread(target=show_progress, args=(duration, stop_event, progress_complete))
+    progress_thread.start()
+
+    try:
+        destination_file = provider_instance.generate_image(prompt)
+    finally:
+        stop_event.set()
+        progress_thread.join()
+
+    console = Console()
+    if progress_complete.is_set():
+        console.print(f"\nImage saved: {destination_file}", style="green")
+    else:
+        console.print(f"\nImage generated sooner and saved: {destination_file}", style="green")
+
+    return destination_file
 
 
 @cli.command()

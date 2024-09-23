@@ -1,11 +1,14 @@
+# Copyright 2024 and beyond, NavamAI. All Rights Reserved.
+# https://www.navamai.com/
+# This code is Apache-2.0 licensed. Please see the LICENSE file in our repository for the full license text.
+# You may use this code under the terms of the Apache-2.0 license. 
+# This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
 import pytest
 from click.testing import CliRunner
 from navamai.cli import cli, run, audit, gather, split, trends, test, init, config, id, ask, refer, intents, merge, validate, vision
 from unittest.mock import patch, MagicMock, mock_open, call
-import os
-import tempfile
 from pathlib import Path
-import shutil
 
 @pytest.fixture
 def runner():
