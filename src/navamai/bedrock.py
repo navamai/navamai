@@ -1,6 +1,6 @@
 import base64
 import json
-from typing import Generator
+from typing import Generator, Dict, Any, List, Union
 
 import boto3
 
@@ -12,70 +12,55 @@ class Bedrock(Provider):
         super().__init__()
         self.client = boto3.client("bedrock-runtime")
 
-    def create_request_data(self, prompt: str) -> dict:
+    def _create_base_request_data(self) -> Dict[str, Any]:
         config = self.model_config
-        model = self.resolve_model(config["model"])
-        body = {
+        return {
             "anthropic_version": "bedrock-2023-05-31",
             "max_tokens": config["max-tokens"],
-            "system": config["system"],
-            "messages": [{"role": "user", "content": prompt}],
             "temperature": config["temperature"],
+            "system": config.get("system", ""),
         }
+
+    def _create_message_content(self, prompt: str, image_data: bytes = None) -> Union[str, List[Dict[str, Any]]]:
+        if image_data:
+            return [
+                {
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "image/jpeg",
+                        "data": base64.b64encode(image_data).decode("utf-8"),
+                    },
+                },
+                {"type": "text", "text": prompt},
+            ]
+        return prompt
+
+    def create_request_data(self, prompt: str, image_data: bytes = None) -> Dict[str, Any]:
+        config = self.model_config
+        model = self.resolve_model(config["model"])
+        body = self._create_base_request_data()
+        body["messages"] = [{"role": "user", "content": self._create_message_content(prompt, image_data)}]
+        
         return {
             "modelId": model,
             "contentType": "application/json",
             "accept": "application/json",
             "body": json.dumps(body).encode("utf-8"),
         }
+
+    def _stream_response(self, request_data: Dict[str, Any]) -> Generator[str, None, None]:
+        response = self.client.invoke_model_with_response_stream(**request_data)
+        for event in response.get("body", []):
+            if "chunk" in event:
+                chunk = json.loads(event["chunk"]["bytes"].decode("utf-8"))
+                if "delta" in chunk and "text" in chunk["delta"]:
+                    yield chunk["delta"]["text"]
 
     def stream_response(self, prompt: str) -> Generator[str, None, None]:
         request_data = self.create_request_data(prompt)
-        response = self.client.invoke_model_with_response_stream(**request_data)
-        for event in response.get("body", []):
-            if "chunk" in event:
-                chunk = json.loads(event["chunk"]["bytes"].decode("utf-8"))
-                if "delta" in chunk and "text" in chunk["delta"]:
-                    yield chunk["delta"]["text"]
+        yield from self._stream_response(request_data)
 
-    def create_vision_request_data(self, image_data: bytes, prompt: str) -> dict:
-        config = self.model_config
-        model = self.resolve_model(config["model"])
-        body = {
-            "anthropic_version": "bedrock-2023-05-31",
-            "max_tokens": config["max-tokens"],
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "image",
-                            "source": {
-                                "type": "base64",
-                                "media_type": "image/jpeg",
-                                "data": base64.b64encode(image_data).decode("utf-8"),
-                            },
-                        },
-                        {"type": "text", "text": prompt},
-                    ],
-                }
-            ],
-            "temperature": config["temperature"],
-        }
-        return {
-            "modelId": model,
-            "contentType": "application/json",
-            "accept": "application/json",
-            "body": json.dumps(body).encode("utf-8"),
-        }
-
-    def stream_vision_response(
-        self, image_data: bytes, prompt: str
-    ) -> Generator[str, None, None]:
-        request_data = self.create_vision_request_data(image_data, prompt)
-        response = self.client.invoke_model_with_response_stream(**request_data)
-        for event in response.get("body", []):
-            if "chunk" in event:
-                chunk = json.loads(event["chunk"]["bytes"].decode("utf-8"))
-                if "delta" in chunk and "text" in chunk["delta"]:
-                    yield chunk["delta"]["text"]
+    def stream_vision_response(self, image_data: bytes, prompt: str) -> Generator[str, None, None]:
+        request_data = self.create_request_data(prompt, image_data)
+        yield from self._stream_response(request_data)
