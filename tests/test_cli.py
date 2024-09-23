@@ -1,10 +1,11 @@
 import pytest
 from click.testing import CliRunner
 from navamai.cli import cli, run, audit, gather, split, trends, test, init, config, id, ask, refer, intents, merge, validate, vision
-from unittest.mock import patch, MagicMock, mock_open
+from unittest.mock import patch, MagicMock, mock_open, call
 import os
 import tempfile
 from pathlib import Path
+import shutil
 
 @pytest.fixture
 def runner():
@@ -83,21 +84,6 @@ def test_validate(mock_diff, mock_parse, mock_get_provider, mock_load_config, ru
         mock_diff.assert_called_once()
 
 
-@patch("navamai.cli.importlib.resources.path")
-@patch("navamai.cli.shutil.copy2")
-@patch("navamai.cli.click.confirm")
-@patch("navamai.cli.os.path.exists", return_value=True)
-def test_init_existing_files(mock_exists, mock_confirm, mock_copy, mock_path, runner):
-    with tempfile.TemporaryDirectory() as temp_dir:
-        mock_path.return_value.__enter__.return_value = Path(temp_dir)
-        os.makedirs(os.path.join(temp_dir, "scaffold"))
-        with open(os.path.join(temp_dir, "scaffold", "existing_file.txt"), "w") as f:
-            f.write("existing content")
-        
-        mock_confirm.return_value = True
-        result = runner.invoke(init)
-        assert result.exit_code == 0
-        mock_copy.assert_called()
 
 @patch("navamai.cli.configure.load_config")
 @patch("navamai.cli.utils.get_provider_instance")

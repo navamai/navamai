@@ -5,7 +5,7 @@ ask:
   prompts-folder: Prompts
   provider: claude
   save: true
-  save-folder: Code
+  save-folder: Posts
   system: Only respond to the prompt using valid markdown syntax. 
     Do not explain your response.
   temperature: 0.5
