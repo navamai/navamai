@@ -9,22 +9,25 @@ ask:
   system: Only respond to the prompt using valid markdown syntax. Do not explain your
     response.
   temperature: 0.5
+gather:
+  save-folder: Gather
+  user-agent: NavamAI/1.0
+  user-email: team@navamai.com
+  user-website: https://www.navamai.com
 image:
+  generation-seconds: 15
   lookup-folder: Prompts/ImageGen
   max-tokens: 300
   model: dall-e-3
   provider: openai
   save: true
   save-folder: Images/Generated
+  size: 1024x1024
   system: Generate an image based on the given prompt.
-  size: "1024x1024"
-  generation-seconds: 15
   temperature: 0.7
-gather:
-  save-folder: Gather
-  user-agent: NavamAI/1.0
-  user-email: team@navamai.com
-  user-website: https://www.navamai.com
+image-models:
+- dalle3
+- dalle2
 intents:
   lookup-folder: Intents
   max-tokens: 1000
@@ -61,6 +64,8 @@ model-context:
   sonnet: 200000
   sonnet3: 200000
 model-mapping:
+  dalle2: dall-e-2
+  dalle3: dall-e-3
   gemini-flash: gemini-1.5-flash
   gemini-pro: gemini-1.5-pro
   gemma: gemma2
@@ -79,8 +84,6 @@ model-mapping:
   sonar: llama-3.1-sonar-large-128k-online
   sonnet: claude-3-5-sonnet-20240620
   sonnet3: anthropic.claude-3-sonnet-20240229-v1:0
-  dalle3: dall-e-3
-  dalle2: dall-e-2
 provider-model-mapping:
   bedrock:
   - sonnet3
@@ -232,6 +235,3 @@ vision-models:
 - gemini-pro
 - gemini-flash
 - llava
-image-models:
-- dalle3
-- dalle2

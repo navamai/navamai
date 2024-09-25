@@ -129,9 +129,9 @@ def test_validate_response_file_not_found(mock_diff, mock_parse, mock_get_provid
 @patch("navamai.cli.configure.load_config")
 @patch("navamai.cli.utils.get_provider_instance")
 @patch("navamai.cli.markdown.file_select_paginate")
-@patch("navamai.cli.images.resize_image")
-@patch("navamai.cli.images.display_image")
-@patch("navamai.cli.requests.get")
+@patch("navamai.model_vision.images.resize_image")
+@patch("navamai.model_vision.images.display_image")
+@patch("navamai.model_vision.requests.get")
 @patch("navamai.cli.configure.has_vision_capability", return_value=True)
 def test_vision_with_url(mock_has_vision, mock_requests_get, mock_display, mock_resize, mock_file_select, mock_get_provider, mock_load_config, runner, mock_config, mock_provider_instance):
     mock_load_config.return_value = mock_config
@@ -141,7 +141,7 @@ def test_vision_with_url(mock_has_vision, mock_requests_get, mock_display, mock_
     mock_requests_get.return_value.headers = {"content-type": "image/jpeg"}
     mock_requests_get.return_value.status_code = 200
     
-    with patch("navamai.cli.tempfile.NamedTemporaryFile") as mock_temp_file, \
+    with patch("navamai.model_vision.tempfile.NamedTemporaryFile") as mock_temp_file, \
          patch("navamai.cli.os.unlink"), \
          patch("navamai.cli.shutil.copyfileobj"), \
          patch("builtins.open", mock_open()):

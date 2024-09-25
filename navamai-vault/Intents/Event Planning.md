@@ -7,3 +7,6 @@ Prompt: Create a table of popular venues in Redmond WA, including coffee shops a
 # Payment Methods for Event Planning Startup
 
 Prompt: List popular payment methods used for event planning startups, including their pros, cons, setup fees, transaction fees, and any additional charges.
+
+![[Payment Methods for Event Planning Startup.md]]
+
