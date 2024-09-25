@@ -1,14 +1,16 @@
-import navamai.configure as configure
-from rich.console import Console
-import navamai.markdown as markdown
 import os
 import sys
-import click
-import navamai.utils as utils
 from typing import Optional
 
+import click
+from rich.console import Console
+
+import navamai.configure as configure
+import navamai.markdown as markdown
+import navamai.utils as utils
 
 console = Console()
+
 
 def process(section: str, document: Optional[str] = None, prompt: Optional[str] = None):
     source_document, destination_file, custom_prompt = _document_prompt(
@@ -19,6 +21,7 @@ def process(section: str, document: Optional[str] = None, prompt: Optional[str] 
         "source_file": source_document,
         "destination_file": destination_file,
     }
+
 
 def _document_prompt(
     config_section: str, document: Optional[str] = None, prompt: Optional[str] = None
@@ -74,4 +77,3 @@ def _document_prompt(
                 prompt=source_contents, title=f"{file_name} updated"
             )
     return source_document, destination_file, custom_prompt
-

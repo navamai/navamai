@@ -1,10 +1,12 @@
-import navamai.configure as configure
-from rich.console import Console
-import navamai.markdown as markdown
-import navamai.utils as utils
 import os
 import sys
+
 import click
+from rich.console import Console
+
+import navamai.configure as configure
+import navamai.markdown as markdown
+import navamai.utils as utils
 
 console = Console()
 

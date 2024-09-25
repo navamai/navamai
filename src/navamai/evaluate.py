@@ -1,16 +1,18 @@
-import navamai.configure as configure
-from rich.console import Console
-import time
-from rich.live import Live
-import os
 import mimetypes
+import os
+import time
+
+from rich import box
+from rich.console import Console
+from rich.live import Live
 from rich.markdown import Markdown
 from rich.table import Table
-from rich import box
-from navamai import utils
-from navamai import metrics
+
+import navamai.configure as configure
+from navamai import metrics, utils
 
 console = Console()
+
 
 def by_model_config(model_config):
     """Evaluate the specified model configuration across all compatible providers and models."""

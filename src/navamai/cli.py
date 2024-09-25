@@ -1,7 +1,7 @@
 # Copyright 2024 and beyond, NavamAI. All Rights Reserved.
 # https://www.navamai.com/
 # This code is Apache-2.0 licensed. Please see the LICENSE file in our repository for the full license text.
-# You may use this code under the terms of the Apache-2.0 license. 
+# You may use this code under the terms of the Apache-2.0 license.
 # This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 import importlib.resources
@@ -14,21 +14,21 @@ from typing import Optional
 import click
 from rich.console import Console
 
+import navamai.action_intents as action_intents
 import navamai.auditor as auditor
 import navamai.code as code
 import navamai.configure as configure
+import navamai.evaluate as evaluate
 import navamai.gather as gather_utils
+import navamai.generate as generate
 import navamai.markdown as markdown
 import navamai.metrics as metrics
-import navamai.utils as utils
-import navamai.evaluate as evaluate
-import navamai.generate as generate
-import navamai.model_vision as model_vision
-from navamai.utils import trail
-import navamai.validation as validation
 import navamai.model_text as model_text
+import navamai.model_vision as model_vision
 import navamai.reference as reference
-import navamai.action_intents as action_intents
+import navamai.utils as utils
+import navamai.validation as validation
+from navamai.utils import trail
 
 console = Console()
 
@@ -86,6 +86,7 @@ def trends(days):
 @click.argument("model_config", type=click.Choice(["ask", "vision"]))
 def test(model_config):
     evaluate.by_model_config(model_config)
+
 
 @cli.command()
 @click.option(
@@ -162,11 +163,13 @@ def id(section):
     console.print(f"Model Information: [bold magenta]{model_info}[/bold magenta]")
     sys.exit(0)
 
+
 @click.command()
 @click.argument("prompt", required=False)
 @click.option("-t", "--template", help="Path to a prompt template file")
 def image(prompt, template):
     generate.image(prompt, template)
+
 
 @cli.command()
 @click.argument("prompt", required=False)
@@ -186,11 +189,13 @@ def ask(prompt, template):
 def refer(section: str, document: Optional[str] = None, prompt: Optional[str] = None):
     reference.process(section, document, prompt)
 
+
 @cli.command()
 @click.option("-d", "--document", help="Filename of the document to process")
 @trail
 def intents(document):
     action_intents.process(document)
+
 
 @cli.command()
 @click.argument("filename")
@@ -212,6 +217,7 @@ def merge(filename):
 def validate(document):
     validation.validate(document)
 
+
 @cli.command()
 @click.option(
     "-p", "--path", type=click.Path(exists=True), help="Path to the local image file"
@@ -223,6 +229,7 @@ def validate(document):
 @trail
 def vision(path, url, camera, display, prompt):
     model_vision.process(path, url, camera, display, prompt)
+
 
 if __name__ == "__main__":
     cli()

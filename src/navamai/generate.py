@@ -1,15 +1,17 @@
-import navamai.configure as configure
-from rich.console import Console
 import os
-from navamai import utils
-import threading
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
-import time
-import click
-from navamai import markdown
 import sys
+import threading
+import time
+
+import click
+from rich.console import Console
+from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
+
+import navamai.configure as configure
+from navamai import markdown, utils
 
 console = Console()
+
 
 def image(prompt, template):
     config = configure.load_config()
@@ -24,7 +26,9 @@ def image(prompt, template):
     template_prompt = None
 
     if prompt:
-        destination_file = _generate_image_with_progress(provider_instance, prompt, generation_seconds)
+        destination_file = _generate_image_with_progress(
+            provider_instance, prompt, generation_seconds
+        )
     elif template:
         with open(template, "r") as f:
             template_prompt = f.read().strip()
@@ -40,7 +44,9 @@ def image(prompt, template):
             for variable in prompt_variables:
                 value = click.prompt(variable)
                 template_prompt = template_prompt.replace(variable, value)
-        destination_file = _generate_image_with_progress(provider_instance, template_prompt, generation_seconds)
+        destination_file = _generate_image_with_progress(
+            provider_instance, template_prompt, generation_seconds
+        )
     else:
         prompts_dir = image_config.get("lookup-folder")
         if not os.path.exists(prompts_dir):
@@ -65,8 +71,12 @@ def image(prompt, template):
                 )
                 for variable in prompt_variables:
                     value = click.prompt(variable)
-                    template_prompt = template_prompt.replace("{{" + variable + "}}", value)
-            destination_file = _generate_image_with_progress(provider_instance, template_prompt, generation_seconds)
+                    template_prompt = template_prompt.replace(
+                        "{{" + variable + "}}", value
+                    )
+            destination_file = _generate_image_with_progress(
+                provider_instance, template_prompt, generation_seconds
+            )
         else:
             console = Console()
             console.print("[yellow]No file selected. Exiting.[/yellow]")
@@ -97,17 +107,22 @@ def _show_progress(duration, stop_event, progress_complete):
         for remaining in range(duration, 0, -1):
             if stop_event.is_set():
                 break
-            progress.update(task, advance=1, description=f"Generating image in {remaining}s")
+            progress.update(
+                task, advance=1, description=f"Generating image in {remaining}s"
+            )
             time.sleep(1)
-        
+
         if not stop_event.is_set():
             progress.update(task, completed=duration)
             progress_complete.set()
 
+
 def _generate_image_with_progress(provider_instance, prompt, duration):
     stop_event = threading.Event()
     progress_complete = threading.Event()
-    progress_thread = threading.Thread(target=_show_progress, args=(duration, stop_event, progress_complete))
+    progress_thread = threading.Thread(
+        target=_show_progress, args=(duration, stop_event, progress_complete)
+    )
     progress_thread.start()
 
     try:
@@ -120,6 +135,8 @@ def _generate_image_with_progress(provider_instance, prompt, duration):
     if progress_complete.is_set():
         console.print(f"\nImage saved: {destination_file}", style="green")
     else:
-        console.print(f"\nImage generated sooner and saved: {destination_file}", style="green")
+        console.print(
+            f"\nImage generated sooner and saved: {destination_file}", style="green"
+        )
 
     return destination_file

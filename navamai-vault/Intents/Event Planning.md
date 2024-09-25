@@ -4,6 +4,8 @@ Embarking on a journey to establish an event planning business in Redmond, WA in
 
 Prompt: Create a table of popular venues in Redmond WA, including coffee shops and community centers, ranked by foot fall. Add columns for distance from Bellevue Square, cost of renting the venue, capacity, and any notable features.
 
+![[Suitable Venues in Redmond.md]]
+
 # Payment Methods for Event Planning Startup
 
 Prompt: List popular payment methods used for event planning startups, including their pros, cons, setup fees, transaction fees, and any additional charges.

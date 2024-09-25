@@ -1,74 +1,89 @@
-import navamai.configure as configure
-from rich.console import Console
-import navamai.markdown as markdown
 import os
 import sys
-import click
-import navamai.utils as utils
+from functools import partial
 
+import click
+from rich.console import Console
+
+import navamai.configure as configure
+import navamai.markdown as markdown
+import navamai.utils as utils
 
 console = Console()
 
-def process(document):
+
+def load_config_and_select_document(lookup_folder):
     config = configure.load_config()
     model_config = config.get("intents", {})
-    lookup_folder = model_config.get("lookup-folder")
 
-    if not document:
-        console.print("Select from available documents...", style="green")
-        document = markdown.file_select_paginate(lookup_folder)
+    if not lookup_folder:
+        lookup_folder = model_config.get("lookup-folder")
 
+    document = markdown.file_select_paginate(lookup_folder)
     if not document:
         console.print("[yellow]No file selected. Exiting.[/yellow]")
         sys.exit(0)
 
-    intents_template = document
+    return model_config, document
+
+
+def select_intent(intents_content):
+    sections = markdown.parse_markdown_sections(intents_content)
+    console.print("Select from available intents to generate embed...", style="green")
+    return markdown.intent_select_paginate(sections)
+
+
+def handle_existing_file(file_path):
+    if os.path.exists(file_path):
+        return click.confirm(
+            f"A response file '{os.path.basename(file_path)}' already exists. Do you want to replace it?",
+            default=False,
+        )
+    return True
+
+
+def execute_prompt(provider_instance, prompt, title):
+    click.echo(f"Executing prompt: {prompt}")
+    return provider_instance.ask(prompt, title=title)
+
+
+def update_markdown(template_file, title, response_file):
+    markdown.update_markdown_with_response(
+        template_file, title, os.path.basename(response_file)
+    )
+    click.echo(f"Updated {template_file} with response file path.")
+
+
+def process(document=None):
+    model_config, intents_template = load_config_and_select_document(document)
 
     with open(intents_template, "r") as file:
         intents_content = file.read()
 
-    sections = markdown.parse_markdown_sections(intents_content)
-    console.print("Select from available intents to generate embed...", style="green")
-
-    selected_intent = markdown.intent_select_paginate(sections)
-
-    if selected_intent:
-        selected_title, selected_prompt = selected_intent
-    else:
+    selected_intent = select_intent(intents_content)
+    if not selected_intent:
         console.print("No intent selected. Exiting.")
         return
 
-    # Check if a response file already exists
-    response_filename = f"{selected_title}.md"
+    selected_title, selected_prompt = selected_intent
     response_file_path = os.path.join(
-        model_config.get("save-folder"), response_filename
+        model_config.get("save-folder"), f"{selected_title}.md"
     )
 
-    if os.path.exists(response_file_path):
-        replace = click.confirm(
-            f"A response file '{response_filename}' already exists. Do you want to replace it?",
-            default=False,
-        )
-        if not replace:
-            click.echo("Operation cancelled. Existing file will not be replaced.")
-            return
+    if not handle_existing_file(response_file_path):
+        click.echo("Operation cancelled. Existing file will not be replaced.")
+        return
 
-    click.echo(f"Executing prompt: {selected_prompt}")
+    provider = utils.get_provider_instance(model_config.get("provider").lower())
+    provider.set_model_config("intents")
 
-    provider = model_config.get("provider").lower()
+    new_response_file_path = execute_prompt(provider, selected_prompt, selected_title)
 
-    provider_instance = utils.get_provider_instance(provider)
-    provider_instance.set_model_config("intents")
-
-    # Execute the ask method and capture the response file path
-    new_response_file_path = provider_instance.ask(
-        selected_prompt, title=selected_title
-    )
-
-    # Update the Markdown file if a response was saved
     if new_response_file_path:
-        markdown.update_markdown_with_response(
-            intents_template, selected_title, os.path.basename(new_response_file_path)
-        )
-        click.echo(f"Updated {intents_template} with response file path.")
+        update_markdown(intents_template, selected_title, new_response_file_path)
+
     return {"source_file": intents_template, "destination_file": new_response_file_path}
+
+
+if __name__ == "__main__":
+    process()

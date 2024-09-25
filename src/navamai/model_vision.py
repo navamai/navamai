@@ -1,20 +1,23 @@
-import navamai.images as images
 import mimetypes
+import os
+import shutil
+import sys
 import tempfile
+
+import click
+import requests
+from rich.console import Console
 from rich.live import Live
 from rich.markdown import Markdown
 from rich.panel import Panel
-import requests
-import shutil
-import sys
-import os
-import click
-import navamai.utils as utils
-import navamai.markdown as markdown
+
 import navamai.configure as configure
-from rich.console import Console
+import navamai.images as images
+import navamai.markdown as markdown
+import navamai.utils as utils
 
 console = Console()
+
 
 def process(path, url, camera, display, prompt):
     config = configure.load_config()

@@ -1,14 +1,17 @@
 # Copyright 2024 and beyond, NavamAI. All Rights Reserved.
 # https://www.navamai.com/
 # This code is Apache-2.0 licensed. Please see the LICENSE file in our repository for the full license text.
-# You may use this code under the terms of the Apache-2.0 license. 
+# You may use this code under the terms of the Apache-2.0 license.
 # This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
-import pytest
-from unittest.mock import patch, MagicMock
 import os
 import tempfile
+from unittest.mock import MagicMock, patch
+
+import pytest
+
 from navamai.provider import Provider
+
 
 class MockProvider(Provider):
     def create_request_data(self, prompt: str) -> dict:
@@ -17,23 +20,33 @@ class MockProvider(Provider):
     def stream_response(self, prompt: str):
         yield "Test response"
 
-    def stream_vision_response(self, image_data: bytes, prompt: str, media_type: str = None):
+    def stream_vision_response(
+        self, image_data: bytes, prompt: str, media_type: str = None
+    ):
         yield "Test vision response"
+
 
 @pytest.fixture
 def mock_provider():
     return MockProvider()
 
+
 def test_init(mock_provider):
     assert mock_provider.full_config == mock_provider.full_config
-    assert mock_provider.model_config == mock_provider.full_config.get("ask-model-config", {})
+    assert mock_provider.model_config == mock_provider.full_config.get(
+        "ask-model-config", {}
+    )
+
 
 def test_set_model_config(mock_provider):
     mock_provider.set_model_config("test-config")
-    assert mock_provider.model_config == mock_provider.full_config.get("test-config", {})
+    assert mock_provider.model_config == mock_provider.full_config.get(
+        "test-config", {}
+    )
 
-@patch('navamai.provider.Live')
-@patch('navamai.provider.Markdown')
+
+@patch("navamai.provider.Live")
+@patch("navamai.provider.Markdown")
 def test_ask(mock_markdown, mock_live, mock_provider):
     mock_live_instance = MagicMock()
     mock_live.return_value.__enter__.return_value = mock_live_instance
@@ -45,27 +58,33 @@ def test_ask(mock_markdown, mock_live, mock_provider):
     mock_markdown.assert_called()
     assert result is None  # Since save is not set to True in the default config
 
+
 def test_vision(mock_provider):
     image_data = b"fake_image_data"
     prompt = "Describe this image"
     response = list(mock_provider.vision(image_data, prompt))
     assert response == ["Test vision response"]
 
+
 def test_save_response(mock_provider):
     with tempfile.TemporaryDirectory() as temp_dir:
         mock_provider.model_config["save-folder"] = temp_dir
         mock_provider.model_config["save"] = True
 
-        filepath = mock_provider.save_response("Test prompt", "Test response", "Test Title")
+        filepath = mock_provider.save_response(
+            "Test prompt", "Test response", "Test Title"
+        )
 
         assert os.path.exists(filepath)
-        with open(filepath, 'r') as f:
+        with open(filepath, "r") as f:
             content = f.read()
             assert content == "Test response"
+
 
 def test_get_model_info(mock_provider):
     mock_provider.model_config["model"] = "test-model"
     assert mock_provider.get_model_info() == "MockProvider - test-model"
+
 
 def test_resolve_model(mock_provider):
     mock_provider.full_config["model-mapping"] = {"alias": "real-model"}

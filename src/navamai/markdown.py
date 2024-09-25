@@ -1,7 +1,7 @@
 # Copyright 2024 and beyond, NavamAI. All Rights Reserved.
 # https://www.navamai.com/
 # This code is Apache-2.0 licensed. Please see the LICENSE file in our repository for the full license text.
-# You may use this code under the terms of the Apache-2.0 license. 
+# You may use this code under the terms of the Apache-2.0 license.
 # This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 import os
@@ -78,21 +78,22 @@ def extract_variables(template):
 
 def list_files(directory, page=1, files_per_page=10, extensions=None):
     all_files = []
-    
+
     for root, _, files in os.walk(directory):
         for file in files:
             if extensions is None or any(file.endswith(ext) for ext in extensions):
                 relative_path = os.path.relpath(root, directory)
-                if relative_path == '.':
+                if relative_path == ".":
                     all_files.append(file)
                 else:
                     all_files.append(os.path.join(relative_path, file))
-    
+
     all_files.sort()  # Sort the files alphabetically
     total_pages = ceil(len(all_files) / files_per_page)
     start = (page - 1) * files_per_page
     end = start + files_per_page
     return all_files[start:end], total_pages
+
 
 def count_tokens(file_path):
     with open(file_path, "r", encoding="utf-8") as file:

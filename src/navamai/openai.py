@@ -1,17 +1,17 @@
 # Copyright 2024 and beyond, NavamAI. All Rights Reserved.
 # https://www.navamai.com/
 # This code is Apache-2.0 licensed. Please see the LICENSE file in our repository for the full license text.
-# You may use this code under the terms of the Apache-2.0 license. 
+# You may use this code under the terms of the Apache-2.0 license.
 # This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 import base64
+import os
 from typing import Generator
 
 from openai import OpenAI
 
 import navamai.configure as configure
 from navamai.provider import Provider
-import os
 
 
 class Openai(Provider):
@@ -74,13 +74,13 @@ class Openai(Provider):
     def generate_image(self, prompt: str) -> str:
         config = self.model_config
         model = self.resolve_model(config["model"])
-        
+
         response = self.client.images.generate(
             model=model,
             prompt=prompt,
             n=1,
             size=config.get("size", "1024x1024"),
-            response_format="b64_json"
+            response_format="b64_json",
         )
 
         image_data = base64.b64decode(response.data[0].b64_json)

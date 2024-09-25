@@ -1,23 +1,26 @@
 # Copyright 2024 and beyond, NavamAI. All Rights Reserved.
 # https://www.navamai.com/
 # This code is Apache-2.0 licensed. Please see the LICENSE file in our repository for the full license text.
-# You may use this code under the terms of the Apache-2.0 license. 
+# You may use this code under the terms of the Apache-2.0 license.
 # This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 import os
 import re
 import shutil
 import subprocess
-import webbrowser
 import time
+import webbrowser
+
 from rich.console import Console
 
 console = Console()
 
-def open_vite_server():
+
+def _open_vite_server():
     url = "http://localhost:5173"
     console.print(f"Starting the app in browser", style="bold green")
     webbrowser.open(url)
+
 
 def process_markdown_file(file_path, app_folder):
     apps_parent_folder = app_folder
@@ -31,7 +34,9 @@ def process_markdown_file(file_path, app_folder):
 
     # Extract the install script and app folder name
     install_script_match = re.search(
-        r"^#+\s+Install script\n\n```bash\n([\s\S]+?)\n```", content, re.MULTILINE | re.IGNORECASE
+        r"^#+\s+Install script\n\n```bash\n([\s\S]+?)\n```",
+        content,
+        re.MULTILINE | re.IGNORECASE,
     )
     if not install_script_match:
         raise ValueError("Install script not found in the markdown file")
@@ -48,7 +53,7 @@ def process_markdown_file(file_path, app_folder):
     app_folder = app_folder_match.group(1)
 
     full_app_folder = os.path.join(apps_parent_folder, app_folder)
-    
+
     # Remove the app folder if it already exists including all its contents
     if os.path.exists(full_app_folder):
         shutil.rmtree(full_app_folder)
@@ -64,7 +69,7 @@ def process_markdown_file(file_path, app_folder):
     # check if the install script already exists
     if os.path.exists(install_script_path):
         os.remove(install_script_path)
-        
+
     with open(install_script_path, "w") as file:
         file.write(install_script)
 
@@ -127,22 +132,25 @@ def process_markdown_file(file_path, app_folder):
         try:
             # Start the run script in a separate process
             process = subprocess.Popen(
-                ["/bin/bash", run_script_path], 
-                cwd=full_app_folder, 
-                stdout=subprocess.PIPE, 
-                stderr=subprocess.PIPE
+                ["/bin/bash", run_script_path],
+                cwd=full_app_folder,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
             )
-            
+
             # check if "create vite" string is in the install script
             if "create vite" in install_script:
                 time.sleep(5)
-                open_vite_server()
+                _open_vite_server()
 
             # Wait for the process to complete
             stdout, stderr = process.communicate()
-            
+
             if process.returncode != 0:
-                console.print(f"Run script exited with non-zero status: {process.returncode}", style="red")
+                console.print(
+                    f"Run script exited with non-zero status: {process.returncode}",
+                    style="red",
+                )
                 console.print(f"stdout: {stdout.decode()}", style="red")
                 console.print(f"stderr: {stderr.decode()}", style="red")
                 raise subprocess.CalledProcessError(process.returncode, run_script_path)
