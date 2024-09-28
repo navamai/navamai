@@ -1,7 +1,5 @@
 import os
 import sys
-from functools import partial
-
 import click
 from rich.console import Console
 
