@@ -6,29 +6,24 @@
 
 import base64
 import json
-from typing import Generator
+from typing import Any, Dict, Generator
 
 import requests
 from rich.console import Console
 
-import navamai.configure as configure
 from navamai.provider import Provider
 
 console = Console()
-
 
 class Ollama(Provider):
     def __init__(self):
         super().__init__()
         self.base_url = "http://localhost:11434"
-        self.full_config = configure.load_config()
 
-    def create_request_data(self, prompt: str, image_data: bytes = None) -> dict:
+    def _create_base_request_data(self) -> Dict[str, Any]:
         config = self.model_config
-        model = self.resolve_model(config["model"])
-        request_data = {
-            "model": model,
-            "prompt": prompt,
+        return {
+            "model": self.resolve_model(config["model"]),
             "stream": True,
             "system": config["system"],
             "options": {
@@ -37,21 +32,18 @@ class Ollama(Provider):
             },
         }
 
+    def create_request_data(self, prompt: str, image_data: bytes = None) -> Dict[str, Any]:
+        request_data = self._create_base_request_data()
+        request_data["prompt"] = prompt
         if image_data:
             request_data["images"] = [base64.b64encode(image_data).decode("utf-8")]
-
         return request_data
 
-    def stream_response(
-        self, prompt: str, image_data: bytes = None, media_type: str = None
-    ) -> Generator[str, None, None]:
+    def _stream_response(self, request_data: Dict[str, Any]) -> Generator[str, None, None]:
         url = f"{self.base_url}/api/generate"
         headers = {"Content-Type": "application/json"}
-        data = self.create_request_data(prompt, image_data)
-
-        with requests.post(
-            url, headers=headers, data=json.dumps(data), stream=True
-        ) as response:
+        
+        with requests.post(url, headers=headers, data=json.dumps(request_data), stream=True) as response:
             for line in response.iter_lines():
                 if line:
                     chunk = json.loads(line)
@@ -60,12 +52,13 @@ class Ollama(Provider):
                     if chunk.get("done", False):
                         break
 
-    def stream_vision_response(
-        self, image_data: bytes, prompt: str, media_type: str
-    ) -> Generator[str, None, None]:
-        # [TODO] Handle this error gracefully. Not sure returning an empty list is the best way to handle this.
+    def stream_response(self, prompt: str) -> Generator[str, None, None]:
+        request_data = self.create_request_data(prompt)
+        yield from self._stream_response(request_data)
+
+    def stream_vision_response(self, image_data: bytes, prompt: str, media_type: str) -> Generator[str, None, None]:
         if media_type == "image/webp":
             console.print("WebP images are not supported by Ollama Llava", style="red")
-            return []
-        else:
-            return self.stream_response(prompt, image_data, media_type)
+            return
+        request_data = self.create_request_data(prompt, image_data)
+        yield from self._stream_response(request_data)

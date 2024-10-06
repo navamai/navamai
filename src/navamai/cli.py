@@ -66,7 +66,6 @@ def gather(type, url):
     else:
         console.print(f"Invalid type: {type}", style="red")
 
-
 @cli.command()
 @click.argument("filepath", required=True)
 def split(filepath):

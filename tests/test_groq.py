@@ -43,13 +43,6 @@ def test_create_request_data(groq_instance):
     ]
 
 
-def test_stream_vision_response(groq_instance):
-    image_data = b"fake_image_data"
-    prompt = "Describe this image"
-
-    response = groq_instance.stream_vision_response(image_data, prompt)
-    assert response is None  # Expecting None as the method is not implemented
-
 
 @pytest.mark.asyncio
 async def test_stream_response(groq_instance):

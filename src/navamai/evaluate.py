@@ -19,6 +19,7 @@ def by_model_config(model_config):
     config = configure.load_config()
     provider_model_mapping = config.get("provider-model-mapping", {})
     test_config = config.get("test", {})
+    image_models = config.get("image-models", [])  # Get the list of image models
 
     # Store original configuration
     original_provider = config[model_config]["provider"]
@@ -29,6 +30,14 @@ def by_model_config(model_config):
     try:
         for provider, models in provider_model_mapping.items():
             for model in models:
+                # Skip image models when running 'ask' test
+                if model_config == "ask" and model in image_models:
+                    console.print(
+                        f"Skipping {provider} - {model} as it's in the image-models list.",
+                        style="yellow",
+                    )
+                    continue
+
                 # Update the configuration
                 config[model_config]["provider"] = provider
                 config[model_config]["model"] = model
@@ -61,9 +70,7 @@ def by_model_config(model_config):
                                 "Config": model_config,
                                 "Status": "Skipped",
                                 "Details": "Not in vision-models list",
-                                "Response Time": float(
-                                    "inf"
-                                ),  # Use infinity for sorting purposes
+                                "Response Time": float("inf"),
                                 "Token Count": "N/A",
                             }
                         )
@@ -112,7 +119,7 @@ def by_model_config(model_config):
                         }
                     )
 
-                    # NEW: Save test summary to YAML
+                    # Save test summary to YAML
                     metrics.save_test_summary(
                         provider,
                         config[model_config]["model"],
@@ -136,14 +143,12 @@ def by_model_config(model_config):
                             "Config": model_config,
                             "Status": "Error",
                             "Details": error_message,
-                            "Response Time": float(
-                                "inf"
-                            ),  # Use infinity for sorting purposes
+                            "Response Time": float("inf"),
                             "Token Count": "N/A",
                         }
                     )
 
-                    # NEW: Save error summary to YAML
+                    # Save error summary to YAML
                     metrics.save_test_summary(
                         provider,
                         config[model_config]["model"],

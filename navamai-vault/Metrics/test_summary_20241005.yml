@@ -1,0 +1,1050 @@
+'2024-10-05T20:52:19.196111':
+  bedrock:
+    sonnet3:
+      ask:
+        details: 'An error occurred (ValidationException) when calling the InvokeModelWithResponseStream
+          operation: Malformed input request: #: subject must not be valid against
+          schema {"required":["messages"]}#: extraneous key [model] is not permitted,
+          please reformat your input and try again.'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:52:19.531160':
+  bedrock:
+    haiku3:
+      ask:
+        details: 'An error occurred (ValidationException) when calling the InvokeModelWithResponseStream
+          operation: Malformed input request: #: subject must not be valid against
+          schema {"required":["messages"]}#: extraneous key [model] is not permitted,
+          please reformat your input and try again.'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:52:24.404104':
+  claude:
+    sonnet:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 4.742637872695923
+        status: Success
+        token_count: 231
+'2024-10-05T20:52:31.058382':
+  claude:
+    opus:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 6.637962102890015
+        status: Success
+        token_count: 149
+'2024-10-05T20:52:33.005084':
+  claude:
+    haiku:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.908808946609497
+        status: Success
+        token_count: 191
+'2024-10-05T20:52:33.020777':
+  gemini:
+    gemini-pro:
+      ask:
+        details: Can't instantiate abstract class Gemini without an implementation
+          for abstract method '_stream_response'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:52:33.031602':
+  gemini:
+    gemini-flash:
+      ask:
+        details: Can't instantiate abstract class Gemini without an implementation
+          for abstract method '_stream_response'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:52:33.042970':
+  groq:
+    mixtral:
+      ask:
+        details: Can't instantiate abstract class Groq without an implementation for
+          abstract method '_stream_response'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:52:36.421037':
+  ollama:
+    llama:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.3610029220581055
+        status: Success
+        token_count: 41
+'2024-10-05T20:52:39.731714':
+  ollama:
+    llava:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.245741844177246
+        status: Success
+        token_count: 46
+'2024-10-05T20:52:43.697455':
+  ollama:
+    mistral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.941045045852661
+        status: Success
+        token_count: 15
+'2024-10-05T20:52:47.247342':
+  ollama:
+    gemma:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.5355398654937744
+        status: Success
+        token_count: 19
+'2024-10-05T20:52:49.928795':
+  ollama:
+    qwen:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.6524269580841064
+        status: Success
+        token_count: 19
+'2024-10-05T20:52:51.005974':
+  openai:
+    gpt4o:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.0380380153656006
+        status: Success
+        token_count: 61
+'2024-10-05T20:52:52.119127':
+  openai:
+    gpt4mini:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.0752427577972412
+        status: Success
+        token_count: 47
+'2024-10-05T20:52:52.491458':
+  openai:
+    o1m:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Unsupported value:
+          ''messages[0].role'' does not support ''system'' with this model.", ''type'':
+          ''invalid_request_error'', ''param'': ''messages[0].role'', ''code'': ''unsupported_value''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:52:53.211531':
+  openai:
+    o1p:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Unsupported value:
+          ''messages[0].role'' does not support ''system'' with this model.", ''type'':
+          ''invalid_request_error'', ''param'': ''messages[0].role'', ''code'': ''unsupported_value''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:52:53.407991':
+  openai:
+    dalle3:
+      ask:
+        details: 'Error code: 403 - {''error'': {''message'': ''You are not allowed
+          to sample from this model'', ''type'': ''invalid_request_error'', ''param'':
+          None, ''code'': None}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:52:53.631218':
+  openai:
+    dalle2:
+      ask:
+        details: 'Error code: 403 - {''error'': {''message'': ''You are not allowed
+          to sample from this model'', ''type'': ''invalid_request_error'', ''param'':
+          None, ''code'': None}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:52:53.656441':
+  perplexity:
+    sonar:
+      ask:
+        details: Can't instantiate abstract class Perplexity without an implementation
+          for abstract method '_stream_response'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:53:40.693763':
+  bedrock:
+    sonnet3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.578683853149414
+        status: Success
+        token_count: 48
+'2024-10-05T20:53:41.442527':
+  bedrock:
+    haiku3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.7303550243377686
+        status: Success
+        token_count: 29
+'2024-10-05T20:53:44.981276':
+  claude:
+    sonnet:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.4857420921325684
+        status: Success
+        token_count: 159
+'2024-10-05T20:53:47.854121':
+  claude:
+    opus:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.8280248641967773
+        status: Success
+        token_count: 49
+'2024-10-05T20:53:48.614998':
+  claude:
+    haiku:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.71026611328125
+        status: Success
+        token_count: 39
+'2024-10-05T20:53:50.016199':
+  gemini:
+    gemini-pro:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.372298002243042
+        status: Success
+        token_count: 15
+'2024-10-05T20:53:50.620645':
+  gemini:
+    gemini-flash:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.5608670711517334
+        status: Success
+        token_count: 24
+'2024-10-05T20:53:51.498035':
+  groq:
+    mixtral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.8302719593048096
+        status: Success
+        token_count: 58
+'2024-10-05T20:53:55.535138':
+  ollama:
+    llama:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 4.005122900009155
+        status: Success
+        token_count: 84
+'2024-10-05T20:53:58.397068':
+  ollama:
+    llava:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.821849822998047
+        status: Success
+        token_count: 51
+'2024-10-05T20:54:00.703768':
+  ollama:
+    mistral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.2646400928497314
+        status: Success
+        token_count: 25
+'2024-10-05T20:54:04.309601':
+  ollama:
+    gemma:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.5567238330841064
+        status: Success
+        token_count: 19
+'2024-10-05T20:54:07.013631':
+  ollama:
+    qwen:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.661776065826416
+        status: Success
+        token_count: 25
+'2024-10-05T20:54:07.905443':
+  openai:
+    gpt4o:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.8378307819366455
+        status: Success
+        token_count: 58
+'2024-10-05T20:54:08.788787':
+  openai:
+    gpt4mini:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.8261899948120117
+        status: Success
+        token_count: 46
+'2024-10-05T20:54:09.116264':
+  openai:
+    o1m:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Unsupported value:
+          ''messages[0].role'' does not support ''system'' with this model.", ''type'':
+          ''invalid_request_error'', ''param'': ''messages[0].role'', ''code'': ''unsupported_value''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:54:09.498991':
+  openai:
+    o1p:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Unsupported value:
+          ''messages[0].role'' does not support ''system'' with this model.", ''type'':
+          ''invalid_request_error'', ''param'': ''messages[0].role'', ''code'': ''unsupported_value''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:54:09.700586':
+  openai:
+    dalle3:
+      ask:
+        details: 'Error code: 403 - {''error'': {''message'': ''You are not allowed
+          to sample from this model'', ''type'': ''invalid_request_error'', ''param'':
+          None, ''code'': None}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:54:09.902063':
+  openai:
+    dalle2:
+      ask:
+        details: 'Error code: 403 - {''error'': {''message'': ''You are not allowed
+          to sample from this model'', ''type'': ''invalid_request_error'', ''param'':
+          None, ''code'': None}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:54:13.332015':
+  perplexity:
+    sonar:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.3838889598846436
+        status: Success
+        token_count: 189
+'2024-10-05T20:55:00.671540':
+  bedrock:
+    sonnet3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.9023611545562744
+        status: Success
+        token_count: 73
+'2024-10-05T20:55:01.483116':
+  bedrock:
+    haiku3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.7863202095031738
+        status: Success
+        token_count: 46
+'2024-10-05T20:55:05.117332':
+  claude:
+    sonnet:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.5738182067871094
+        status: Success
+        token_count: 156
+'2024-10-05T20:55:08.450495':
+  claude:
+    opus:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.2771170139312744
+        status: Success
+        token_count: 64
+'2024-10-05T20:55:09.093723':
+  claude:
+    haiku:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.5793330669403076
+        status: Success
+        token_count: 42
+'2024-10-05T20:55:10.339860':
+  gemini:
+    gemini-pro:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.1904020309448242
+        status: Success
+        token_count: 20
+'2024-10-05T20:55:11.094527':
+  gemini:
+    gemini-flash:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.7059929370880127
+        status: Success
+        token_count: 24
+'2024-10-05T20:55:11.713131':
+  groq:
+    mixtral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.5584511756896973
+        status: Success
+        token_count: 74
+'2024-10-05T20:55:14.518005':
+  ollama:
+    llama:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.771725654602051
+        status: Success
+        token_count: 25
+'2024-10-05T20:55:20.219857':
+  ollama:
+    llava:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 5.653723955154419
+        status: Success
+        token_count: 131
+'2024-10-05T20:55:23.328783':
+  ollama:
+    mistral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.0653610229492188
+        status: Success
+        token_count: 25
+'2024-10-05T20:55:26.435464':
+  ollama:
+    gemma:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.0577809810638428
+        status: Success
+        token_count: 19
+'2024-10-05T20:55:29.224130':
+  ollama:
+    qwen:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.7411599159240723
+        status: Success
+        token_count: 27
+'2024-10-05T20:55:30.017476':
+  openai:
+    gpt4o:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.7382028102874756
+        status: Success
+        token_count: 31
+'2024-10-05T20:55:30.855017':
+  openai:
+    gpt4mini:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.7790126800537109
+        status: Success
+        token_count: 44
+'2024-10-05T20:55:31.208678':
+  openai:
+    o1m:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Unsupported value:
+          ''messages[0].role'' does not support ''system'' with this model.", ''type'':
+          ''invalid_request_error'', ''param'': ''messages[0].role'', ''code'': ''unsupported_value''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:55:31.566375':
+  openai:
+    o1p:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Unsupported value:
+          ''messages[0].role'' does not support ''system'' with this model.", ''type'':
+          ''invalid_request_error'', ''param'': ''messages[0].role'', ''code'': ''unsupported_value''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:55:31.763698':
+  openai:
+    dalle3:
+      ask:
+        details: 'Error code: 403 - {''error'': {''message'': ''You are not allowed
+          to sample from this model'', ''type'': ''invalid_request_error'', ''param'':
+          None, ''code'': None}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:55:31.956934':
+  openai:
+    dalle2:
+      ask:
+        details: 'Error code: 403 - {''error'': {''message'': ''You are not allowed
+          to sample from this model'', ''type'': ''invalid_request_error'', ''param'':
+          None, ''code'': None}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T20:55:33.642285':
+  perplexity:
+    sonar:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.6316118240356445
+        status: Success
+        token_count: 50
+'2024-10-05T20:56:42.478936':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 2.8453609943389893
+        status: Success
+        token_count: 84
+'2024-10-05T20:56:48.968939':
+  claude:
+    opus:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 6.449234962463379
+        status: Success
+        token_count: 43
+'2024-10-05T20:56:50.118371':
+  claude:
+    haiku:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 1.0810680389404297
+        status: Success
+        token_count: 8
+'2024-10-05T20:56:52.656424':
+  gemini:
+    gemini-pro:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 2.451647996902466
+        status: Success
+        token_count: 3
+'2024-10-05T20:56:53.647443':
+  gemini:
+    gemini-flash:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 0.9257211685180664
+        status: Success
+        token_count: 1
+'2024-10-05T20:56:56.016207':
+  ollama:
+    llava:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 2.304347038269043
+        status: Success
+        token_count: 31
+'2024-10-05T20:56:59.030394':
+  openai:
+    gpt4o:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 2.939507007598877
+        status: Success
+        token_count: 11
+'2024-10-05T20:57:03.386388':
+  openai:
+    gpt4mini:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 4.299219846725464
+        status: Success
+        token_count: 14
+'2024-10-05T21:01:47.508976':
+  claude:
+    sonnet:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 3.24684476852417
+        status: Success
+        token_count: 111
+'2024-10-05T21:01:54.556026':
+  claude:
+    opus:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 7.003490209579468
+        status: Success
+        token_count: 71
+'2024-10-05T21:01:55.940471':
+  claude:
+    haiku:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 1.281958818435669
+        status: Success
+        token_count: 27
+'2024-10-05T21:01:57.628327':
+  gemini:
+    gemini-pro:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 1.6208279132843018
+        status: Success
+        token_count: 3
+'2024-10-05T21:01:58.633342':
+  gemini:
+    gemini-flash:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 0.9388828277587891
+        status: Success
+        token_count: 1
+'2024-10-05T21:02:01.279836':
+  ollama:
+    llava:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 2.5804378986358643
+        status: Success
+        token_count: 30
+'2024-10-05T21:02:04.139196':
+  openai:
+    gpt4o:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 2.781770944595337
+        status: Success
+        token_count: 18
+'2024-10-05T21:02:08.606829':
+  openai:
+    gpt4mini:
+      vision:
+        details: Command executed successfully
+        prompt: How many people are in the image?
+        response_time: 4.41097092628479
+        status: Success
+        token_count: 10
+'2024-10-05T21:02:17.278397':
+  bedrock:
+    sonnet3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.4442691802978516
+        status: Success
+        token_count: 54
+'2024-10-05T21:02:18.145733':
+  bedrock:
+    haiku3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.8296759128570557
+        status: Success
+        token_count: 43
+'2024-10-05T21:02:21.467075':
+  claude:
+    sonnet:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.2232718467712402
+        status: Success
+        token_count: 157
+'2024-10-05T21:02:24.013300':
+  claude:
+    opus:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.4761509895324707
+        status: Success
+        token_count: 47
+'2024-10-05T21:02:24.597690':
+  claude:
+    haiku:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.5086500644683838
+        status: Success
+        token_count: 29
+'2024-10-05T21:02:25.946142':
+  gemini:
+    gemini-pro:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.2788641452789307
+        status: Success
+        token_count: 15
+'2024-10-05T21:02:26.538197':
+  gemini:
+    gemini-flash:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.5425100326538086
+        status: Success
+        token_count: 24
+'2024-10-05T21:02:26.942150':
+  groq:
+    mixtral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.33292388916015625
+        status: Success
+        token_count: 86
+'2024-10-05T21:02:30.324442':
+  ollama:
+    llama:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.328144073486328
+        status: Success
+        token_count: 52
+'2024-10-05T21:02:35.908937':
+  ollama:
+    llava:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 5.519705057144165
+        status: Success
+        token_count: 205
+'2024-10-05T21:02:39.647547':
+  ollama:
+    mistral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.675459146499634
+        status: Success
+        token_count: 21
+'2024-10-05T21:02:43.027788':
+  ollama:
+    gemma:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.316572904586792
+        status: Success
+        token_count: 19
+'2024-10-05T21:02:45.748743':
+  ollama:
+    qwen:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.660621166229248
+        status: Success
+        token_count: 19
+'2024-10-05T21:02:46.875489':
+  openai:
+    gpt4o:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.0531492233276367
+        status: Success
+        token_count: 57
+'2024-10-05T21:02:48.301305':
+  openai:
+    gpt4mini:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.355259895324707
+        status: Success
+        token_count: 45
+'2024-10-05T21:02:48.776890':
+  openai:
+    o1m:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Unsupported value:
+          ''messages[0].role'' does not support ''system'' with this model.", ''type'':
+          ''invalid_request_error'', ''param'': ''messages[0].role'', ''code'': ''unsupported_value''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T21:02:49.243241':
+  openai:
+    o1p:
+      ask:
+        details: 'Error code: 400 - {''error'': {''message'': "Unsupported value:
+          ''messages[0].role'' does not support ''system'' with this model.", ''type'':
+          ''invalid_request_error'', ''param'': ''messages[0].role'', ''code'': ''unsupported_value''}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T21:02:49.611240':
+  openai:
+    dalle3:
+      ask:
+        details: 'Error code: 403 - {''error'': {''message'': ''You are not allowed
+          to sample from this model'', ''type'': ''invalid_request_error'', ''param'':
+          None, ''code'': None}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T21:02:50.022446':
+  openai:
+    dalle2:
+      ask:
+        details: 'Error code: 403 - {''error'': {''message'': ''You are not allowed
+          to sample from this model'', ''type'': ''invalid_request_error'', ''param'':
+          None, ''code'': None}}'
+        prompt: How old is the oldest pyramid?
+        response_time: .inf
+        status: Error
+        token_count: N/A
+'2024-10-05T21:02:53.167522':
+  perplexity:
+    sonar:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.069406032562256
+        status: Success
+        token_count: 139
+'2024-10-05T21:08:01.811974':
+  bedrock:
+    sonnet3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.7797131538391113
+        status: Success
+        token_count: 58
+'2024-10-05T21:08:02.654295':
+  bedrock:
+    haiku3:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.7985329627990723
+        status: Success
+        token_count: 38
+'2024-10-05T21:08:06.615946':
+  claude:
+    sonnet:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.8751590251922607
+        status: Success
+        token_count: 178
+'2024-10-05T21:08:10.125764':
+  claude:
+    opus:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.4345719814300537
+        status: Success
+        token_count: 69
+'2024-10-05T21:08:10.885381':
+  claude:
+    haiku:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.6777780055999756
+        status: Success
+        token_count: 49
+'2024-10-05T21:08:12.229563':
+  gemini:
+    gemini-pro:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 1.2714190483093262
+        status: Success
+        token_count: 19
+'2024-10-05T21:08:12.822578':
+  gemini:
+    gemini-flash:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.5134201049804688
+        status: Success
+        token_count: 24
+'2024-10-05T21:08:13.593342':
+  groq:
+    mixtral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.6855478286743164
+        status: Success
+        token_count: 43
+'2024-10-05T21:08:16.485364':
+  ollama:
+    llama:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.8246219158172607
+        status: Success
+        token_count: 77
+'2024-10-05T21:08:20.820945':
+  ollama:
+    llava:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 4.262947082519531
+        status: Success
+        token_count: 115
+'2024-10-05T21:08:25.169039':
+  ollama:
+    mistral:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 4.2473437786102295
+        status: Success
+        token_count: 21
+'2024-10-05T21:08:29.699744':
+  ollama:
+    gemma:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 4.445486068725586
+        status: Success
+        token_count: 20
+'2024-10-05T21:08:32.418141':
+  ollama:
+    qwen:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 2.6466169357299805
+        status: Success
+        token_count: 19
+'2024-10-05T21:08:33.385272':
+  openai:
+    gpt4o:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.8859930038452148
+        status: Success
+        token_count: 60
+'2024-10-05T21:08:34.340045':
+  openai:
+    gpt4mini:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 0.8746559619903564
+        status: Success
+        token_count: 39
+'2024-10-05T21:08:38.051742':
+  perplexity:
+    sonar:
+      ask:
+        details: Command executed successfully
+        prompt: How old is the oldest pyramid?
+        response_time: 3.631843090057373
+        status: Success
+        token_count: 174

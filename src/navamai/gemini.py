@@ -5,7 +5,7 @@
 # This code is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 import os
-from typing import Generator
+from typing import Any, Dict, Generator, List
 
 import google.generativeai as genai
 
@@ -22,31 +22,33 @@ class Gemini(Provider):
         genai.configure(api_key=api_key)
         self.full_config = configure.load_config()
 
-    def create_request_data(
-        self, prompt: str, image_data: bytes = None, media_type: str = None
-    ) -> dict:
+    def _create_base_request_data(self) -> Dict[str, Any]:
         config = self.model_config
-        model = self.resolve_model(config["model"])
-
-        contents = []
-
-        if image_data:
-            # image = Image.open(io.BytesIO(image_data))
-            contents.append({"mime_type": media_type, "data": image_data})
-
-        contents.append(config["system"] + "\n\n" + prompt)
-
         return {
-            "model": model,
+            "model": self.resolve_model(config["model"]),
             "max_output_tokens": config["max-tokens"],
             "temperature": config["temperature"],
-            "contents": contents,
         }
 
-    def stream_response(
+    def _create_message_content(
         self, prompt: str, image_data: bytes = None, media_type: str = None
+    ) -> List[Any]:
+        contents = []
+        if image_data:
+            contents.append({"mime_type": media_type, "data": image_data})
+        contents.append(self.model_config["system"] + "\n\n" + prompt)
+        return contents
+
+    def create_request_data(
+        self, prompt: str, image_data: bytes = None, media_type: str = None
+    ) -> Dict[str, Any]:
+        request_data = self._create_base_request_data()
+        request_data["contents"] = self._create_message_content(prompt, image_data, media_type)
+        return request_data
+
+    def _stream_response(
+        self, request_data: Dict[str, Any]
     ) -> Generator[str, None, None]:
-        request_data = self.create_request_data(prompt, image_data, media_type)
         model = genai.GenerativeModel(request_data["model"])
         response = model.generate_content(
             request_data["contents"],
@@ -60,7 +62,12 @@ class Gemini(Provider):
             if chunk.text:
                 yield chunk.text
 
+    def stream_response(self, prompt: str) -> Generator[str, None, None]:
+        request_data = self.create_request_data(prompt)
+        yield from self._stream_response(request_data)
+
     def stream_vision_response(
         self, image_data: bytes, prompt: str, media_type: str
     ) -> Generator[str, None, None]:
-        return self.stream_response(prompt, image_data, media_type)
+        request_data = self.create_request_data(prompt, image_data, media_type)
+        yield from self._stream_response(request_data)

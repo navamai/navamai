@@ -78,27 +78,6 @@ async def test_stream_response(openai_instance):
     )
 
 
-def test_create_vision_request_data(openai_instance):
-    openai_instance.model_config = {
-        "model": "gpt-4-vision-preview",
-        "max-tokens": 1000,
-        "temperature": 0.7,
-        "system": "You are a helpful assistant.",
-    }
-
-    prompt = "Describe this image"
-    image_data = b"fake_image_data"
-    request_data = openai_instance.create_vision_request_data(image_data, prompt)
-
-    assert request_data["model"] == "gpt-4-vision-preview"
-    assert request_data["max_tokens"] == 1000
-    assert request_data["temperature"] == 0.7
-    assert len(request_data["messages"]) == 2
-    assert request_data["messages"][1]["content"][0]["type"] == "image_url"
-    assert request_data["messages"][1]["content"][1]["type"] == "text"
-    assert request_data["messages"][1]["content"][1]["text"] == "Describe this image"
-
-
 @pytest.mark.asyncio
 async def test_stream_vision_response(openai_instance):
     openai_instance.model_config = {

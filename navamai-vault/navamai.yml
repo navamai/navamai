@@ -4,7 +4,7 @@ ask:
   model: sonnet
   prompts-folder: Prompts
   provider: claude
-  save: false
+  save: true
   save-folder: Posts
   system: Only respond to the prompt using valid markdown syntax. Do not explain your
     response.
@@ -56,8 +56,6 @@ model-context:
   llava: 4096
   mistral: 128000
   mixtral: 32000
-  o1m: 128000
-  o1p: 128000
   opus: 200000
   qwen: 128000
   sonar: 128000
@@ -77,8 +75,6 @@ model-mapping:
   llava: llava
   mistral: mistral-nemo
   mixtral: mixtral-8x7b-32768
-  o1m: o1-mini
-  o1p: o1-preview
   opus: claude-3-opus-20240229
   qwen: qwen2
   sonar: llama-3.1-sonar-large-128k-online
@@ -106,8 +102,6 @@ provider-model-mapping:
   openai:
   - gpt4o
   - gpt4mini
-  - o1m
-  - o1p
   - dalle3
   - dalle2
   perplexity:
