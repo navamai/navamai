@@ -1,23 +1,47 @@
 ## Create Streamlit App
 
-Create a web app with the following description: {{DESCRIPTION}}
-Use the following stack and guidelines:
+Your job is to create Streamlit app.
 
-Framework: Streamlit
-Styling: Native Streamlit components + Custom CSS (if needed)
-Data visualization: Plotly, Matplotlib, or Altair
-Data storage: Local file system or SQLite database
-Additional libraries: Include via pip as needed
-Language: Python
+Think step by step to create a user friendly, pleasing, and interactive app.
 
-Provide key code snippets for the main functionality, including:
-1. app.py as the main script
-2. Any crucial custom functions or classes
-3. State management setup (using Streamlit session state)
-4. Data loading and processing implementation
+1. Study description of the app carefully as provided here:
 
-Remember to prioritize writing the fewest possible lines of code while maintaining functionality and readability. Utilize Streamlit's built-in components and functions where appropriate to minimize custom code.
-Ensure all functionality runs locally without requiring any cloud services.
+{{DESCRIPTION}}
+
+2. Think of how to represent the description as features in the app.
+3. Think of appropriate structure for user experience.
+4. Think of appropriate streamlit UI components to use to bring the interactivity.
+5. Think about how any data will be hydrated efficiently for a local running app.
+6. Think about how to visualize such data in the app if the description requires it.
+7. Use from the list of following libraries based on the app requirements:
+    navamai
+    streamlit-extras
+    streamlit-aggrid
+    plotly
+    altair
+    matplotlib
+    seaborn
+    bokeh
+    pydeck
+    streamlit-option-menu
+    streamlit-lottie
+    streamlit-folium
+    streamlit-ace
+    streamlit-authenticator
+    streamlit-bokeh-events
+    streamlit-elements
+    pandas
+    numpy
+    scipy
+    scikit-learn
+    tensorflow  # or pytorch
+    requests
+    streamlit-gsheets
+    streamlit-autorefresh
+    streamlit-camera-input-live
+    streamlit-toggle-switch
+    streamlit-embedcode
+8. Create an app naming it based on the description provided.
 
 Generate code for the entire app as a markdown formatted response with separate code blocks for each file. Each code block should be preceded with a level 2 heading - File: file-name.ext. 
 
@@ -25,7 +49,8 @@ Start the response with a level 2 heading with name of the app based on the desc
 
 Also create a level 2 heading "Install script".
 Create a "install_app" shell script in code block with the necessary command-line instructions to set up the project locally.
-Ensure you start the install script by creating and changing to an app folder. Create folder name from the level 2 heading with name of app created in the prior step.
+Ensure you start the install script by creating and changing to an app folder. Create folder name from the level 2 heading with name of app created in the prior step 8.
+
 If the app requires any specific libraries or packages, please include the installation commands for those packages in the script.
 
 Create a level 2 heading "Run script".

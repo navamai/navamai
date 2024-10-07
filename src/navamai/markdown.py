@@ -79,7 +79,11 @@ def extract_variables(template):
 def list_files(directory, page=1, files_per_page=10, extensions=None):
     all_files = []
 
-    for root, _, files in os.walk(directory):
+    for root, dirs, files in os.walk(directory):
+        # Skip __pycache__ directories
+        if '__pycache__' in dirs:
+            dirs.remove('__pycache__')
+        
         for file in files:
             if extensions is None or any(file.endswith(ext) for ext in extensions):
                 relative_path = os.path.relpath(root, directory)

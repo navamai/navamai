@@ -1,30 +1,33 @@
 ask:
   lookup-folder: Raw
-  max-tokens: 500
+  max-tokens: 4000
   model: sonnet
-  prompts-folder: Prompts
   provider: claude
-  save: false
-  save-folder: Posts
+  prompts-folder: Prompts
+  save: true
+  save-folder: Code
   system: Only respond to the prompt using valid markdown syntax. Do not explain your
     response.
-  temperature: 0.5
+  temperature: 0.1
+gather:
+  save-folder: Gather
+  user-agent: NavamAI/1.0
+  user-email: team@navamai.com
+  user-website: https://www.navamai.com
 image:
+  generation-seconds: 15
   lookup-folder: Prompts/ImageGen
   max-tokens: 300
   model: dall-e-3
   provider: openai
   save: true
   save-folder: Images/Generated
+  size: 1024x1024
   system: Generate an image based on the given prompt.
-  size: "1024x1024"
-  generation-seconds: 15
   temperature: 0.7
-gather:
-  save-folder: Gather
-  user-agent: NavamAI/1.0
-  user-email: team@navamai.com
-  user-website: https://www.navamai.com
+image-models:
+- dalle3
+- dalle2
 intents:
   lookup-folder: Intents
   max-tokens: 1000
@@ -53,14 +56,14 @@ model-context:
   llava: 4096
   mistral: 128000
   mixtral: 32000
-  o1m: 128000
-  o1p: 128000
   opus: 200000
   qwen: 128000
   sonar: 128000
   sonnet: 200000
   sonnet3: 200000
 model-mapping:
+  dalle2: dall-e-2
+  dalle3: dall-e-3
   gemini-flash: gemini-1.5-flash
   gemini-pro: gemini-1.5-pro
   gemma: gemma2
@@ -72,15 +75,11 @@ model-mapping:
   llava: llava
   mistral: mistral-nemo
   mixtral: mixtral-8x7b-32768
-  o1m: o1-mini
-  o1p: o1-preview
   opus: claude-3-opus-20240229
   qwen: qwen2
   sonar: llama-3.1-sonar-large-128k-online
   sonnet: claude-3-5-sonnet-20240620
   sonnet3: anthropic.claude-3-sonnet-20240229-v1:0
-  dalle3: dall-e-3
-  dalle2: dall-e-2
 provider-model-mapping:
   bedrock:
   - sonnet3
@@ -103,8 +102,6 @@ provider-model-mapping:
   openai:
   - gpt4o
   - gpt4mini
-  - o1m
-  - o1p
   - dalle3
   - dalle2
   perplexity:
@@ -163,7 +160,7 @@ refer-iterate-code:
     improve the code blocks. Respond with the updated markdown file replacing the
     improved code blocks. Do not remove any sections, code blocks, or headings. Add
     "Updates" heading and mention the changes made. Do not explain your response.
-  temperature: 0.5
+  temperature: 0.1
 refer-post-to-update:
   lookup-folder: Posts
   max-tokens: 4000
@@ -232,6 +229,3 @@ vision-models:
 - gemini-pro
 - gemini-flash
 - llava
-image-models:
-- dalle3
-- dalle2

@@ -1,14 +1,14 @@
 ask:
   lookup-folder: Raw
-  max-tokens: 500
+  max-tokens: 4000
   model: sonnet
-  prompts-folder: Prompts
   provider: claude
+  prompts-folder: Prompts
   save: true
-  save-folder: Posts
+  save-folder: Code
   system: Only respond to the prompt using valid markdown syntax. Do not explain your
     response.
-  temperature: 0.5
+  temperature: 0.1
 gather:
   save-folder: Gather
   user-agent: NavamAI/1.0
@@ -160,7 +160,7 @@ refer-iterate-code:
     improve the code blocks. Respond with the updated markdown file replacing the
     improved code blocks. Do not remove any sections, code blocks, or headings. Add
     "Updates" heading and mention the changes made. Do not explain your response.
-  temperature: 0.5
+  temperature: 0.1
 refer-post-to-update:
   lookup-folder: Posts
   max-tokens: 4000
