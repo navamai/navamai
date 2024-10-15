@@ -7,7 +7,6 @@
 import os
 from datetime import datetime, timedelta
 
-import tiktoken
 import yaml
 from rich import box
 from rich.columns import Columns
@@ -19,14 +18,14 @@ console = Console()
 
 
 def count_tokens(text):
-    """Count the number of tokens in the given text."""
-    try:
-        encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
-        return len(encoding.encode(text))
-    except Exception:
-        # Fallback to a simple word count if tiktoken fails
-        return len(text.split())
-
+    """Estimate the number of tokens in the given text."""
+    # Count words
+    words = text.split()
+    
+    # Estimate tokens (assuming average of 1.3 tokens per word)
+    estimated_tokens = int(len(words) * 1.3)
+    
+    return estimated_tokens
 
 def generate_yaml_data(
     provider, model, config, prompt, status, details, response_time, token_count

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "navamai"
-version = "0.1.63"
+version = "0.1.66"
 description = "Use NavamAI to supercharge your productivity and workflow with personal, fast, and quality AI. Turn your Terminal into a configurable, interactive, and unobtrusive personal AI app. Power of 15 LLMs and 7 providers at your finger tips. Pair with workflows in Markdown, VS Code, Obsidian, and GitHub. Get productive fast with three simple commands."
 authors = ["NavamAI <team@navamai.com>"]
 license = "Apache-2.0"
@@ -11,7 +11,6 @@ packages = [{ include = "navamai", from = "src" }]
 [tool.poetry.dependencies]
 python = "^3.12"
 click = "^8.1.7"
-tiktoken = "^0.7.0"
 rich = "^13.7.1"
 requests = "^2.32.3"
 lxml = {extras = ["html_clean"], version = "^4.6.3"}

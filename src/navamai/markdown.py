@@ -9,17 +9,18 @@ import re
 from difflib import SequenceMatcher
 from math import ceil
 
-import tiktoken
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
+import chardet
+import imghdr
 
 from navamai import configure
 
 console = Console()
 
 
-def split_text_by_tokens(file_path, model="gpt-3.5-turbo"):
+def split_text_by_tokens(file_path):
     config = configure.load_config()
     split_config = config.get("split")
     target_model = split_config.get("model")
@@ -27,33 +28,33 @@ def split_text_by_tokens(file_path, model="gpt-3.5-turbo"):
     context_config = config.get("model-context")
     context_window = context_config.get(target_model)
     token_limit = round(context_window * ratio, 0)
-    # Initialize the tokenizer
-    enc = tiktoken.encoding_for_model(model)
 
     # Read the entire file
     with open(file_path, "r", encoding="utf-8") as file:
         text = file.read()
 
-    # Tokenize the entire text
-    tokens = enc.encode(text)
+    # Approximate token count using word count
+    words = text.split()
+    estimated_tokens = len(words) * 1.3  # Assuming average of 1.3 tokens per word
 
-    # Split the tokens into chunks
+    # Split the text into chunks
     chunks = []
     current_chunk = []
     current_chunk_tokens = 0
 
-    for token in tokens:
-        if current_chunk_tokens + 1 > token_limit:
-            chunks.append(enc.decode(current_chunk))
+    for word in words:
+        word_tokens = len(word) * 1.3 / 4  # Rough estimate: 4 characters per token
+        if current_chunk_tokens + word_tokens > token_limit:
+            chunks.append(" ".join(current_chunk))
             current_chunk = []
             current_chunk_tokens = 0
 
-        current_chunk.append(token)
-        current_chunk_tokens += 1
+        current_chunk.append(word)
+        current_chunk_tokens += word_tokens
 
     # Add the last chunk if it's not empty
     if current_chunk:
-        chunks.append(enc.decode(current_chunk))
+        chunks.append(" ".join(current_chunk))
 
     # Write chunks to separate files
     base_name = os.path.splitext(file_path)[0]
@@ -63,7 +64,6 @@ def split_text_by_tokens(file_path, model="gpt-3.5-turbo"):
             file.write(chunk)
 
     return len(chunks)
-
 
 def extract_variables(template):
     # Regular expression pattern to match variables enclosed in double curly braces
@@ -99,12 +99,53 @@ def list_files(directory, page=1, files_per_page=10, extensions=None):
     return all_files[start:end], total_pages
 
 
-def count_tokens(file_path):
-    with open(file_path, "r", encoding="utf-8") as file:
-        content = file.read()
-    encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
-    return len(encoding.encode(content))
+def _is_binary(file_path):
+    """
+    Check if a file is binary or text.
+    Returns True if the file is binary, False if it's text.
+    """
+    try:
+        with open(file_path, 'rb') as file:
+            chunk = file.read(1024)
+        return b'\0' in chunk  # Binary files often contain null bytes
+    except IOError:
+        return True  # If we can't read the file, assume it's binary
 
+def _is_image(file_path):
+    """
+    Check if a file is an image.
+    Returns True if the file is an image, False otherwise.
+    """
+    return imghdr.what(file_path) is not None
+
+def count_tokens(file_path):
+    if _is_image(file_path):
+        print(f"Image file detected: {file_path}")
+        return 0
+    
+    if _is_binary(file_path):
+        print(f"Binary file detected: {file_path}")
+        return 0
+    
+    try:
+        # Detect the file encoding
+        with open(file_path, 'rb') as file:
+            raw_data = file.read()
+        detected = chardet.detect(raw_data)
+        encoding = detected['encoding']
+
+        # Read the file content with the detected encoding
+        with open(file_path, "r", encoding=encoding) as file:
+            content = file.read()
+        
+        # Count words
+        words = content.split()
+        # Estimate tokens (assuming average of 1.3 tokens per word)
+        estimated_tokens = int(len(words) * 1.3)
+        return estimated_tokens
+    except Exception as e:
+        print(f"Error processing file: {e}")
+        return 0
 
 def intent_select_paginate(sections, page=1, intents_per_page=10):
     total_pages = ceil(len(sections) / intents_per_page)

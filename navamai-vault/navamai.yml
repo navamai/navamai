@@ -113,10 +113,9 @@ refer-gather:
   provider: claude
   save: true
   save-folder: Posts
-  system: You will be given a paper or an article in markdown to analyze. Response
-    in valid markdown syntax. Follow the prompt as instructed and do not explain your
+  system: Response in valid markdown syntax. Follow the prompt as instructed and do not explain your
     response.
-  temperature: 0.0
+  temperature: 0.3
 refer-inline-prompts-to-run:
   lookup-folder: Posts
   max-tokens: 4000
